@@ -1,0 +1,59 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 436,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 307,
+            "y": 0
+          },
+          "nodeIndex": "指标映射",
+          "nodeLineageTag": "39ec67d2-c82d-4c5b-b2ed-73cdd233b935",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 568,
+            "y": 98
+          },
+          "nodeIndex": "度量值",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1136,
+            "y": 0
+          },
+          "nodeIndex": "KFM选冶厂月报",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "所有表",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "所有表",
+  "defaultDiagram": "所有表"
+}

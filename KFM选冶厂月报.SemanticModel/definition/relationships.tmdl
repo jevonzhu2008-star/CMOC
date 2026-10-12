@@ -1,0 +1,4 @@
+relationship AutoDetected_796b1a59-7d37-49b4-bac5-5f0c36dda55a
+	fromColumn: KFM选冶厂月报.指标项
+	toColumn: 指标映射.指标项
+

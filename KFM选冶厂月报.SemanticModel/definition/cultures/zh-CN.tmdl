@@ -1,0 +1,2018 @@
+cultureInfo zh-CN
+
+	linguisticMetadata =
+			{
+			  "Version": "4.1.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "度量值": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "度量值": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.v_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "."
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          ".": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.月计划": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "月计划"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月计划": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.月完成": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "月完成"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月完成": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.月比计划": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "月比计划"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月比计划": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "月比计划_Base": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.月计划累计": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "月计划累计"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月计划累计": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.年累计完成": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "年累计完成"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "年累计完成": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.年比计划": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "年比计划"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "年比计划": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "年比计划_Base": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.同期年累计完成": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "同期年累计完成"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "同期年累计完成": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.年计划": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "年计划"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "年计划": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.年累计完成比计划": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "年累计完成比计划"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "年累计完成比计划": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "年累计完成比计划_Base": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "指标映射": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "指标映射"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "指标映射": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "指标映射.序号": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "指标映射",
+			          "ConceptualProperty": "序号"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "序号": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "指标映射.指标项": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "指标映射",
+			          "ConceptualProperty": "指标项"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "指标项": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "指标映射.类别": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "指标映射",
+			          "ConceptualProperty": "类别"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "类别": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "指标映射.环节": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "指标映射",
+			          "ConceptualProperty": "环节"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "环节": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.标题": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "标题"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "标题": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "KFM选冶厂月报": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.产品分类": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "产品分类"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "产品分类": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.单位": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "单位"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "单位": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.累计实际数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "累计实际数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "累计实际数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.累计预测数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "累计预测数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "累计预测数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.累计预算数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "累计预算数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "累计预算数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.实际数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "实际数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "实际数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.预测数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "预测数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "预测数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.预算数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "预算数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "预算数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.月份": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "月份"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月份": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.指标项": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "指标项"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "指标项": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.类别": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "类别"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "类别": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.序号": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "序号"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "序号": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.总类别": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "总类别"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "总类别": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.类别2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "类别2"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "类别2": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "类别": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.日期": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "日期"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "日期": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "KFM选冶厂月报.排序": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "排序"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "排序": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.标题同期年": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "标题-同期年"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "标题-同期年": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "标题 同期年": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "指标映射.环节序号": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "指标映射",
+			          "ConceptualProperty": "环节序号"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "环节序号": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.环节序号": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "环节序号"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "环节序号": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.月份筛选器": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "月份-筛选器"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月份-筛选器": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "月份 筛选器": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.标题月份": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "标题-月份"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "标题-月份": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "标题 月份": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.标题年累计": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "标题-年累计"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "标题-年累计": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "标题 年累计": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.标题年全年": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "标题-年全年"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "标题-年全年": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "标题 年全年": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
+			    "KFM选冶厂月报_has_指标映射": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "指标映射": {
+			          "Target": {
+			            "Entity": "指标映射"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "指标映射"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_指标映射"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "指标映射"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "指标映射_have_KFM选冶厂月报"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_度量值_标题年全年": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "度量值.标题年全年": {
+			          "Target": {
+			            "Entity": "度量值.标题年全年"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "度量值.标题年全年"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_标题年全年"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_度量值_标题年累计": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "度量值.标题年累计": {
+			          "Target": {
+			            "Entity": "度量值.标题年累计"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "度量值.标题年累计"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_标题年累计"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_度量值_标题月份": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "度量值.标题月份": {
+			          "Target": {
+			            "Entity": "度量值.标题月份"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "度量值.标题月份"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_标题月份"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_月份筛选器": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.月份筛选器": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.月份筛选器"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.月份筛选器"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_月份筛选器"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_环节序号": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.环节序号": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.环节序号"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.环节序号"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_环节序号"
+			        }
+			      ]
+			    },
+			    "指标映射_has_环节序号": {
+			      "Binding": {
+			        "ConceptualEntity": "指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "指标映射": {
+			          "Target": {
+			            "Entity": "指标映射"
+			          }
+			        },
+			        "指标映射.环节序号": {
+			          "Target": {
+			            "Entity": "指标映射.环节序号"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "指标映射"
+			            },
+			            "Object": {
+			              "Role": "指标映射.环节序号"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "指标映射_have_环节序号"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_度量值_标题同期年": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "度量值.标题同期年": {
+			          "Target": {
+			            "Entity": "度量值.标题同期年"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "度量值.标题同期年"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_标题同期年"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_排序": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.排序": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.排序"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.排序"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_排序"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_日期": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.日期": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.日期"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.日期"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_日期"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_类别2": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.类别2": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.类别2"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.类别2"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_类别2"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_总类别": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.总类别": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.总类别"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.总类别"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_总类别"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_序号": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.序号": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.序号"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.序号"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_序号"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_类别": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.类别": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.类别"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.类别"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_类别"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_月份": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.月份": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.月份"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.月份"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_月份"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_预算数": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.预算数": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.预算数"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.预算数"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_预算数"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_预测数": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.预测数": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.预测数"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.预测数"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_预测数"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_实际数": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.实际数": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.实际数"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.实际数"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_实际数"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_累计预算数": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.累计预算数": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.累计预算数"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.累计预算数"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_累计预算数"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_累计预测数": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.累计预测数": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.累计预测数"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.累计预测数"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_累计预测数"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_累计实际数": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.累计实际数": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.累计实际数"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.累计实际数"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_累计实际数"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_单位": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.单位": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.单位"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.单位"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_单位"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_产品分类": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.产品分类": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.产品分类"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.产品分类"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_产品分类"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_度量值_标题": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "度量值.标题": {
+			          "Target": {
+			            "Entity": "度量值.标题"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "度量值.标题"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_标题"
+			        }
+			      ]
+			    },
+			    "指标映射_has_环节": {
+			      "Binding": {
+			        "ConceptualEntity": "指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "指标映射": {
+			          "Target": {
+			            "Entity": "指标映射"
+			          }
+			        },
+			        "指标映射.环节": {
+			          "Target": {
+			            "Entity": "指标映射.环节"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "指标映射"
+			            },
+			            "Object": {
+			              "Role": "指标映射.环节"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "指标映射_have_环节"
+			        }
+			      ]
+			    },
+			    "指标映射_has_类别": {
+			      "Binding": {
+			        "ConceptualEntity": "指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "指标映射": {
+			          "Target": {
+			            "Entity": "指标映射"
+			          }
+			        },
+			        "指标映射.类别": {
+			          "Target": {
+			            "Entity": "指标映射.类别"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "指标映射"
+			            },
+			            "Object": {
+			              "Role": "指标映射.类别"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "指标映射_have_类别"
+			        }
+			      ]
+			    },
+			    "指标映射_has_指标项": {
+			      "Binding": {
+			        "ConceptualEntity": "指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "指标映射": {
+			          "Target": {
+			            "Entity": "指标映射"
+			          }
+			        },
+			        "指标映射.指标项": {
+			          "Target": {
+			            "Entity": "指标映射.指标项"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "指标映射"
+			            },
+			            "Object": {
+			              "Role": "指标映射.指标项"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "指标映射_have_指标项"
+			        }
+			      ]
+			    },
+			    "指标映射_has_序号": {
+			      "Binding": {
+			        "ConceptualEntity": "指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "指标映射": {
+			          "Target": {
+			            "Entity": "指标映射"
+			          }
+			        },
+			        "指标映射.序号": {
+			          "Target": {
+			            "Entity": "指标映射.序号"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "指标映射"
+			            },
+			            "Object": {
+			              "Role": "指标映射.序号"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "指标映射_have_序号"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_度量值_年累计完成比计划": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "度量值.年累计完成比计划": {
+			          "Target": {
+			            "Entity": "度量值.年累计完成比计划"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "度量值.年累计完成比计划"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_年累计完成比计划"
+			        }
+			      ]
+			    },
+			    "度量值_has_年计划": {
+			      "Binding": {
+			        "ConceptualEntity": "度量值"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "度量值": {
+			          "Target": {
+			            "Entity": "度量值"
+			          }
+			        },
+			        "度量值.年计划": {
+			          "Target": {
+			            "Entity": "度量值.年计划"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "度量值"
+			            },
+			            "Object": {
+			              "Role": "度量值.年计划"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "度量值_have_年计划"
+			        }
+			      ]
+			    },
+			    "度量值_has_同期年累计完成": {
+			      "Binding": {
+			        "ConceptualEntity": "度量值"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "度量值": {
+			          "Target": {
+			            "Entity": "度量值"
+			          }
+			        },
+			        "度量值.同期年累计完成": {
+			          "Target": {
+			            "Entity": "度量值.同期年累计完成"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "度量值"
+			            },
+			            "Object": {
+			              "Role": "度量值.同期年累计完成"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "度量值_have_同期年累计完成"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_度量值_年比计划": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "度量值.年比计划": {
+			          "Target": {
+			            "Entity": "度量值.年比计划"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "度量值.年比计划"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_年比计划"
+			        }
+			      ]
+			    },
+			    "度量值_has_年累计完成": {
+			      "Binding": {
+			        "ConceptualEntity": "度量值"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "度量值": {
+			          "Target": {
+			            "Entity": "度量值"
+			          }
+			        },
+			        "度量值.年累计完成": {
+			          "Target": {
+			            "Entity": "度量值.年累计完成"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "度量值"
+			            },
+			            "Object": {
+			              "Role": "度量值.年累计完成"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "度量值_have_年累计完成"
+			        }
+			      ]
+			    },
+			    "度量值_has_月计划累计": {
+			      "Binding": {
+			        "ConceptualEntity": "度量值"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "度量值": {
+			          "Target": {
+			            "Entity": "度量值"
+			          }
+			        },
+			        "度量值.月计划累计": {
+			          "Target": {
+			            "Entity": "度量值.月计划累计"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "度量值"
+			            },
+			            "Object": {
+			              "Role": "度量值.月计划累计"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "度量值_have_月计划累计"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_度量值_月比计划": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "度量值.月比计划": {
+			          "Target": {
+			            "Entity": "度量值.月比计划"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "度量值.月比计划"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_月比计划"
+			        }
+			      ]
+			    },
+			    "度量值_has_月完成": {
+			      "Binding": {
+			        "ConceptualEntity": "度量值"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "度量值": {
+			          "Target": {
+			            "Entity": "度量值"
+			          }
+			        },
+			        "度量值.月完成": {
+			          "Target": {
+			            "Entity": "度量值.月完成"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "度量值"
+			            },
+			            "Object": {
+			              "Role": "度量值.月完成"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "度量值_have_月完成"
+			        }
+			      ]
+			    },
+			    "度量值_has_月计划": {
+			      "Binding": {
+			        "ConceptualEntity": "度量值"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "度量值": {
+			          "Target": {
+			            "Entity": "度量值"
+			          }
+			        },
+			        "度量值.月计划": {
+			          "Target": {
+			            "Entity": "度量值.月计划"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "度量值"
+			            },
+			            "Object": {
+			              "Role": "度量值.月计划"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "度量值_have_月计划"
+			        }
+			      ]
+			    },
+			    "度量值_has_v_": {
+			      "Binding": {
+			        "ConceptualEntity": "度量值"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "度量值": {
+			          "Target": {
+			            "Entity": "度量值"
+			          }
+			        },
+			        "度量值.v_": {
+			          "Target": {
+			            "Entity": "度量值.v_"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "度量值"
+			            },
+			            "Object": {
+			              "Role": "度量值.v_"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "度量值_have__"
+			        }
+			      ]
+			    }
+			  },
+			  "Agents": {
+			    "Internal": {
+			      "Version": "1.1.0"
+			    }
+			  }
+			}
+		contentType: json
+

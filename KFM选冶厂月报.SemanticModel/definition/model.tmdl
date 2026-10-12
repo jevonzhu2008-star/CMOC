@@ -1,0 +1,21 @@
+model Model
+	culture: zh-CN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: zh-CN
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["p_起始日期","KFM选冶厂月报","指标映射","度量值"]
+
+annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
+
+ref table 度量值
+ref table 指标映射
+ref table KFM选冶厂月报
+
+ref cultureInfo zh-CN
+

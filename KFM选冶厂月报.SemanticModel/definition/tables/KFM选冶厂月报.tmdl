@@ -185,7 +185,7 @@ table KFM选冶厂月报
 
 	partition KFM选冶厂月报 = m
 		mode: import
-		source =
+		source = ```
 let
     数据源 = SapBusinessWarehouse.Cubes("10.43.13.31", "01", "100", [LanguageCode="ZH", Implementation="2.0", BatchSize=500000000]),
     立方体 = 数据源{[Name="ZRPP_CP006"]}[Data],
@@ -308,6 +308,7 @@ let
     设置类型 = Table.TransformColumnTypes(保留最终列, {{"类别2", type text}, {"月份-筛选器", type text}, {"日期", type date}, {"月份", Int64.Type}, {"环节序号", Int64.Type}, {"排序", Int64.Type}})
 in
     设置类型
+```
 
 
 	annotation PBI_NavigationStepName = 导航

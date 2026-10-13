@@ -358,9 +358,27 @@ table L1-KFM日报
 				            Text.From(Date.Year(PreMonth)) & Text.PadStart(Text.From(Date.Month(PreMonth)),2,"0")
 				    , type text),
 				    // =============================================
-				    已合并查询 = Table.NestedJoin(添加上月年月编码, {"年", "产品分类", "指标名称"}, 全年预算表, {"年", "产品分类", "指标项"}, "中间表", JoinKind.LeftOuter),
+				    全年预算中间表 = Table.Group(
+				        Table.AddColumn(
+				            Table.SelectColumns(KFM选冶厂月报, {"日期", "产品分类", "指标项", "全年预算数"}),
+				            "年",
+				            each Date.Year([日期]),
+				            Int64.Type
+				        ),
+				        {"产品分类", "年", "指标项"},
+				        {{"全年预算数", each List.Average([全年预算数]), type nullable number}}
+				    ),
+				    已合并查询 = Table.NestedJoin(添加上月年月编码, {"年", "产品分类", "指标名称"}, 全年预算中间表, {"年", "产品分类", "指标项"}, "中间表", JoinKind.LeftOuter),
 				    #"已展开 中间表" = Table.ExpandTableColumn(已合并查询, "中间表", {"全年预算数"}, {"全年预算数"}),
-				    #"已合并查询 1" = Table.NestedJoin(#"已展开 中间表", {"上月年月编码", "产品分类", "指标名称"}, 月累计预测表, {"月份", "产品分类", "指标项"}, "月累计预测表", JoinKind.LeftOuter),
+				    月累计预测中间表 = Table.TransformColumnTypes(
+				        Table.Group(
+				            Table.SelectColumns(KFM选冶厂月报, {"月份", "产品分类", "指标项", "累计预测数"}),
+				            {"月份", "产品分类", "指标项"},
+				            {{"累计预测数", each List.Average([累计预测数]), type nullable number}}
+				        ),
+				        {{"月份", type text}}
+				    ),
+				    #"已合并查询 1" = Table.NestedJoin(#"已展开 中间表", {"上月年月编码", "产品分类", "指标名称"}, 月累计预测中间表, {"月份", "产品分类", "指标项"}, "月累计预测表", JoinKind.LeftOuter),
 				  #"已展开 月累计预测表" = Table.ExpandTableColumn(#"已合并查询 1", "月累计预测表", {"累计预测数"}, {"累计预测数"}),
 				  已更改列类型 = Table.TransformColumnTypes(#"已展开 月累计预测表", {{"标准日期", type date}})
 				in

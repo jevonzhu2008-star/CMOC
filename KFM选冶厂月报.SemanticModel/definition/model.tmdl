@@ -10,7 +10,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["p_日报起始日期","p_月报起始日期","L1-KFM日报","KFM选冶厂月报","日报指标映射","月报指标映射","度量值","全年预算表","月累计预测表"]
+annotation PBI_QueryOrder = ["p_日报起始日期","p_月报起始日期","L1-KFM日报","KFM选冶厂月报","日报指标映射","月报指标映射","度量值"]
 
 annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
 

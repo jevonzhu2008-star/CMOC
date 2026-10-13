@@ -1,5 +1,5 @@
 /// 按单位返回格式字符串（用于度量值的动态格式字符串）
-function FormatKFM = ```
+function FormatAmount = ```
 		() =>
 		VAR v_Unit1 = SELECTEDVALUE('KFM选冶厂月报'[单位])
 		VAR v_Unit2 = SELECTEDVALUE('L1-KFM日报'[单位])
@@ -16,7 +16,7 @@ function FormatKFM = ```
 	lineageTag: 15da78dd-fbd0-4602-96c6-32c1edbef155
 
 /// 去年同月的年累计实际数：解析月份切片器并回退到去年同月
-function PriorYearMonthValue = ```
+function SameMonthPriorYear = ```
 		( amount : EXPR ) => 
 		// ============================================================
 		// 同期 —— 去年同期（去年同月）
@@ -67,7 +67,7 @@ function PriorYearMonthValue = ```
 		```
 	lineageTag: 612311e5-2cf2-419d-8691-0887015a30f1
 
-function FormatKFM2 =
+function FormatRatio =
 		() =>
 		VAR v_Unit1 = SELECTEDVALUE('KFM选冶厂月报'[单位])
 		VAR v_Unit2 = SELECTEDVALUE('L1-KFM日报'[单位])

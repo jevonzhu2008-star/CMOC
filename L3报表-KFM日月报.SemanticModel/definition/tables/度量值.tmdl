@@ -212,7 +212,7 @@ table 度量值
 
 		formatStringDefinition = FormatRatio()
 
-	measure 标题-日报 = ```
+	measure 标题-日报 =
 			
 			
 			VAR v_SelectedDate = SELECTEDVALUE('L1-KFM日报'[标准日期])
@@ -241,7 +241,6 @@ table 度量值
 			        TitlePrefix & ReportYearMonthDayText & TitleSuffix & YearProgressText,
 			        BLANK()
 			    )
-			```
 		displayFolder: 辅助
 		lineageTag: dc30c013-90ab-409b-bc39-fdbc3568ba9d
 
@@ -255,7 +254,7 @@ table 度量值
 			
 			// 年累计完成 = 累计预测数 + 当月累计实际数
 			// 注意：A 用「累计预测数」字段（经上月编码关联月报），需确认口径是否为「截至上月累计实际」
-			VAR A = SUM('L1-KFM日报'[累计预测数])
+			VAR A = SUM('L1-KFM日报'[当月累计实际数])
 			VAR B = [月累计]
 			RETURN
 			    A + B
@@ -273,6 +272,7 @@ table 度量值
 			    DIVIDE([年累计完成L1],[年计划L1])
 			 )
 			```
+		displayFolder: 日报
 		lineageTag: 7c4b1d22-9343-4f52-8f26-cbb150ca8d11
 
 		formatStringDefinition = FormatRatio()

@@ -210,25 +210,25 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "指标映射": {
+			    "月报指标映射": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "指标映射"
+			          "ConceptualEntity": "月报指标映射"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "指标映射": {
+			          "月报指标映射": {
 			            "State": "Generated"
 			          }
 			        }
 			      ]
 			    },
-			    "指标映射.序号": {
+			    "月报指标映射.序号": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "指标映射",
+			          "ConceptualEntity": "月报指标映射",
 			          "ConceptualProperty": "序号"
 			        }
 			      },
@@ -241,10 +241,10 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "指标映射.指标项": {
+			    "月报指标映射.指标项": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "指标映射",
+			          "ConceptualEntity": "月报指标映射",
 			          "ConceptualProperty": "指标项"
 			        }
 			      },
@@ -257,10 +257,10 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "指标映射.类别": {
+			    "月报指标映射.类别": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "指标映射",
+			          "ConceptualEntity": "月报指标映射",
 			          "ConceptualProperty": "类别"
 			        }
 			      },
@@ -273,10 +273,10 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "指标映射.环节": {
+			    "月报指标映射.环节": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "指标映射",
+			          "ConceptualEntity": "月报指标映射",
 			          "ConceptualProperty": "环节"
 			        }
 			      },
@@ -289,18 +289,24 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "度量值.标题": {
+			    "度量值.标题月报": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "度量值",
-			          "ConceptualProperty": "标题"
+			          "ConceptualProperty": "标题-月报"
 			        }
 			      },
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "标题": {
+			          "标题-月报": {
 			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "标题 月报": {
+			            "State": "Generated",
+			            "Weight": 0.97
 			          }
 			        }
 			      ]
@@ -315,38 +321,6 @@ cultureInfo zh-CN
 			      "Terms": [
 			        {
 			          "KFM选冶厂月报": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "KFM选冶厂月报.产品分类": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "KFM选冶厂月报",
-			          "ConceptualProperty": "产品分类"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "产品分类": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "KFM选冶厂月报.单位": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "KFM选冶厂月报",
-			          "ConceptualProperty": "单位"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "单位": {
 			            "State": "Generated"
 			          }
 			        }
@@ -472,9 +446,6 @@ cultureInfo zh-CN
 			        }
 			      },
 			      "State": "Generated",
-			      "Visibility": {
-			        "Value": "Hidden"
-			      },
 			      "Terms": [
 			        {
 			          "指标项": {
@@ -618,10 +589,10 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "指标映射.环节序号": {
+			    "月报指标映射.环节序号": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "指标映射",
+			          "ConceptualEntity": "月报指标映射",
 			          "ConceptualProperty": "环节序号"
 			        }
 			      },
@@ -737,10 +708,1386 @@ cultureInfo zh-CN
 			          }
 			        }
 			      ]
+			    },
+			    "度量值.日完成": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "日完成"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "日完成": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "当日合计": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.月累计": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "月累计"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月累计": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "当月累计": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.月计划L1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "月计划L1"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月计划L1": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "月计划": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.月比计划L1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "月比计划L1"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月比计划L1": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "月比计划": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.标题日报": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "标题-日报"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "标题-日报": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "标题 日报": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__月计划_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_月计划 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_月计划 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__月完成_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_月完成 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_月完成 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__月计划累计_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_月计划累计 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_月计划累计 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__年累计完成_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_年累计完成 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_年累计完成 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__同期年累计完成_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_同期年累计完成 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_同期年累计完成 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__年计划_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_年计划 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_年计划 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__日完成_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_日完成 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_日完成 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__月累计_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_月累计 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_月累计 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__月计划L1_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_月计划L1 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_月计划L1 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__月比计划L1_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_月比计划L1 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_月比计划L1 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "月报指标映射.报表": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "月报指标映射",
+			          "ConceptualProperty": "报表"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "报表": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.产品分类": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "产品分类"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "产品分类": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.单位": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "单位"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "单位": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "L1-KFM日报": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "L1 KFM日报": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.产线": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "产线"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "产线": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.单位": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "单位"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "单位": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.指标类型": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "指标类型"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "指标类型": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.日期": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "日期"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "日期": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.运营形式": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "运营形式"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "运营形式": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.指标编码": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "指标编码"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "指标编码": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.指标编码代码": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "指标编码代码"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "指标编码代码": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.指标名称": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "指标名称"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "指标名称": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.当日实际数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "当日实际数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "当日实际数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.当月累计实际数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "当月累计实际数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "当月累计实际数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.日期月份": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "日期（月份）"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "日期（月份）": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "日期": {
+			            "State": "Generated",
+			            "Weight": 0.75
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.指标名": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "指标名"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "指标名": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.地域": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "地域"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "地域": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.序号": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "序号"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "序号": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.类别": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "类别"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "类别": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.类别2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "类别2"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "类别2": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "类别": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.排序": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "排序"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "排序": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.总类别": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "总类别"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "总类别": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.环节序号": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "环节序号"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "环节序号": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "日报指标映射": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "日报指标映射"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "日报指标映射": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "日报指标映射.序号": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "日报指标映射",
+			          "ConceptualProperty": "序号"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "序号": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "日报指标映射.指标项": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "日报指标映射",
+			          "ConceptualProperty": "指标项"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "指标项": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "日报指标映射.类别": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "日报指标映射",
+			          "ConceptualProperty": "类别"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "类别": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "日报指标映射.环节": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "日报指标映射",
+			          "ConceptualProperty": "环节"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "环节": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "日报指标映射.环节序号": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "日报指标映射",
+			          "ConceptualProperty": "环节序号"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "环节序号": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "日报指标映射.报表": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "日报指标映射",
+			          "ConceptualProperty": "报表"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "报表": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.年计划L1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "年计划L1"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "年计划L1": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "年计划": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__年计划L1_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_年计划L1 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_年计划L1 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报.全年预算数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KFM选冶厂月报",
+			          "ConceptualProperty": "全年预算数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "全年预算数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.年": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "年"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "年": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.全年预算数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "全年预算数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "全年预算数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.产品分类": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "产品分类"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "产品分类": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.年累计完成L1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "年累计完成L1"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "年累计完成L1": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "年累计完成": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__年累计完成L1_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_年累计完成L1 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_年累计完成L1 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.上月年月编码": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "上月年月编码"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "上月年月编码": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.累计预测数": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "累计预测数"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "累计预测数": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.月计划": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "月计划"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月计划": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "L1KFM日报.月预算": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "L1-KFM日报",
+			          "ConceptualProperty": "月预算"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "月预算": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.年比计划L1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "年比计划L1"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "年比计划L1": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "年比计划": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "度量值.entity__年比计划L1_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "度量值",
+			          "ConceptualProperty": "_年比计划L1 FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_年比计划L1 FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
-			    "KFM选冶厂月报_has_指标映射": {
+			    "L1KFM日报_has_度量值_年比计划L1": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "度量值.年比计划L1": {
+			          "Target": {
+			            "Entity": "度量值.年比计划L1"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "度量值.年比计划L1"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_年比计划L1"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_月预算": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.月预算": {
+			          "Target": {
+			            "Entity": "L1KFM日报.月预算"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.月预算"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_月预算"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_月计划": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.月计划": {
+			          "Target": {
+			            "Entity": "L1KFM日报.月计划"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.月计划"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_月计划"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_累计预测数": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.累计预测数": {
+			          "Target": {
+			            "Entity": "L1KFM日报.累计预测数"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.累计预测数"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_累计预测数"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_上月年月编码": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.上月年月编码": {
+			          "Target": {
+			            "Entity": "L1KFM日报.上月年月编码"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.上月年月编码"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_上月年月编码"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_度量值_年累计完成L1": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "度量值.年累计完成L1": {
+			          "Target": {
+			            "Entity": "度量值.年累计完成L1"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "度量值.年累计完成L1"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_年累计完成L1"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_产品分类": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.产品分类": {
+			          "Target": {
+			            "Entity": "L1KFM日报.产品分类"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.产品分类"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_产品分类"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_全年预算数": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.全年预算数": {
+			          "Target": {
+			            "Entity": "L1KFM日报.全年预算数"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.全年预算数"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_全年预算数"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_年": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.年": {
+			          "Target": {
+			            "Entity": "L1KFM日报.年"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.年"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_年"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_全年预算数": {
 			      "Binding": {
 			        "ConceptualEntity": "KFM选冶厂月报"
 			      },
@@ -751,9 +2098,9 @@ cultureInfo zh-CN
 			            "Entity": "KFM选冶厂月报"
 			          }
 			        },
-			        "指标映射": {
+			        "KFM选冶厂月报.全年预算数": {
 			          "Target": {
-			            "Entity": "指标映射"
+			            "Entity": "KFM选冶厂月报.全年预算数"
 			          }
 			        }
 			      },
@@ -764,25 +2111,1167 @@ cultureInfo zh-CN
 			              "Role": "KFM选冶厂月报"
 			            },
 			            "Object": {
-			              "Role": "指标映射"
+			              "Role": "KFM选冶厂月报.全年预算数"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "KFM选冶厂月报_have_指标映射"
+			          "ID": "KFM选冶厂月报_have_全年预算数"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_度量值_年计划L1": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
 			        },
+			        "度量值.年计划L1": {
+			          "Target": {
+			            "Entity": "度量值.年计划L1"
+			          }
+			        }
+			      },
+			      "Phrasings": [
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "指标映射"
+			              "Role": "L1KFM日报"
 			            },
 			            "Object": {
-			              "Role": "KFM选冶厂月报"
+			              "Role": "度量值.年计划L1"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "指标映射_have_KFM选冶厂月报"
+			          "ID": "L1KFM日报_have_年计划L1"
+			        }
+			      ]
+			    },
+			    "日报指标映射_has_报表": {
+			      "Binding": {
+			        "ConceptualEntity": "日报指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "日报指标映射": {
+			          "Target": {
+			            "Entity": "日报指标映射"
+			          }
+			        },
+			        "日报指标映射.报表": {
+			          "Target": {
+			            "Entity": "日报指标映射.报表"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "日报指标映射"
+			            },
+			            "Object": {
+			              "Role": "日报指标映射.报表"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "日报指标映射_have_报表"
+			        }
+			      ]
+			    },
+			    "日报指标映射_has_环节序号": {
+			      "Binding": {
+			        "ConceptualEntity": "日报指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "日报指标映射": {
+			          "Target": {
+			            "Entity": "日报指标映射"
+			          }
+			        },
+			        "日报指标映射.环节序号": {
+			          "Target": {
+			            "Entity": "日报指标映射.环节序号"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "日报指标映射"
+			            },
+			            "Object": {
+			              "Role": "日报指标映射.环节序号"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "日报指标映射_have_环节序号"
+			        }
+			      ]
+			    },
+			    "日报指标映射_has_环节": {
+			      "Binding": {
+			        "ConceptualEntity": "日报指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "日报指标映射": {
+			          "Target": {
+			            "Entity": "日报指标映射"
+			          }
+			        },
+			        "日报指标映射.环节": {
+			          "Target": {
+			            "Entity": "日报指标映射.环节"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "日报指标映射"
+			            },
+			            "Object": {
+			              "Role": "日报指标映射.环节"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "日报指标映射_have_环节"
+			        }
+			      ]
+			    },
+			    "日报指标映射_has_类别": {
+			      "Binding": {
+			        "ConceptualEntity": "日报指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "日报指标映射": {
+			          "Target": {
+			            "Entity": "日报指标映射"
+			          }
+			        },
+			        "日报指标映射.类别": {
+			          "Target": {
+			            "Entity": "日报指标映射.类别"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "日报指标映射"
+			            },
+			            "Object": {
+			              "Role": "日报指标映射.类别"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "日报指标映射_have_类别"
+			        }
+			      ]
+			    },
+			    "日报指标映射_has_指标项": {
+			      "Binding": {
+			        "ConceptualEntity": "日报指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "日报指标映射": {
+			          "Target": {
+			            "Entity": "日报指标映射"
+			          }
+			        },
+			        "日报指标映射.指标项": {
+			          "Target": {
+			            "Entity": "日报指标映射.指标项"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "日报指标映射"
+			            },
+			            "Object": {
+			              "Role": "日报指标映射.指标项"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "日报指标映射_have_指标项"
+			        }
+			      ]
+			    },
+			    "日报指标映射_has_序号": {
+			      "Binding": {
+			        "ConceptualEntity": "日报指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "日报指标映射": {
+			          "Target": {
+			            "Entity": "日报指标映射"
+			          }
+			        },
+			        "日报指标映射.序号": {
+			          "Target": {
+			            "Entity": "日报指标映射.序号"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "日报指标映射"
+			            },
+			            "Object": {
+			              "Role": "日报指标映射.序号"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "日报指标映射_have_序号"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_环节序号": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.环节序号": {
+			          "Target": {
+			            "Entity": "L1KFM日报.环节序号"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.环节序号"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_环节序号"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_总类别": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.总类别": {
+			          "Target": {
+			            "Entity": "L1KFM日报.总类别"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.总类别"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_总类别"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_排序": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.排序": {
+			          "Target": {
+			            "Entity": "L1KFM日报.排序"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.排序"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_排序"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_类别2": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.类别2": {
+			          "Target": {
+			            "Entity": "L1KFM日报.类别2"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.类别2"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_类别2"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_类别": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.类别": {
+			          "Target": {
+			            "Entity": "L1KFM日报.类别"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.类别"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_类别"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_序号": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.序号": {
+			          "Target": {
+			            "Entity": "L1KFM日报.序号"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.序号"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_序号"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_标准日期": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.标准日期": {
+			          "Target": {
+			            "Entity": "L1KFM日报.标准日期"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.标准日期"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_标准日期"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_地域": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.地域": {
+			          "Target": {
+			            "Entity": "L1KFM日报.地域"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.地域"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_地域"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_指标名": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.指标名": {
+			          "Target": {
+			            "Entity": "L1KFM日报.指标名"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.指标名"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_指标名"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_日期月份": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.日期月份": {
+			          "Target": {
+			            "Entity": "L1KFM日报.日期月份"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.日期月份"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_日期月份"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_当月累计实际数": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.当月累计实际数": {
+			          "Target": {
+			            "Entity": "L1KFM日报.当月累计实际数"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.当月累计实际数"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_当月累计实际数"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_当日实际数": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.当日实际数": {
+			          "Target": {
+			            "Entity": "L1KFM日报.当日实际数"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.当日实际数"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_当日实际数"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_指标名称": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.指标名称": {
+			          "Target": {
+			            "Entity": "L1KFM日报.指标名称"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.指标名称"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_指标名称"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_指标编码代码": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.指标编码代码": {
+			          "Target": {
+			            "Entity": "L1KFM日报.指标编码代码"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.指标编码代码"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_指标编码代码"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_指标编码": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.指标编码": {
+			          "Target": {
+			            "Entity": "L1KFM日报.指标编码"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.指标编码"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_指标编码"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_运营形式": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.运营形式": {
+			          "Target": {
+			            "Entity": "L1KFM日报.运营形式"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.运营形式"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_运营形式"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_日期": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.日期": {
+			          "Target": {
+			            "Entity": "L1KFM日报.日期"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.日期"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_日期"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_指标类型": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.指标类型": {
+			          "Target": {
+			            "Entity": "L1KFM日报.指标类型"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.指标类型"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_指标类型"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_单位": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.单位": {
+			          "Target": {
+			            "Entity": "L1KFM日报.单位"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.单位"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_单位"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_产线": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "L1KFM日报.产线": {
+			          "Target": {
+			            "Entity": "L1KFM日报.产线"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "L1KFM日报.产线"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_产线"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_单位": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.单位": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.单位"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.单位"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_单位"
+			        }
+			      ]
+			    },
+			    "KFM选冶厂月报_has_产品分类": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.产品分类": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.产品分类"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.产品分类"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_产品分类"
+			        }
+			      ]
+			    },
+			    "月报指标映射_has_报表": {
+			      "Binding": {
+			        "ConceptualEntity": "月报指标映射"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "月报指标映射": {
+			          "Target": {
+			            "Entity": "月报指标映射"
+			          }
+			        },
+			        "月报指标映射.报表": {
+			          "Target": {
+			            "Entity": "月报指标映射.报表"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "月报指标映射"
+			            },
+			            "Object": {
+			              "Role": "月报指标映射.报表"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "月报指标映射_have_报表"
+			        }
+			      ]
+			    },
+			    "度量值_has_标题日报": {
+			      "Binding": {
+			        "ConceptualEntity": "度量值"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "度量值": {
+			          "Target": {
+			            "Entity": "度量值"
+			          }
+			        },
+			        "度量值.标题日报": {
+			          "Target": {
+			            "Entity": "度量值.标题日报"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "度量值"
+			            },
+			            "Object": {
+			              "Role": "度量值.标题日报"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "度量值_have_标题日报"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_度量值_月比计划L1": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "度量值.月比计划L1": {
+			          "Target": {
+			            "Entity": "度量值.月比计划L1"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "度量值.月比计划L1"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_月比计划L1"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_度量值_月计划L1": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "度量值.月计划L1": {
+			          "Target": {
+			            "Entity": "度量值.月计划L1"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "度量值.月计划L1"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_月计划L1"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_度量值_月累计": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "度量值.月累计": {
+			          "Target": {
+			            "Entity": "度量值.月累计"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "度量值.月累计"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_月累计"
+			        }
+			      ]
+			    },
+			    "L1KFM日报_has_度量值_日完成": {
+			      "Binding": {
+			        "ConceptualEntity": "L1-KFM日报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "L1KFM日报": {
+			          "Target": {
+			            "Entity": "L1KFM日报"
+			          }
+			        },
+			        "度量值.日完成": {
+			          "Target": {
+			            "Entity": "度量值.日完成"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "L1KFM日报"
+			            },
+			            "Object": {
+			              "Role": "度量值.日完成"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "L1KFM日报_have_日完成"
 			        }
 			      ]
 			    },
@@ -951,20 +3440,20 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "指标映射_has_环节序号": {
+			    "月报指标映射_has_环节序号": {
 			      "Binding": {
-			        "ConceptualEntity": "指标映射"
+			        "ConceptualEntity": "月报指标映射"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "指标映射": {
+			        "月报指标映射": {
 			          "Target": {
-			            "Entity": "指标映射"
+			            "Entity": "月报指标映射"
 			          }
 			        },
-			        "指标映射.环节序号": {
+			        "月报指标映射.环节序号": {
 			          "Target": {
-			            "Entity": "指标映射.环节序号"
+			            "Entity": "月报指标映射.环节序号"
 			          }
 			        }
 			      },
@@ -972,15 +3461,15 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "指标映射"
+			              "Role": "月报指标映射"
 			            },
 			            "Object": {
-			              "Role": "指标映射.环节序号"
+			              "Role": "月报指标映射.环节序号"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "指标映射_have_环节序号"
+			          "ID": "月报指标映射_have_环节序号"
 			        }
 			      ]
 			    },
@@ -1215,6 +3704,39 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
+			    "KFM选冶厂月报_has_指标项": {
+			      "Binding": {
+			        "ConceptualEntity": "KFM选冶厂月报"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "KFM选冶厂月报": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报"
+			          }
+			        },
+			        "KFM选冶厂月报.指标项": {
+			          "Target": {
+			            "Entity": "KFM选冶厂月报.指标项"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "KFM选冶厂月报"
+			            },
+			            "Object": {
+			              "Role": "KFM选冶厂月报.指标项"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "KFM选冶厂月报_have_指标项"
+			        }
+			      ]
+			    },
 			    "KFM选冶厂月报_has_月份": {
 			      "Binding": {
 			        "ConceptualEntity": "KFM选冶厂月报"
@@ -1446,7 +3968,7 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "KFM选冶厂月报_has_单位": {
+			    "KFM选冶厂月报_has_度量值_标题月报": {
 			      "Binding": {
 			        "ConceptualEntity": "KFM选冶厂月报"
 			      },
@@ -1457,9 +3979,9 @@ cultureInfo zh-CN
 			            "Entity": "KFM选冶厂月报"
 			          }
 			        },
-			        "KFM选冶厂月报.单位": {
+			        "度量值.标题月报": {
 			          "Target": {
-			            "Entity": "KFM选冶厂月报.单位"
+			            "Entity": "度量值.标题月报"
 			          }
 			        }
 			      },
@@ -1470,29 +3992,29 @@ cultureInfo zh-CN
 			              "Role": "KFM选冶厂月报"
 			            },
 			            "Object": {
-			              "Role": "KFM选冶厂月报.单位"
+			              "Role": "度量值.标题月报"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "KFM选冶厂月报_have_单位"
+			          "ID": "KFM选冶厂月报_have_标题月报"
 			        }
 			      ]
 			    },
-			    "KFM选冶厂月报_has_产品分类": {
+			    "月报指标映射_has_环节": {
 			      "Binding": {
-			        "ConceptualEntity": "KFM选冶厂月报"
+			        "ConceptualEntity": "月报指标映射"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "KFM选冶厂月报": {
+			        "月报指标映射": {
 			          "Target": {
-			            "Entity": "KFM选冶厂月报"
+			            "Entity": "月报指标映射"
 			          }
 			        },
-			        "KFM选冶厂月报.产品分类": {
+			        "月报指标映射.环节": {
 			          "Target": {
-			            "Entity": "KFM选冶厂月报.产品分类"
+			            "Entity": "月报指标映射.环节"
 			          }
 			        }
 			      },
@@ -1500,32 +4022,32 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "KFM选冶厂月报"
+			              "Role": "月报指标映射"
 			            },
 			            "Object": {
-			              "Role": "KFM选冶厂月报.产品分类"
+			              "Role": "月报指标映射.环节"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "KFM选冶厂月报_have_产品分类"
+			          "ID": "月报指标映射_have_环节"
 			        }
 			      ]
 			    },
-			    "KFM选冶厂月报_has_度量值_标题": {
+			    "月报指标映射_has_类别": {
 			      "Binding": {
-			        "ConceptualEntity": "KFM选冶厂月报"
+			        "ConceptualEntity": "月报指标映射"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "KFM选冶厂月报": {
+			        "月报指标映射": {
 			          "Target": {
-			            "Entity": "KFM选冶厂月报"
+			            "Entity": "月报指标映射"
 			          }
 			        },
-			        "度量值.标题": {
+			        "月报指标映射.类别": {
 			          "Target": {
-			            "Entity": "度量值.标题"
+			            "Entity": "月报指标映射.类别"
 			          }
 			        }
 			      },
@@ -1533,32 +4055,32 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "KFM选冶厂月报"
+			              "Role": "月报指标映射"
 			            },
 			            "Object": {
-			              "Role": "度量值.标题"
+			              "Role": "月报指标映射.类别"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "KFM选冶厂月报_have_标题"
+			          "ID": "月报指标映射_have_类别"
 			        }
 			      ]
 			    },
-			    "指标映射_has_环节": {
+			    "月报指标映射_has_指标项": {
 			      "Binding": {
-			        "ConceptualEntity": "指标映射"
+			        "ConceptualEntity": "月报指标映射"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "指标映射": {
+			        "月报指标映射": {
 			          "Target": {
-			            "Entity": "指标映射"
+			            "Entity": "月报指标映射"
 			          }
 			        },
-			        "指标映射.环节": {
+			        "月报指标映射.指标项": {
 			          "Target": {
-			            "Entity": "指标映射.环节"
+			            "Entity": "月报指标映射.指标项"
 			          }
 			        }
 			      },
@@ -1566,32 +4088,32 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "指标映射"
+			              "Role": "月报指标映射"
 			            },
 			            "Object": {
-			              "Role": "指标映射.环节"
+			              "Role": "月报指标映射.指标项"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "指标映射_have_环节"
+			          "ID": "月报指标映射_have_指标项"
 			        }
 			      ]
 			    },
-			    "指标映射_has_类别": {
+			    "月报指标映射_has_序号": {
 			      "Binding": {
-			        "ConceptualEntity": "指标映射"
+			        "ConceptualEntity": "月报指标映射"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "指标映射": {
+			        "月报指标映射": {
 			          "Target": {
-			            "Entity": "指标映射"
+			            "Entity": "月报指标映射"
 			          }
 			        },
-			        "指标映射.类别": {
+			        "月报指标映射.序号": {
 			          "Target": {
-			            "Entity": "指标映射.类别"
+			            "Entity": "月报指标映射.序号"
 			          }
 			        }
 			      },
@@ -1599,81 +4121,15 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "指标映射"
+			              "Role": "月报指标映射"
 			            },
 			            "Object": {
-			              "Role": "指标映射.类别"
+			              "Role": "月报指标映射.序号"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "指标映射_have_类别"
-			        }
-			      ]
-			    },
-			    "指标映射_has_指标项": {
-			      "Binding": {
-			        "ConceptualEntity": "指标映射"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "指标映射": {
-			          "Target": {
-			            "Entity": "指标映射"
-			          }
-			        },
-			        "指标映射.指标项": {
-			          "Target": {
-			            "Entity": "指标映射.指标项"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "指标映射"
-			            },
-			            "Object": {
-			              "Role": "指标映射.指标项"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "指标映射_have_指标项"
-			        }
-			      ]
-			    },
-			    "指标映射_has_序号": {
-			      "Binding": {
-			        "ConceptualEntity": "指标映射"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "指标映射": {
-			          "Target": {
-			            "Entity": "指标映射"
-			          }
-			        },
-			        "指标映射.序号": {
-			          "Target": {
-			            "Entity": "指标映射.序号"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "指标映射"
-			            },
-			            "Object": {
-			              "Role": "指标映射.序号"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "指标映射_have_序号"
+			          "ID": "月报指标映射_have_序号"
 			        }
 			      ]
 			    },
@@ -1710,15 +4166,15 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "度量值_has_年计划": {
+			    "KFM选冶厂月报_has_度量值_年计划": {
 			      "Binding": {
-			        "ConceptualEntity": "度量值"
+			        "ConceptualEntity": "KFM选冶厂月报"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "度量值": {
+			        "KFM选冶厂月报": {
 			          "Target": {
-			            "Entity": "度量值"
+			            "Entity": "KFM选冶厂月报"
 			          }
 			        },
 			        "度量值.年计划": {
@@ -1731,7 +4187,7 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "度量值"
+			              "Role": "KFM选冶厂月报"
 			            },
 			            "Object": {
 			              "Role": "度量值.年计划"
@@ -1739,19 +4195,19 @@ cultureInfo zh-CN
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "度量值_have_年计划"
+			          "ID": "KFM选冶厂月报_have_年计划"
 			        }
 			      ]
 			    },
-			    "度量值_has_同期年累计完成": {
+			    "KFM选冶厂月报_has_度量值_同期年累计完成": {
 			      "Binding": {
-			        "ConceptualEntity": "度量值"
+			        "ConceptualEntity": "KFM选冶厂月报"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "度量值": {
+			        "KFM选冶厂月报": {
 			          "Target": {
-			            "Entity": "度量值"
+			            "Entity": "KFM选冶厂月报"
 			          }
 			        },
 			        "度量值.同期年累计完成": {
@@ -1764,7 +4220,7 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "度量值"
+			              "Role": "KFM选冶厂月报"
 			            },
 			            "Object": {
 			              "Role": "度量值.同期年累计完成"
@@ -1772,7 +4228,7 @@ cultureInfo zh-CN
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "度量值_have_同期年累计完成"
+			          "ID": "KFM选冶厂月报_have_同期年累计完成"
 			        }
 			      ]
 			    },
@@ -1809,15 +4265,15 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "度量值_has_年累计完成": {
+			    "KFM选冶厂月报_has_度量值_年累计完成": {
 			      "Binding": {
-			        "ConceptualEntity": "度量值"
+			        "ConceptualEntity": "KFM选冶厂月报"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "度量值": {
+			        "KFM选冶厂月报": {
 			          "Target": {
-			            "Entity": "度量值"
+			            "Entity": "KFM选冶厂月报"
 			          }
 			        },
 			        "度量值.年累计完成": {
@@ -1830,7 +4286,7 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "度量值"
+			              "Role": "KFM选冶厂月报"
 			            },
 			            "Object": {
 			              "Role": "度量值.年累计完成"
@@ -1838,19 +4294,19 @@ cultureInfo zh-CN
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "度量值_have_年累计完成"
+			          "ID": "KFM选冶厂月报_have_年累计完成"
 			        }
 			      ]
 			    },
-			    "度量值_has_月计划累计": {
+			    "KFM选冶厂月报_has_度量值_月计划累计": {
 			      "Binding": {
-			        "ConceptualEntity": "度量值"
+			        "ConceptualEntity": "KFM选冶厂月报"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "度量值": {
+			        "KFM选冶厂月报": {
 			          "Target": {
-			            "Entity": "度量值"
+			            "Entity": "KFM选冶厂月报"
 			          }
 			        },
 			        "度量值.月计划累计": {
@@ -1863,7 +4319,7 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "度量值"
+			              "Role": "KFM选冶厂月报"
 			            },
 			            "Object": {
 			              "Role": "度量值.月计划累计"
@@ -1871,7 +4327,7 @@ cultureInfo zh-CN
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "度量值_have_月计划累计"
+			          "ID": "KFM选冶厂月报_have_月计划累计"
 			        }
 			      ]
 			    },
@@ -1908,15 +4364,15 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "度量值_has_月完成": {
+			    "KFM选冶厂月报_has_度量值_月完成": {
 			      "Binding": {
-			        "ConceptualEntity": "度量值"
+			        "ConceptualEntity": "KFM选冶厂月报"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "度量值": {
+			        "KFM选冶厂月报": {
 			          "Target": {
-			            "Entity": "度量值"
+			            "Entity": "KFM选冶厂月报"
 			          }
 			        },
 			        "度量值.月完成": {
@@ -1929,7 +4385,7 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "度量值"
+			              "Role": "KFM选冶厂月报"
 			            },
 			            "Object": {
 			              "Role": "度量值.月完成"
@@ -1937,19 +4393,19 @@ cultureInfo zh-CN
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "度量值_have_月完成"
+			          "ID": "KFM选冶厂月报_have_月完成"
 			        }
 			      ]
 			    },
-			    "度量值_has_月计划": {
+			    "KFM选冶厂月报_has_度量值_月计划": {
 			      "Binding": {
-			        "ConceptualEntity": "度量值"
+			        "ConceptualEntity": "KFM选冶厂月报"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "度量值": {
+			        "KFM选冶厂月报": {
 			          "Target": {
-			            "Entity": "度量值"
+			            "Entity": "KFM选冶厂月报"
 			          }
 			        },
 			        "度量值.月计划": {
@@ -1962,7 +4418,7 @@ cultureInfo zh-CN
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "度量值"
+			              "Role": "KFM选冶厂月报"
 			            },
 			            "Object": {
 			              "Role": "度量值.月计划"
@@ -1970,7 +4426,7 @@ cultureInfo zh-CN
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "度量值_have_月计划"
+			          "ID": "KFM选冶厂月报_have_月计划"
 			        }
 			      ]
 			    },

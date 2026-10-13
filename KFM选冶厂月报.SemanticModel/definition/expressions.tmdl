@@ -1,7 +1,36 @@
-expression p_起始日期 = #date(2025, 1, 1) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
+expression p_月报起始日期 = #date(2025, 1, 1) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
 	lineageTag: d37f2340-7e85-4790-a15d-b76741818d33
 
 	annotation PBI_NavigationStepName = 导航
 
 	annotation PBI_ResultType = Date
+
+expression p_日报起始日期 = #date(2026, 1, 1) meta [IsParameterQuery = true, IsParameterQueryRequired = true, Type = type date]
+	lineageTag: 11d89abb-ed2d-42a8-bf70-517ae5c3a03e
+
+	annotation PBI_ResultType = Date
+
+expression 全年预算表 =
+		let
+		  源 = KFM选冶厂月报,
+		  #"删除的其他列 1" = Table.SelectColumns(源, {"日期", "产品分类", "指标项", "全年预算数"}),
+		  插入的年份 = Table.AddColumn(#"删除的其他列 1", "年", each Date.Year([日期]), Int64.Type),
+		  分组的行 = Table.Group(插入的年份, {"产品分类", "年", "指标项"}, {{"全年预算数", each List.Average([全年预算数]), type nullable number}})
+		in
+		  分组的行
+	lineageTag: eadb7a8e-3de8-4860-a5f6-7a56d52a183f
+
+	annotation PBI_ResultType = Table
+
+expression 月累计预测表 =
+		let
+		  源 = KFM选冶厂月报,
+		  #"删除的其他列 1" = Table.SelectColumns(源, {"月份", "产品分类", "指标项", "累计预测数"}),
+		  分组的行 = Table.Group(#"删除的其他列 1", {"月份", "产品分类", "指标项"}, {{"累计预测数", each List.Average([累计预测数]), type nullable number}}),
+		  已更改列类型 = Table.TransformColumnTypes(分组的行, {{"月份", type text}})
+		in
+		  已更改列类型
+	lineageTag: fbce04bf-08e6-40c3-b34e-264775ce612e
+
+	annotation PBI_ResultType = Table
 

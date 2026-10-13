@@ -8,8 +8,7 @@
       "b1f4c824c9076603d157",
       "979a623837f5c344c589"
     ],
-    "suppressData": true,
-    "preserveNewVisualVisibility": true
+    "suppressData": true
   },
   "explorationState": {
     "version": "1.3",
@@ -30,7 +29,7 @@
                           "Entity": "度量值"
                         }
                       },
-                      "Property": "标题"
+                      "Property": "标题-月报"
                     }
                   },
                   "howCreated": 0

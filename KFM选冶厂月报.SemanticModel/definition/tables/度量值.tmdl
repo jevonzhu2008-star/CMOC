@@ -10,231 +10,58 @@ table 度量值
 		displayFolder: 辅助
 		lineageTag: e7a3b12a-83a8-4420-b280-443476456db1
 
-	measure 月计划 =
-			// ------------------------------------------------------------
-			// 月计划 —— 当月预测数（当月计划值）
-			// 与「月计划」的差异：单位判定由「仅 %」扩充为「% 与 t/t」
-			// 特点：按单位智能切换显示格式，返回文本类型
-			// ------------------------------------------------------------
-			VAR SumValue =
-			    // 当月预测数合计
-			    SUM('KFM选冶厂月报'[预测数])
-			VAR FormatString =
-			    // 单位为 % 或 t/t 时保留 2 位小数，其余（如吨）显示带千分位的整数
-			    IF(
-			        NOT SELECTEDVALUE('KFM选冶厂月报'[单位]) IN {"%", "t/t"},
-			        "#,0",
-			        "#,0.00"
-			    )
-			VAR FormattedValue =
-			    // 按单位格式化后的文本结果
-			    FORMAT(SumValue, FormatString)
-			RETURN
-			    FormattedValue
-		displayFolder: KFM选冶厂月报
+	measure 月计划 = SUM('KFM选冶厂月报'[预测数])
+		displayFolder: 月报
 		lineageTag: 9574da2d-1ff7-44e7-a7e0-cccdc3fc916d
 
-	measure 月完成 =
-			// ------------------------------------------------------------
-			// 月完成 —— 当月实际完成数
-			// 与「月完成」的差异：单位判定由「仅 %」扩充为「% 与 t/t」
-			// 特点：按单位智能切换显示格式，返回文本类型
-			// ------------------------------------------------------------
-			VAR SumValue =
-			    // 当月实际完成数合计
-			    SUM('KFM选冶厂月报'[实际数])
-			VAR FormatString =
-			    // 单位为 % 或 t/t 时保留 2 位小数，其余（如吨）显示带千分位的整数
-			    IF(
-			        NOT SELECTEDVALUE('KFM选冶厂月报'[单位]) IN {"%", "t/t"},
-			        "#,0",
-			        "#,0.00"
-			    )
-			VAR FormattedValue =
-			    // 按单位格式化后的文本结果
-			    FORMAT(SumValue, FormatString)
-			RETURN
-			    FormattedValue
-		displayFolder: KFM选冶厂月报
+		formatStringDefinition = FormatKFM()
+
+	measure 月完成 = SUM('KFM选冶厂月报'[实际数])
+		displayFolder: 月报
 		lineageTag: fc665243-de9e-44cf-b181-787dafd11401
 
-	measure 月比计划 =
-			// ------------------------------------------------------------
-			// 月比计划 —— 当月计划完成率
-			// 公式：当月实际完成数 ÷ 当月预测数
-			// ------------------------------------------------------------
-			VAR ActualValue =
-			    // 当月实际完成数
-			    SUM('KFM选冶厂月报'[实际数])
-			VAR ForecastValue =
-			    // 当月预测数（即当月计划）
-			    SUM('KFM选冶厂月报'[预测数])
-			RETURN
-			    // DIVIDE 自动处理分母为 0 或空值，避免除零错误
-			    DIVIDE(ActualValue, ForecastValue)
+		formatStringDefinition = FormatKFM()
+
+	measure 月比计划 = DIVIDE ( [月完成], [月计划] )
 		formatString: 0.00%;-0.00%;0.00%
-		displayFolder: KFM选冶厂月报
+		displayFolder: 月报
 		lineageTag: 4aed6c08-0b00-428f-b3cd-ba9f26db2ecd
 
-	measure 月计划累计 =
-			// ------------------------------------------------------------
-			// 月计划累计 —— 截至当月的累计预测数（累计计划值）
-			// 与「月计划累计」的差异：单位判定由「仅 %」扩充为「% 与 t/t」
-			// 特点：按单位智能切换显示格式，返回文本类型
-			// ------------------------------------------------------------
-			VAR SumValue =
-			    // 累计预测数合计
-			    SUM('KFM选冶厂月报'[累计预测数])
-			VAR FormatString =
-			    // 单位为 % 或 t/t 时保留 2 位小数，其余显示带千分位的整数
-			    IF(
-			        NOT SELECTEDVALUE('KFM选冶厂月报'[单位]) IN {"%", "t/t"},
-			        "#,0",
-			        "#,0.00"
-			    )
-			VAR FormattedValue =
-			    // 按单位格式化后的文本结果
-			    FORMAT(SumValue, FormatString)
-			RETURN
-			    FormattedValue
-		displayFolder: KFM选冶厂月报
+	measure 月计划累计 = SUM('KFM选冶厂月报'[累计预测数])
+		displayFolder: 月报
 		lineageTag: 6f628e6c-6fff-4107-86a4-f4559811f6cd
 
-	measure 年累计完成 =
-			// ------------------------------------------------------------
-			// 年累计完成 —— 截至当月的年度累计实际完成数
-			// 与「年累计完成」的差异：单位判定由「仅 %」扩充为「% 与 t/t」
-			// 特点：按单位智能切换显示格式，返回文本类型
-			// ------------------------------------------------------------
-			VAR SumValue =
-			    // 年累计实际完成数合计
-			    SUM('KFM选冶厂月报'[累计实际数])
-			VAR FormatString =
-			    // 单位为 % 或 t/t 时保留 2 位小数，其余显示带千分位的整数
-			    IF(
-			        NOT SELECTEDVALUE('KFM选冶厂月报'[单位]) IN {"%", "t/t"},
-			        "#,0",
-			        "#,0.00"
-			    )
-			VAR FormattedValue =
-			    // 按单位格式化后的文本结果
-			    FORMAT(SumValue, FormatString)
-			RETURN
-			    FormattedValue
-		displayFolder: KFM选冶厂月报
+		formatStringDefinition = FormatKFM()
+
+	measure 年累计完成 = SUM('KFM选冶厂月报'[累计实际数])
+		displayFolder: 月报
 		lineageTag: 9d700dd8-e4b0-4c57-ade7-61e2320d01fd
 
-	measure 年比计划 =
-			// ------------------------------------------------------------
-			// 年比计划 —— 年度累计计划完成率
-			// 公式：年累计实际完成数 ÷ 年累计预测数
-			// ------------------------------------------------------------
-			VAR CumulativeActual =
-			    // 年累计实际完成数
-			    SUM('KFM选冶厂月报'[累计实际数])
-			VAR CumulativeForecast =
-			    // 年累计预测数
-			    SUM('KFM选冶厂月报'[累计预测数])
-			RETURN
-			    // DIVIDE 自动处理分母为 0 或空值，避免除零错误
-			    DIVIDE(CumulativeActual, CumulativeForecast)
+		formatStringDefinition = FormatKFM()
+
+	measure 年比计划 = DIVIDE ( [年累计完成], [月计划累计] )
 		formatString: 0.00%;-0.00%;0.00%
-		displayFolder: KFM选冶厂月报
+		displayFolder: 月报
 		lineageTag: 3a615cd9-4013-4269-b999-3c8186c5b5fd
 
-	measure 同期年累计完成 =
-			// ============================================================
-			// 同期年累计完成 —— 去年同期（去年同月）的年累计完成值
-			// ------------------------------------------------------------
-			// 背景：本模型使用「月份-筛选器」切片器，其取值有两种形态：
-			//       ① “最近月份”  → 代表数据中最后一个有实际数的月份
-			//       ② 具体月份文本 → 如 “202608”
-			// 因此需先将切片器值解析为真实月份，再回退到去年同月取数。
-			// ============================================================
-			VAR SelectedFilter =
-			    // 切片器当前选中值（取自「月份-筛选器」列，而非「月份」列）
-			    SELECTEDVALUE('KFM选冶厂月报'[月份-筛选器])
-			VAR LatestMonth =
-			    // 真实「最近月份」= 有实际数的最大月份（与 M 中 LatestMonth 同口径）
-			    CALCULATE(
-			        MAX('KFM选冶厂月报'[月份]),
-			        'KFM选冶厂月报'[实际数] <> 0,
-			        ALL('KFM选冶厂月报')
-			    )
-			VAR CurrentMonth =
-			    // 解析切片器选中值：“最近月份” → LatestMonth；月份文本 → 转为数字
-			    SWITCH(
-			        TRUE(),
-			        SelectedFilter = "最近月份", LatestMonth,
-			        NOT ISBLANK(SelectedFilter), VALUE(SelectedFilter),
-			        BLANK()
-			    )
-			VAR PriorYearMonth =
-			    // 去年同月：利用 YYYYMM 编码特性，减 100 即得（如 202608 → 202508）
-			    CurrentMonth - 100
-			RETURN
-			    IF(
-			        NOT ISBLANK(CurrentMonth),
-			        CALCULATE(
-			            [年累计完成],
-			            // 先清除「月份」与「月份-筛选器」上的全部筛选：
-			            // 否则切片器遗留的 [月份-筛选器]=“最近月份” 会与
-			            // [月份]=去年同月 互斥，导致整表被清空、结果恒为空。
-			            ALL(
-			                'KFM选冶厂月报'[月份],
-			                'KFM选冶厂月报'[月份-筛选器]
-			            ),
-			            // 再单独施加「去年同月」这一个筛选条件
-			            'KFM选冶厂月报'[月份] = PriorYearMonth
-			        ),
-			        BLANK()
-			    )
-		displayFolder: KFM选冶厂月报
+	measure 同期年累计完成 = PriorYearMonthValue([年累计完成])
+		displayFolder: 月报
 		lineageTag: 767269f6-7d34-4e30-988f-00f03d46e4a7
 
-	measure 年计划 =
-			// ------------------------------------------------------------
-			// 年计划 —— 年度累计预算数（年度预算值）
-			// 与「年计划」的差异：单位判定由「仅 %」扩充为「% 与 t/t」
-			// 特点：按单位智能切换显示格式，返回文本类型
-			// ------------------------------------------------------------
-			VAR SumValue =
-			    // 累计预算数合计
-			    SUM('KFM选冶厂月报'[累计预算数])
-			VAR FormatString =
-			    // 单位为 % 或 t/t 时保留 2 位小数，其余显示带千分位的整数
-			    IF(
-			        NOT SELECTEDVALUE('KFM选冶厂月报'[单位]) IN {"%", "t/t"},
-			        "#,0",
-			        "#,0.00"
-			    )
-			VAR FormattedValue =
-			    // 按单位格式化后的文本结果
-			    FORMAT(SumValue, FormatString)
-			RETURN
-			    FormattedValue
-		displayFolder: KFM选冶厂月报
+		formatStringDefinition = FormatKFM()
+
+	measure 年计划 = SUM('KFM选冶厂月报'[全年预算数])
+		displayFolder: 月报
 		lineageTag: 38cd5c00-3ece-4b80-90cc-39620cdaf36a
 
-	measure 年累计完成比计划 =
-			// ------------------------------------------------------------
-			// 年累计完成比计划 —— 年度累计预算完成率
-			// 公式：年累计实际完成数 ÷ 年累计预算数
-			// ------------------------------------------------------------
-			VAR CumulativeActual =
-			    // 年累计实际完成数
-			    SUM('KFM选冶厂月报'[累计实际数])
-			VAR CumulativeBudget =
-			    // 年累计预算数
-			    SUM('KFM选冶厂月报'[累计预算数])
-			RETURN
-			    // DIVIDE 自动处理分母为 0 或空值，避免除零错误
-			    DIVIDE(CumulativeActual, CumulativeBudget)
+		formatStringDefinition = FormatKFM()
+
+	measure 年累计完成比计划 = DIVIDE ( [年累计完成], [年计划] )
 		formatString: 0.00%;-0.00%;0.00%
-		displayFolder: KFM选冶厂月报
+		displayFolder: 月报
 		lineageTag: c405995a-f7b8-49e5-abcc-4940f06860bc
 
-	measure 标题 =
+	measure 标题-月报 =
 			// ------------------------------------------------------------
 			// 标题 —— 动态生成月报头部标题
 			// 输出示例：KFM月度生产指标完成情况（2026年8月）年时间进度66.67%
@@ -352,6 +179,99 @@ table 度量值
 			    )
 		displayFolder: 辅助
 		lineageTag: 2edb1f3d-5ab9-4b52-915b-9691edcd9664
+
+	measure 日完成 = SUM('L1-KFM日报'[当日实际数])
+		displayFolder: 日报
+		lineageTag: 56ceea6a-68ff-47c5-b883-f01003950497
+
+		formatStringDefinition = FormatKFM()
+
+	measure 月累计 = SUM('L1-KFM日报'[当月累计实际数])
+		displayFolder: 日报
+		lineageTag: 883aa15e-6a38-48b6-ae74-9e95cda00f40
+
+		formatStringDefinition = FormatKFM()
+
+	measure 月计划L1 = SUM('L1-KFM日报'[月计划])
+		displayFolder: 日报
+		lineageTag: 3042fb7d-44b9-4294-a4ec-abb88a9ccae6
+
+		formatStringDefinition = FormatKFM()
+
+	measure 月比计划L1 = ```
+			
+			 IF(
+			    SELECTEDVALUE('L1-KFM日报'[单位]) = "%" ,
+			    [月累计] - [月计划L1] ,
+			    DIVIDE([月累计],[月计划L1])
+			 )
+			```
+		displayFolder: 日报
+		lineageTag: 92bf0f52-a549-4cdb-a15a-b6b5ce619bf6
+
+		formatStringDefinition = FormatKFM2()
+
+	measure 标题-日报 = ```
+			
+			
+			    // 进度百分比文本，如 66.67%
+			VAR v_SelectedDate = SELECTEDVALUE('L1-KFM日报'[标准日期])
+			VAR v_FirstDayOfMonth = DATE(YEAR(v_SelectedDate), MONTH(v_SelectedDate), 1)
+			VAR v_LastDayOfMonth = EOMONTH(v_SelectedDate, 0)
+			VAR v_DaysPassed = DATEDIFF(v_FirstDayOfMonth, v_SelectedDate, DAY) + 1
+			VAR v_TotalDays = DATEDIFF(v_FirstDayOfMonth, v_LastDayOfMonth, DAY) + 1
+			VAR v_Progress = DIVIDE(v_DaysPassed, v_TotalDays)
+			VAR v_Progress2 = IF(NOT ISBLANK(v_SelectedDate), v_Progress, BLANK())
+			VAR YearProgressText = FORMAT(v_Progress2, "0.00%")
+			VAR ReportYearMonthDayText =
+			    // 统计年月+日期+星期，示例：2026年8月05日 星期三
+			    FORMAT(v_SelectedDate, "yyyy年M月dd日 ") & FORMAT(v_SelectedDate, "aaaa")
+			
+			VAR TitlePrefix =
+			    // 标题前缀
+			    "KFM日度生产指标完成情况（"
+			VAR TitleSuffix =
+			    // 标题后缀
+			    "）年时间进度"
+			RETURN
+			    // 无日期数据时返回空，避免拼出错误标题
+			    IF(
+			        NOT ISBLANK(v_SelectedDate),
+			        TitlePrefix & ReportYearMonthDayText & TitleSuffix & YearProgressText,
+			        BLANK()
+			    )
+			```
+		displayFolder: 辅助
+		lineageTag: dc30c013-90ab-409b-bc39-fdbc3568ba9d
+
+	measure 年计划L1 = SUM('L1-KFM日报'[全年预算数])
+		displayFolder: 日报
+		lineageTag: e42cd4f5-5fbe-426a-85cb-178d99dd60cf
+
+		formatStringDefinition = FormatKFM()
+
+	measure 年累计完成L1 =
+			
+			VAR A = SUM('L1-KFM日报'[累计预测数])
+			VAR B = [月累计]
+			RETURN
+			    A + B
+		displayFolder: 日报
+		lineageTag: 2a066569-aebe-402d-acd9-9c839cad1879
+
+		formatStringDefinition = FormatKFM()
+
+	measure 年比计划L1 = ```
+			
+			 IF(
+			    SELECTEDVALUE('L1-KFM日报'[单位]) = "%" ,
+			    [年累计完成L1] - [年计划L1] ,
+			    DIVIDE([年累计完成L1],[年计划L1])
+			 )
+			```
+		lineageTag: 7c4b1d22-9343-4f52-8f26-cbb150ca8d11
+
+		formatStringDefinition = FormatKFM2()
 
 	partition 度量值 = m
 		mode: import

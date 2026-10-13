@@ -23,7 +23,7 @@
                       "Entity": "度量值"
                     }
                   },
-                  "Property": "标题"
+                  "Property": "标题-月报"
                 }
               },
               "queryRef": "_Measures.标题",

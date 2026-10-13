@@ -1280,56 +1280,8 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "7c7bfcb791055253ffaf",
-        "ordinal": 0,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "KFM选冶厂月报_Original"
-              }
-            },
-            "Property": "单位"
-          }
-        },
-        "type": "Categorical",
-        "howCreated": "User"
-      },
-      {
-        "name": "a2b0e65b44c70228f5ff",
-        "ordinal": 1,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "KFM选冶厂月报_Original"
-              }
-            },
-            "Property": "序号"
-          }
-        },
-        "type": "Advanced",
-        "howCreated": "User"
-      },
-      {
-        "name": "5cfe33fddc500e7834b5",
-        "ordinal": 2,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "KFM选冶厂月报_Original"
-              }
-            },
-            "Property": "类别"
-          }
-        },
-        "type": "Categorical",
-        "howCreated": "User"
-      },
-      {
         "name": "f270d2fd360521631e9c",
-        "ordinal": 3,
+        "ordinal": 0,
         "field": {
           "Measure": {
             "Expression": {
@@ -1340,12 +1292,11 @@
             "Property": "年比计划"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
         "name": "5ef10e9fec2998d08aec",
-        "ordinal": 4,
+        "ordinal": 1,
         "field": {
           "Measure": {
             "Expression": {
@@ -1356,12 +1307,11 @@
             "Property": "年计划"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
         "name": "c8535adc53ad0236b847",
-        "ordinal": 5,
+        "ordinal": 2,
         "field": {
           "Measure": {
             "Expression": {
@@ -1372,12 +1322,11 @@
             "Property": "年累计完成"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
         "name": "cb405f74dfc93f759c31",
-        "ordinal": 6,
+        "ordinal": 3,
         "field": {
           "Measure": {
             "Expression": {
@@ -1388,12 +1337,11 @@
             "Property": "年累计完成比计划"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
         "name": "704f5f5fcf51c9692348",
-        "ordinal": 7,
+        "ordinal": 4,
         "field": {
           "Measure": {
             "Expression": {
@@ -1404,12 +1352,11 @@
             "Property": "同期年累计完成"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
         "name": "3a67ef76a282527e604e",
-        "ordinal": 8,
+        "ordinal": 5,
         "field": {
           "Measure": {
             "Expression": {
@@ -1420,12 +1367,11 @@
             "Property": "月比计划"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
         "name": "97d77b2d70c683871b9a",
-        "ordinal": 9,
+        "ordinal": 6,
         "field": {
           "Measure": {
             "Expression": {
@@ -1436,12 +1382,11 @@
             "Property": "月计划"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
         "name": "8c2ee326e9d78428fc37",
-        "ordinal": 10,
+        "ordinal": 7,
         "field": {
           "Measure": {
             "Expression": {
@@ -1452,12 +1397,11 @@
             "Property": "月计划累计"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
         "name": "c52a7e0370677f0e3da5",
-        "ordinal": 11,
+        "ordinal": 8,
         "field": {
           "Measure": {
             "Expression": {
@@ -1468,27 +1412,11 @@
             "Property": "月完成"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
-      },
-      {
-        "name": "2a0e64f4a7bd68bc2c28",
-        "ordinal": 12,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "KFM选冶厂月报_Original"
-              }
-            },
-            "Property": "总类别"
-          }
-        },
-        "type": "Categorical",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
         "name": "73c2a33ac4d47b7c0834",
+        "ordinal": 9,
         "field": {
           "Column": {
             "Expression": {
@@ -1539,9 +1467,53 @@
             }
           ]
         }
+      },
+      {
+        "name": "05a50433da93a5896b54",
+        "ordinal": 10,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KFM选冶厂月报"
+              }
+            },
+            "Property": "类别2"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6780053caf1309ba39f2",
+        "ordinal": 11,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KFM选冶厂月报"
+              }
+            },
+            "Property": "单位"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "67125995d7ddeaa0d7ee",
+        "ordinal": 12,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "度量值"
+              }
+            },
+            "Property": "."
+          }
+        },
+        "type": "Advanced"
       }
     ],
     "filterSortOrder": "Custom"
-  },
-  "isHidden": true
+  }
 }

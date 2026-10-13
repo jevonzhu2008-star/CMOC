@@ -4,46 +4,74 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 436,
+        "x": 0,
         "y": 0
       },
       "nodes": [
         {
           "location": {
-            "x": 307,
-            "y": 0
-          },
-          "nodeIndex": "指标映射",
-          "nodeLineageTag": "39ec67d2-c82d-4c5b-b2ed-73cdd233b935",
-          "size": {
-            "height": 176,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 568,
-            "y": 98
+            "x": 546,
+            "y": 7
           },
           "nodeIndex": "度量值",
+          "nodeLineageTag": "3155867a-412f-4412-aba1-d930d6fe7b51",
           "size": {
             "height": 104,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 6
         },
         {
           "location": {
-            "x": 1136,
-            "y": 0
+            "x": 626.99998474121094,
+            "y": 202
           },
           "nodeIndex": "KFM选冶厂月报",
+          "nodeLineageTag": "a4ceba1e-f83a-4479-84d7-7b93e4502760",
           "size": {
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 201.09999084472656
+          },
+          "nodeIndex": "L1-KFM日报",
+          "nodeLineageTag": "c13d8e49-6648-4b4d-90c0-30204dc558d3",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "日报指标映射",
+          "nodeLineageTag": "06b1ef45-ee23-4924-b096-124c378aea69",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 254,
+            "y": 4
+          },
+          "nodeIndex": "月报指标映射",
+          "nodeLineageTag": "39ec67d2-c82d-4c5b-b2ed-73cdd233b935",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 2
         }
       ],
       "name": "所有表",

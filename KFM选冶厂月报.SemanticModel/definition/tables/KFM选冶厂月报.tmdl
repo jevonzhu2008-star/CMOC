@@ -1,22 +1,6 @@
 table KFM选冶厂月报
 	lineageTag: a4ceba1e-f83a-4479-84d7-7b93e4502760
 
-	column 产品分类
-		dataType: string
-		lineageTag: 3375026d-2097-4368-ba98-c394b0c94e71
-		summarizeBy: none
-		sourceColumn: 产品分类
-
-		annotation SummarizationSetBy = Automatic
-
-	column 单位
-		dataType: string
-		lineageTag: 4bcab619-b151-414c-b0a8-7e10b08108df
-		summarizeBy: none
-		sourceColumn: 单位
-
-		annotation SummarizationSetBy = Automatic
-
 	column 累计实际数
 		dataType: double
 		lineageTag: 6f9652c9-b57d-4b7b-821e-4b81387e2779
@@ -173,6 +157,32 @@ table KFM选冶厂月报
 
 		annotation SummarizationSetBy = Automatic
 
+	column 产品分类
+		dataType: string
+		lineageTag: 95de8128-9065-47a8-8415-724f10809041
+		summarizeBy: none
+		sourceColumn: 产品分类
+
+		annotation SummarizationSetBy = Automatic
+
+	column 单位
+		dataType: string
+		lineageTag: 2f5d4ce2-b325-458b-ac81-dcbece2dcf5c
+		summarizeBy: none
+		sourceColumn: 单位
+
+		annotation SummarizationSetBy = Automatic
+
+	column 全年预算数
+		dataType: double
+		lineageTag: 0f458932-3d86-4f75-ba43-7df582c3a39b
+		summarizeBy: sum
+		sourceColumn: 全年预算数
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition KFM选冶厂月报 = m
 		mode: import
 		source =
@@ -190,7 +200,7 @@ table KFM选冶厂月报
 				    // ---- 2) 按月份循环取数并纵向合并 ----
 				    按月展开数据 =
 				        let
-				            起始月份 = p_起始日期,
+				            起始月份 = p_月报起始日期,
 				            结束月份 = #date(Date.Year(DateTimeZone.SwitchZone(DateTimeZone.UtcNow(), 8)), 12, 1),
 				            月份序列 = List.Generate(
 				                () => 起始月份,
@@ -272,7 +282,7 @@ table KFM选冶厂月报
 				    保留所需列 = Table.SelectColumns(新增指标项列, {"产品分类", "单位", "环节", "矿区", "工序代码", "工序", "环比变化%", "环比实际数", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "同比变化%", "同期实际数", "预测达成差%", "预测达成率%", "预测数", "预算达成差%", "预算达成率%", "预算数", "生产线", "生产线代码", "矿区代码", "月份", "矿体", "指标项"}),
 				
 				    // ========== 第二部分：关联指标映射 + 派生报表字段 ==========
-				    MappingRaw = 指标映射,
+				    MappingRaw = 月报指标映射,
 				    // ---- 6) 左连指标映射（等价 DAX RELATED）----
 				    JoinedWithMapping =
 				        Table.NestedJoin(
@@ -373,7 +383,7 @@ table KFM选冶厂月报
 				            {
 				                "环节序号","序号", "排序", "月份", "月份-筛选器", "日期",
 				                "产品分类", "指标项", "总类别",  "类别", "类别2", "单位",
-				                "累计实际数", "累计预测数", "累计预算数",
+				                "累计实际数", "累计预测数", "累计预算数", "全年预算数",
 				                "实际数", "预测数", "预算数"
 				            }
 				        ),

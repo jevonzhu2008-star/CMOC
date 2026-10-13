@@ -4,5 +4,6 @@
   "displayName": "KFM选冶厂月报UI Enhance",
   "displayOption": "FitToPage",
   "height": 1080,
-  "width": 1920
+  "width": 1920,
+  "visibility": "HiddenInViewMode"
 }

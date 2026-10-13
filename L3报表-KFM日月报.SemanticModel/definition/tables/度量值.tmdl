@@ -200,6 +200,7 @@ table 度量值
 
 	measure 月比计划L1 = ```
 			
+			 // 比率单位（%）→ 差额（百分点差）；数量单位 → 比率
 			 IF(
 			    SELECTEDVALUE('L1-KFM日报'[单位]) = "%" ,
 			    [月累计] - [月计划L1] ,
@@ -214,7 +215,6 @@ table 度量值
 	measure 标题-日报 = ```
 			
 			
-			    // 进度百分比文本，如 66.67%
 			VAR v_SelectedDate = SELECTEDVALUE('L1-KFM日报'[标准日期])
 			VAR v_FirstDayOfMonth = DATE(YEAR(v_SelectedDate), MONTH(v_SelectedDate), 1)
 			VAR v_LastDayOfMonth = EOMONTH(v_SelectedDate, 0)
@@ -222,6 +222,7 @@ table 度量值
 			VAR v_TotalDays = DATEDIFF(v_FirstDayOfMonth, v_LastDayOfMonth, DAY) + 1
 			VAR v_Progress = DIVIDE(v_DaysPassed, v_TotalDays)
 			VAR v_Progress2 = IF(NOT ISBLANK(v_SelectedDate), v_Progress, BLANK())
+			// 进度百分比文本，如 66.67%
 			VAR YearProgressText = FORMAT(v_Progress2, "0.00%")
 			VAR ReportYearMonthDayText =
 			    // 统计年月+日期+星期，示例：2026年8月05日 星期三
@@ -252,6 +253,8 @@ table 度量值
 
 	measure 年累计完成L1 =
 			
+			// 年累计完成 = 累计预测数 + 当月累计实际数
+			// 注意：A 用「累计预测数」字段（经上月编码关联月报），需确认口径是否为「截至上月累计实际」
 			VAR A = SUM('L1-KFM日报'[累计预测数])
 			VAR B = [月累计]
 			RETURN
@@ -263,6 +266,7 @@ table 度量值
 
 	measure 年比计划L1 = ```
 			
+			 // 比率单位（%）→ 差额（百分点差）；数量单位 → 比率
 			 IF(
 			    SELECTEDVALUE('L1-KFM日报'[单位]) = "%" ,
 			    [年累计完成L1] - [年计划L1] ,

@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Report",
-    "displayName": "KFM选冶厂月报"
+    "displayName": "L3报表-KFM日月报"
   },
   "config": {
     "version": "2.0",

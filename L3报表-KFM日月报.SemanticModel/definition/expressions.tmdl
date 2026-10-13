@@ -9,3 +9,4 @@ expression p_日报起始日期 = #date(2026, 1, 1) meta [IsParameterQuery = tru
 	lineageTag: 11d89abb-ed2d-42a8-bf70-517ae5c3a03e
 
 	annotation PBI_ResultType = Date
+

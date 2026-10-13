@@ -186,222 +186,129 @@ table KFM选冶厂月报
 	partition KFM选冶厂月报 = m
 		mode: import
 		source =
-				let
-				    // ============================================================
-				    // 查询名称：KFM选冶厂月报（合并版）
-				    // 数据源：SAP BW 立方体 ZRPP_CP006 / 查询 ZRPP_CP006_Q0002
-				    // 流程：BW逐月取数 → 重命名/补维度 → 左连指标映射 → 派生类别2/日期/月份-筛选器/统一排序
-				    // ============================================================
-				    // ========== 第一部分：BW 取数 ==========
-				    // ---- 1) 连接 BW 立方体 ----
-				    数据源 = SapBusinessWarehouse.Cubes("10.43.13.31", "01", "100", [LanguageCode="ZH", Implementation="2.0", BatchSize=500000000]),
-				    立方体 = 数据源{[Name="ZRPP_CP006"]}[Data],
-				    基础查询 = 立方体{[Id="ZRPP_CP006/ZRPP_CP006_Q0002"]}[Data],
-				    // ---- 2) 按月份循环取数并纵向合并 ----
-				    按月展开数据 =
-				        let
-				            起始月份 = p_月报起始日期,
-				            结束月份 = #date(Date.Year(DateTimeZone.SwitchZone(DateTimeZone.UtcNow(), 8)), 12, 1),
-				            月份序列 = List.Generate(
-				                () => 起始月份,
-				                each _ <= 结束月份,
-				                each Date.AddMonths(_, 1)
-				            ),
-				            月份文本列表 = List.Transform(月份序列, each Text.From(Date.Year(_) * 100 + Date.Month(_))),
-				            按月取数 = (month as text) =>
-				                let
-				                    展开查询结果 = Cube.Transform(
-				                        基础查询,
-				                        {
-				                            // 月份参数
-				                            {Cube.ApplyParameter, "[ZMSDQNY]", {month}},
-				                            // 维度列
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZCP]", {"[4ZRPP_CP006-ZCP].[LEVEL01]"}, {"产品.产品 级别 01"}},
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZCPL]", {"[4ZRPP_CP006-ZCPL].[LEVEL01]"}, {"产品类别.产品类别 级别 01"}},
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZUNIT]", {"[4ZRPP_CP006-ZUNIT].[LEVEL01]"}, {"单位.单位 级别 01"}},
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZHJ]", {"[4ZRPP_CP006-ZHJ].[LEVEL01]"}, {"环节.环节 级别 01"}},
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZKK]", {"[4ZRPP_CP006-ZKK].[LEVEL01]"}, {"矿坑.矿坑 级别 01"}},
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZMAREA]", {"[4ZRPP_CP006-ZMAREA].[LEVEL01]"}, {"矿区.矿区 级别 01"}},
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZSJGX]", {"[4ZRPP_CP006-ZSJGX].[LEVEL01]"}, {"三级工序.三级工序 级别 01"}},
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZSJGX_T]", {"[4ZRPP_CP006-ZSJGX_T].[LEVEL01]"}, {"三级工序名.三级工序名 级别 01"}},
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZINDITEM]", {"[4ZRPP_CP006-ZINDITEM].[LEVEL01]"}, {"指标名称.指标名称 级别 01"}},
-				                            // 度量列
-				                            {Cube.AddMeasureColumn, "环比变化%", "[Measures].[4VGQHR12MHZ1PGIPW5ZTU4PVN]"},
-				                            {Cube.AddMeasureColumn, "环比实际数", "[Measures].[4VGQHR12MHZ1PGIPW5ZTU4JK3]"},
-				                            {Cube.AddMeasureColumn, "累计实际数", "[Measures].[4VGQHR12MHZ1PFWV78XF5HC7D]"},
-				                            {Cube.AddMeasureColumn, "累计预测数", "[Measures].[4VGQHR12MHZ1PFWV78XF5HIIX]"},
-				                            {Cube.AddMeasureColumn, "累计预算数", "[Measures].[4VGQHR12MHZ1PG2HCQCV38IEL]"},
-				                            {Cube.AddMeasureColumn, "全年预算数", "[Measures].[4VGQHR12MHZ1PG2HCQCV38OQ5]"},
-				                            {Cube.AddMeasureColumn, "实际数", "[Measures].[4VGQHR12MHZ1PFWV78XF5GZK9]"},
-				                            {Cube.AddMeasureColumn, "同比变化%", "[Measures].[4VGQHR12MHZ1PGIPW5ZTU4D8J]"},
-				                            {Cube.AddMeasureColumn, "同期实际数", "[Measures].[4VGQHR12MHZ1PGIPW5ZTU46WZ]"},
-				                            {Cube.AddMeasureColumn, "预测达成差%", "[Measures].[4VGQHR12MHZ1PGIB7956O16TC]"},
-				                            {Cube.AddMeasureColumn, "预测达成率%", "[Measures].[4VGQHR12MHZ1PGIB7956O10HS]"},
-				                            {Cube.AddMeasureColumn, "预测数", "[Measures].[4VGQHR12MHZ1PFWV78XF5H5VT]"},
-				                            {Cube.AddMeasureColumn, "预算达成差%", "[Measures].[4VGQHR12MHZ1PGIB7956O1JGG]"},
-				                            {Cube.AddMeasureColumn, "预算达成率%", "[Measures].[4VGQHR12MHZ1PGIB7956O1D4W]"},
-				                            {Cube.AddMeasureColumn, "预算数", "[Measures].[4VGQHR12MHZ1PG2HCQCV38C31]"},
-				                            // 维度列（续）+ 成员代码
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZINDID]", {"[4ZRPP_CP006-ZINDID].[LEVEL01]"}, {"指标编码.指标编码 级别 01"}},
-				                            {Table.AddColumn, "指标编码.指标编码 级别 01.代码", each Cube.AttributeMemberProperty([指标编码.指标编码 级别 01], "[24ZRPP_CP006-ZINDID]")},
-				                            {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZCX]", {"[4ZRPP_CP006-ZCX].[LEVEL01]"}, {"产线.产线 级别 01"}},
-				                            {Table.AddColumn, "产线.产线 级别 01.代码", each Cube.AttributeMemberProperty([产线.产线 级别 01], "[24ZRPP_CP006-ZCX]")},
-				                            {Table.AddColumn, "矿坑.矿坑 级别 01.代码", each Cube.AttributeMemberProperty([矿坑.矿坑 级别 01], "[24ZRPP_CP006-ZKK]")},
-				                            {Table.AddColumn, "矿区.矿区 级别 01.代码", each Cube.AttributeMemberProperty([矿区.矿区 级别 01], "[24ZRPP_CP006-ZMAREA]")}
-				                        }
-				                    ),
-				                    新增月份列 = Table.AddColumn(展开查询结果, "月份", each month)
-				                in
-				                    新增月份列,
-				            分月结果集 = List.Transform(月份文本列表, 按月取数),
-				            合并全部月份 = Table.Combine(分月结果集)
-				        in
-				            合并全部月份,
-				    // ---- 3) 规范列名 ----
-				    重命名列 = Table.RenameColumns(按月展开数据, {
-				        {"产品.产品 级别 01", "产品"},
-				        {"产品类别.产品类别 级别 01", "产品分类"},
-				        {"单位.单位 级别 01", "单位"},
-				        {"环节.环节 级别 01", "环节"},
-				        {"矿坑.矿坑 级别 01", "矿坑"},
-				        {"矿区.矿区 级别 01", "矿区"},
-				        {"三级工序.三级工序 级别 01", "工序代码"},
-				        {"三级工序名.三级工序名 级别 01", "工序"},
-				        {"指标名称.指标名称 级别 01", "指标名称"},
-				        {"产线.产线 级别 01", "生产线"},
-				        {"产线.产线 级别 01.代码", "生产线代码"},
-				        {"指标编码.指标编码 级别 01", "指标编码"},
-				        {"指标编码.指标编码 级别 01.代码", "指标编码代码"},
-				        {"矿坑.矿坑 级别 01.代码", "矿坑代码"},
-				        {"矿区.矿区 级别 01.代码", "矿区代码"}
-				    }),
-				    // ---- 4) 新增派生列：矿体 / 指标项 ----
-				    新增矿体列 = Table.AddColumn(重命名列, "矿体", each "KFM"),
-				    新增指标项列 = Table.AddColumn(新增矿体列, "指标项", each [指标名称]),
-				    // ---- 5) 裁剪列 ----
-				    保留所需列 = Table.SelectColumns(新增指标项列, {"产品分类", "单位", "环节", "矿区", "工序代码", "工序", "环比变化%", "环比实际数", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "同比变化%", "同期实际数", "预测达成差%", "预测达成率%", "预测数", "预算达成差%", "预算达成率%", "预算数", "生产线", "生产线代码", "矿区代码", "月份", "矿体", "指标项"}),
-				
-				    // ========== 第二部分：关联指标映射 + 派生报表字段 ==========
-				    MappingRaw = 月报指标映射,
-				    // ---- 6) 左连指标映射（等价 DAX RELATED）----
-				    JoinedWithMapping =
-				        Table.NestedJoin(
-				            保留所需列, {"指标项"},
-				            MappingRaw, {"指标项"},
-				            "指标映射",
-				            JoinKind.LeftOuter
-				        ),
-				    // ---- 7) 展开：类别 / 序号 / 环节(→总类别) / 环节序号 ----
-				    ExpandedWithMapping =
-				        Table.ExpandTableColumn(
-				            JoinedWithMapping,
-				            "指标映射",
-				            {"类别", "序号", "环节", "环节序号"},
-				            {"类别", "序号", "总类别", "环节序号"}
-				        ),
-				    // ---- 8) 剔除未匹配到映射的行 ----
-				    FilteredNoBlankSerial =
-				        Table.SelectRows(ExpandedWithMapping, each [序号] <> null),
-				    // ---- 9) 分组A：序号 ∈ {5,13,14,15,16} 需重映射类别2 ----
-				    RowsNeedMapCategory2 =
-				        Table.SelectRows(FilteredNoBlankSerial, each List.Contains({5, 13, 14, 15, 16}, [序号])),
-				    // ---- 10) 分组B：其余行沿用原类别 ----
-				    RowsKeepOriginCategory =
-				        Table.SelectRows(FilteredNoBlankSerial, each not List.Contains({5, 13, 14, 15, 16}, [序号])),
-				    // ---- 11) 分组A：按 类别+产品分类 映射细分类别2 ----
-				    RowsWithNewCategory2 =
-				        Table.AddColumn(
-				            RowsNeedMapCategory2, "类别2",
-				            each
-				                if [类别] = "采出品位（铜+钴）" and [产品分类] = "全铜TCu" then "采出全铜品位"
-				            else if [类别] = "采出品位（铜+钴）" and [产品分类] = "全钴TCo" then "采出全钴品位"
-				            else if [类别] = "入选品位（铜+钴）" and [产品分类] = "全铜TCu" then "入选铜品位"
-				            else if [类别] = "入选品位（铜+钴）" and [产品分类] = "全钴TCo" then "入选钴品位"
-				            else if [类别] = "浸出率（铜+钴）"     and [产品分类] = "全铜TCu" then "浸出率TCu"
-				            else if [类别] = "浸出率（铜+钴）"     and [产品分类] = "全钴TCo" then "浸出率TCo"
-				            else if [类别] = "回收率（铜+钴）"     and [产品分类] = "全铜TCu" then "全铜回收率"
-				            else if [类别] = "回收率（铜+钴）"     and [产品分类] = "全钴TCo" then "全钴回收率"
-				            else if [类别] = "阴极铜+氢氧化钴含钴" and [产品分类] = "全铜TCu" then "阴极铜"
-				            else if [类别] = "阴极铜+氢氧化钴含钴" and [产品分类] = "全钴TCo" then "氢氧化钴含钴"
-				            else null
-				        ),
-				    // ---- 12) 分组B：类别2 = 原类别 ----
-				    RowsWithOriginCategory2 =
-				        Table.AddColumn(RowsKeepOriginCategory, "类别2", each [类别]),
-				    // ---- 13) 合并两组 ----
-				    Combined = Table.Combine({RowsWithNewCategory2, RowsWithOriginCategory2}),
-				    // ---- 13.5) 统一排序列：序号为主，同序号内铜(0)前钴(1)后 ----
-				    // 排序键 = 序号 × 10 + 铜钴次序号；该列即报表行的唯一排序依据
-				    AddSortColumn =
-				        Table.AddColumn(
-				            Combined, "排序",
-				            each
-				                let
-				                    主序 = [序号],
-				                    次序 =
-				                        if List.Contains({5, 13, 14, 15, 16}, [序号])
-				                        then if [产品分类] = "全铜TCu" then 0
-				                             else if [产品分类] = "全钴TCo" then 1
-				                             else 0
-				                        else 0
-				                in
-				                    主序 * 10 + 次序
-				        ),
-				    排序后 = Table.Sort(AddSortColumn, {{"排序", Order.Ascending}}),
-				    // ---- 14) 计算最近月份 LatestMonth（实际数<>0 的最大月份）----
-				    RowsWithActual =
-				        Table.SelectRows(排序后, each [实际数] <> null and [实际数] <> 0),
-				    LatestMonth = List.Max(RowsWithActual[月份]),
-				    // ---- 15) 新增【日期】列：YYYYMM → 当月1日 ----
-				    AddDateColumn =
-				        Table.AddColumn(
-				            排序后,
-				            "日期",
-				            each
-				                if [月份] = null then null
-				                else
-				                    let
-				                        YM_Text = Text.From([月份]),
-				                        Y = Number.FromText(Text.Start(YM_Text, 4)),
-				                        M = Number.FromText(Text.Range(YM_Text, 4, 2))
-				                    in
-				                        #date(Y, M, 1)
-				        ),
-				    // ---- 16) 新增【月份-筛选器】列：LatestMonth → "最近月份"，其余 → 月份文本 ----
-				    AddMonthFilter =
-				        Table.AddColumn(
-				            AddDateColumn, "月份-筛选器",
-				            each
-				                if [月份] = LatestMonth then "最近月份"
-				                else if [月份] = null then null
-				                else Text.From([月份])
-				        ),
-				    // ---- 17) 收列：按报表需要顺序保留（含"排序"列）----
-				    FinalResult =
-				        Table.SelectColumns(
-				            AddMonthFilter,
-				            {
-				                "环节序号","序号", "排序", "月份", "月份-筛选器", "日期",
-				                "产品分类", "指标项", "总类别",  "类别", "类别2", "单位",
-				                "累计实际数", "累计预测数", "累计预算数", "全年预算数",
-				                "实际数", "预测数", "预算数"
-				            }
-				        ),
-				    // ---- 18) 类型转换 ----
-				    设置类型 =
-				        Table.TransformColumnTypes(
-				            FinalResult,
-				            {
-				                {"类别2", type text},
-				                {"月份-筛选器", type text},
-				                {"日期", type date},
-				                {"月份", Int64.Type},
-				                {"环节序号", Int64.Type},
-				                {"排序", Int64.Type}
-				            }
-				        )
-				in
-				    设置类型
+let
+    数据源 = SapBusinessWarehouse.Cubes("10.43.13.31", "01", "100", [LanguageCode="ZH", Implementation="2.0", BatchSize=500000000]),
+    立方体 = 数据源{[Name="ZRPP_CP006"]}[Data],
+    基础查询 = 立方体{[Id="ZRPP_CP006/ZRPP_CP006_Q0002"]}[Data],
+
+    // 按月循环取数：从 p_月报起始日期 到当年 12 月，逐月查询 SAP BW 后合并
+    合并月度数据 = let
+        起始月份 = p_月报起始日期,
+        结束月份 = #date(Date.Year(DateTimeZone.SwitchZone(DateTimeZone.UtcNow(), 8)), 12, 1),
+        月份序列 = List.Generate(() => 起始月份, each _ <= 结束月份, each Date.AddMonths(_, 1)),
+        月份文本列表 = List.Transform(月份序列, each Text.From(Date.Year(_) * 100 + Date.Month(_))),
+        查询单月 = (month as text) =>
+            let
+                Query = Cube.Transform(基础查询, {
+                    {Cube.ApplyParameter, "[ZMSDQNY]", {month}},
+                    {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZCPL]", {"[4ZRPP_CP006-ZCPL].[LEVEL01]"}, {"产品分类"}},
+                    {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZUNIT]", {"[4ZRPP_CP006-ZUNIT].[LEVEL01]"}, {"单位"}},
+                    {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZHJ]", {"[4ZRPP_CP006-ZHJ].[LEVEL01]"}, {"环节"}},
+                    {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZMAREA]", {"[4ZRPP_CP006-ZMAREA].[LEVEL01]"}, {"矿区"}},
+                    {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZSJGX]", {"[4ZRPP_CP006-ZSJGX].[LEVEL01]"}, {"工序代码"}},
+                    {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZSJGX_T]", {"[4ZRPP_CP006-ZSJGX_T].[LEVEL01]"}, {"工序"}},
+                    {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZINDITEM]", {"[4ZRPP_CP006-ZINDITEM].[LEVEL01]"}, {"指标项"}},
+                    {Cube.AddMeasureColumn, "环比变化%", "[Measures].[4VGQHR12MHZ1PGIPW5ZTU4PVN]"},
+                    {Cube.AddMeasureColumn, "环比实际数", "[Measures].[4VGQHR12MHZ1PGIPW5ZTU4JK3]"},
+                    {Cube.AddMeasureColumn, "累计实际数", "[Measures].[4VGQHR12MHZ1PFWV78XF5HC7D]"},
+                    {Cube.AddMeasureColumn, "累计预测数", "[Measures].[4VGQHR12MHZ1PFWV78XF5HIIX]"},
+                    {Cube.AddMeasureColumn, "累计预算数", "[Measures].[4VGQHR12MHZ1PG2HCQCV38IEL]"},
+                    {Cube.AddMeasureColumn, "全年预算数", "[Measures].[4VGQHR12MHZ1PG2HCQCV38OQ5]"},
+                    {Cube.AddMeasureColumn, "实际数", "[Measures].[4VGQHR12MHZ1PFWV78XF5GZK9]"},
+                    {Cube.AddMeasureColumn, "同比变化%", "[Measures].[4VGQHR12MHZ1PGIPW5ZTU4D8J]"},
+                    {Cube.AddMeasureColumn, "同期实际数", "[Measures].[4VGQHR12MHZ1PGIPW5ZTU46WZ]"},
+                    {Cube.AddMeasureColumn, "预测达成差%", "[Measures].[4VGQHR12MHZ1PGIB7956O16TC]"},
+                    {Cube.AddMeasureColumn, "预测达成率%", "[Measures].[4VGQHR12MHZ1PGIB7956O10HS]"},
+                    {Cube.AddMeasureColumn, "预测数", "[Measures].[4VGQHR12MHZ1PFWV78XF5H5VT]"},
+                    {Cube.AddMeasureColumn, "预算达成差%", "[Measures].[4VGQHR12MHZ1PGIB7956O1JGG]"},
+                    {Cube.AddMeasureColumn, "预算达成率%", "[Measures].[4VGQHR12MHZ1PGIB7956O1D4W]"},
+                    {Cube.AddMeasureColumn, "预算数", "[Measures].[4VGQHR12MHZ1PG2HCQCV38C31]"},
+                    {Cube.AddAndExpandDimensionColumn, "[4ZRPP_CP006-ZCX]", {"[4ZRPP_CP006-ZCX].[LEVEL01]"}, {"生产线"}},
+                    {Table.AddColumn, "生产线代码", each Cube.AttributeMemberProperty([生产线], "[24ZRPP_CP006-ZCX]")},
+                    {Table.AddColumn, "矿区代码", each Cube.AttributeMemberProperty([矿区], "[24ZRPP_CP006-ZMAREA]")}
+                }),
+                附加月份 = Table.AddColumn(Query, "月份", each month)
+            in
+                附加月份,
+        各月结果 = List.Transform(月份文本列表, 查询单月),
+        合并结果 = Table.Combine(各月结果)
+    in
+        合并结果,
+
+    // 矿体标识
+    添加矿体列 = Table.AddColumn(合并月度数据, "矿体", each "KFM"),
+
+    // 保留输出列
+    保留列 = Table.SelectColumns(添加矿体列, {"产品分类", "单位", "环节", "矿区", "工序代码", "工序", "环比变化%", "环比实际数", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "同比变化%", "同期实际数", "预测达成差%", "预测达成率%", "预测数", "预算达成差%", "预算达成率%", "预算数", "生产线", "生产线代码", "矿区代码", "月份", "矿体", "指标项"}),
+
+    // 左连接月报指标映射，补充类别、序号、总类别、环节序号
+    合并指标映射 = Table.NestedJoin(保留列, {"指标项"}, 月报指标映射, {"指标项"}, "指标映射", JoinKind.LeftOuter),
+    展开指标映射 = Table.ExpandTableColumn(合并指标映射, "指标映射", {"类别", "序号", "环节", "环节序号"}, {"类别", "序号", "总类别", "环节序号"}),
+
+    // 剔除未匹配到映射的行
+    剔除未匹配行 = Table.SelectRows(展开指标映射, each [序号] <> null),
+
+    // 类别2：序号 ∈ {5,13,14,15,16} 按 类别+产品分类 细分，其余沿用原类别
+    添加类别2 = Table.AddColumn(剔除未匹配行, "类别2", each
+        if List.Contains({5, 13, 14, 15, 16}, [序号]) then
+            if [类别] = "采出品位（铜+钴）" and [产品分类] = "全铜TCu" then "采出全铜品位"
+            else if [类别] = "采出品位（铜+钴）" and [产品分类] = "全钴TCo" then "采出全钴品位"
+            else if [类别] = "入选品位（铜+钴）" and [产品分类] = "全铜TCu" then "入选铜品位"
+            else if [类别] = "入选品位（铜+钴）" and [产品分类] = "全钴TCo" then "入选钴品位"
+            else if [类别] = "浸出率（铜+钴）" and [产品分类] = "全铜TCu" then "浸出率TCu"
+            else if [类别] = "浸出率（铜+钴）" and [产品分类] = "全钴TCo" then "浸出率TCo"
+            else if [类别] = "回收率（铜+钴）" and [产品分类] = "全铜TCu" then "全铜回收率"
+            else if [类别] = "回收率（铜+钴）" and [产品分类] = "全钴TCo" then "全钴回收率"
+            else if [类别] = "阴极铜+氢氧化钴含钴" and [产品分类] = "全铜TCu" then "阴极铜"
+            else if [类别] = "阴极铜+氢氧化钴含钴" and [产品分类] = "全钴TCo" then "氢氧化钴含钴"
+            else null
+        else [类别]
+    ),
+
+    // 排序键 = 序号 × 10 + 铜钴次序（铜 0 钴 1）
+    添加排序键 = Table.AddColumn(添加类别2, "排序", each
+        let
+            主序 = [序号],
+            次序 = if List.Contains({5, 13, 14, 15, 16}, [序号]) then
+                if [产品分类] = "全铜TCu" then 0
+                else if [产品分类] = "全钴TCo" then 1
+                else 0
+            else 0
+        in
+            主序 * 10 + 次序
+    ),
+    按排序键排序 = Table.Sort(添加排序键, {{"排序", Order.Ascending}}),
+
+    // 最近月份 = 实际数非空的月份最大值
+    最近月份 = List.Max(Table.SelectRows(按排序键排序, each [实际数] <> null and [实际数] <> 0)[月份]),
+
+    // 日期 = YYYYMM → 当月 1 日
+    添加日期 = Table.AddColumn(按排序键排序, "日期", each
+        if [月份] = null then null
+        else
+            let
+                月份文本 = Text.From([月份]),
+                年 = Number.FromText(Text.Start(月份文本, 4)),
+                月 = Number.FromText(Text.Range(月份文本, 4, 2))
+            in
+                #date(年, 月, 1)
+    ),
+
+    // 月份-筛选器：最近月份 → "最近月份"，其余 → 月份文本
+    添加月份筛选器 = Table.AddColumn(添加日期, "月份-筛选器", each
+        if [月份] = 最近月份 then "最近月份"
+        else if [月份] = null then null
+        else Text.From([月份])
+    ),
+
+    // 收列（按最终输出顺序）
+    保留最终列 = Table.SelectColumns(添加月份筛选器, {"环节序号", "序号", "排序", "月份", "月份-筛选器", "日期", "产品分类", "指标项", "总类别", "类别", "类别2", "单位", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "预测数", "预算数"}),
+
+    // 类型转换
+    设置类型 = Table.TransformColumnTypes(保留最终列, {{"类别2", type text}, {"月份-筛选器", type text}, {"日期", type date}, {"月份", Int64.Type}, {"环节序号", Int64.Type}, {"排序", Int64.Type}})
+in
+    设置类型
+
 
 	annotation PBI_NavigationStepName = 导航
 

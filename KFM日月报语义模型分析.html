@@ -1,0 +1,320 @@
+<title>KFM日月报语义模型分析</title>
+<style>
+/* 布局概念：单列工程分析报告——顶部元信息条 + 摘要卡 + 四个内容分区；问题用分级徽章卡片呈现 */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface2:#eef1f5;
+  --fg:#17202e; --muted:#5c6a7a; --border:#d9dfe7;
+  --accent:#1f5aa8; --accent-soft:#e8eff8;
+  --crit:#b53a2e; --crit-soft:#fae9e6;
+  --warn:#a46a12; --warn-soft:#f8f0e0;
+  --info:#2a7bb6; --info-soft:#e5f1f9;
+  --ok:#2e7d5b; --ok-soft:#e6f2ec;
+  --mono:"Cascadia Code","JetBrains Mono",Consolas,"Courier New",monospace;
+  --sans:"Segoe UI","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161f; --surface:#1a2230; --surface2:#202a3a;
+    --fg:#e6ecf5; --muted:#98a6b8; --border:#2c394c;
+    --accent:#6ea8e8; --accent-soft:#1d2c40;
+    --crit:#e07a6b; --crit-soft:#3a2420;
+    --warn:#e0a94e; --warn-soft:#3a2f1b;
+    --info:#6db3e8; --info-soft:#1d2c3a;
+    --ok:#63c197; --ok-soft:#1e342a;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161f; --surface:#1a2230; --surface2:#202a3a;
+  --fg:#e6ecf5; --muted:#98a6b8; --border:#2c394c;
+  --accent:#6ea8e8; --accent-soft:#1d2c40;
+  --crit:#e07a6b; --crit-soft:#3a2420;
+  --warn:#e0a94e; --warn-soft:#3a2f1b;
+  --info:#6db3e8; --info-soft:#1d2c3a;
+  --ok:#63c197; --ok-soft:#1e342a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; padding-inline:20px; padding-block:28px 48px;
+  background:var(--bg); color:var(--fg);
+  font-family:var(--sans); font-size:15px; line-height:1.65;
+}
+.wrap{max-width:960px; margin:0 auto; display:flex; flex-direction:column; gap:28px}
+header h1{font-size:clamp(24px,4vw,34px); line-height:1.2; margin:0 0 8px; letter-spacing:-.01em; text-wrap:balance}
+header .sub{color:var(--muted); font-size:14px; max-width:60ch}
+.meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px}
+.meta span{font-size:12.5px; color:var(--muted); background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:3px 10px; font-family:var(--mono)}
+.meta span b{color:var(--fg); font-weight:600}
+section.card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:22px 24px}
+section.card h2{font-size:19px; margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--border); text-wrap:balance}
+section.card h3{font-size:15.5px; margin:20px 0 8px}
+p{margin:8px 0}
+table{border-collapse:collapse; width:100%; font-size:13.5px; margin:10px 0}
+th,td{text-align:left; padding:8px 10px; border:1px solid var(--border); vertical-align:top}
+th{background:var(--surface2); font-weight:600; white-space:nowrap}
+td code,th code{font-family:var(--mono); font-size:12.5px}
+.tbl-wrap{overflow-x:auto}
+code{font-family:var(--mono); font-size:13px; background:var(--surface2); border:1px solid var(--border); border-radius:5px; padding:1px 6px}
+pre{font-family:var(--mono); font-size:12.5px; line-height:1.55; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:14px 16px; overflow-x:auto; margin:10px 0}
+pre code{background:none; border:none; padding:0; font-size:inherit}
+.badge{display:inline-block; font-size:12px; font-weight:600; padding:2px 9px; border-radius:999px; white-space:nowrap}
+.badge.crit{background:var(--crit-soft); color:var(--crit)}
+.badge.warn{background:var(--warn-soft); color:var(--warn)}
+.badge.info{background:var(--info-soft); color:var(--info)}
+.badge.ok{background:var(--ok-soft); color:var(--ok)}
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px}
+.kpi{background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px 16px}
+.kpi .n{font-size:26px; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+.kpi .l{font-size:12.5px; color:var(--muted); margin-top:2px}
+.issue{border:1px solid var(--border); border-left-width:4px; border-radius:8px; padding:14px 16px; margin:12px 0; background:var(--surface)}
+.issue.crit{border-left-color:var(--crit)}
+.issue.warn{border-left-color:var(--warn)}
+.issue.info{border-left-color:var(--info)}
+.issue h4{margin:0 0 4px; font-size:15px; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.issue .loc{font-size:12px; color:var(--muted); font-family:var(--mono)}
+.issue p{margin:6px 0}
+.issue .tag{font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--muted)}
+.step{display:flex; gap:10px; margin:7px 0; align-items:flex-start}
+.step .arrow{color:var(--accent); font-family:var(--mono); flex:none; margin-top:1px}
+.step .t{min-width:0}
+.flow{border:1px dashed var(--border); border-radius:8px; padding:12px 16px; background:var(--surface2); margin:10px 0; font-size:13.5px}
+.note{background:var(--ok-soft); border:1px solid var(--border); border-radius:8px; padding:12px 16px; margin:10px 0; font-size:13.5px}
+.note b{color:var(--ok)}
+@media(max-width:520px){
+  body{padding-inline:16px}
+  section.card{padding:16px 16px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+
+<header>
+  <h1>KFM日月报语义模型分析</h1>
+  <p class="sub">梳理 <code>L3报表-KFM日月报.SemanticModel</code> 的 M（Power Query）转换逻辑与 DAX 计算逻辑，评估其正确性与合理性，并给出分级问题清单。</p>
+  <div class="meta">
+    <span>兼容级别 <b>1702</b></span>
+    <span>文化 <b>zh-CN</b></span>
+    <span>表 <b>5</b></span>
+    <span>关系 <b>0</b></span>
+    <span>DAX 函数 <b>3</b></span>
+    <span>度量值 <b>23</b></span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <h2>摘要</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="n">5</div><div class="l">张表（2 事实 + 2 映射 + 1 度量值）</div></div>
+      <div class="kpi"><div class="n">0</div><div class="l">模型关系（扁平化设计）</div></div>
+      <div class="kpi"><div class="n" style="color:var(--crit)">2</div><div class="l">严重问题</div></div>
+      <div class="kpi"><div class="n" style="color:var(--warn)">6</div><div class="l">中等问题</div></div>
+      <div class="kpi"><div class="n" style="color:var(--info)">2</div><div class="l">轻微问题</div></div>
+    </div>
+    <p style="margin-top:14px">整体架构清晰：两张事实表分别从 SAP BW 立方体 <code>ZRPP_CP006</code> 的两条查询按月循环取数，映射表的维度属性通过 M 层 <code>Join</code> 物化进事实表，DAX 侧用三个 UDF（动态格式字符串）统一格式化。主要风险集中在<b>硬编码路径</b>、<b>脏数据（前导空格）</b>和若干<b>口径不一致</b>。</p>
+  </section>
+
+  <section class="card">
+    <h2>模型总览</h2>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>表</th><th>角色</th><th>列数</th><th>数据源</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><code>KFM选冶厂月报</code></td><td>事实表（月报）</td><td>19</td><td>SAP BW <code>ZRPP_CP006_Q0002</code></td><td>月粒度生产指标，起点 2025-01</td></tr>
+        <tr><td><code>L1-KFM日报</code></td><td>事实表（日报）</td><td>27</td><td>SAP BW <code>ZRPP_CP006_Q0001</code></td><td>日粒度生产指标，起点 2026-01</td></tr>
+        <tr><td><code>日报指标映射</code></td><td>映射表</td><td>6</td><td>Excel「指标映射.xlsx」日报 Sheet</td><td>指标 → 类别/序号/环节</td></tr>
+        <tr><td><code>月报指标映射</code></td><td>映射表</td><td>6</td><td>Excel「指标映射.xlsx」月报 Sheet</td><td>指标 → 类别/序号/环节</td></tr>
+        <tr><td><code>度量值</code></td><td>度量值表</td><td>—</td><td>—</td><td>23 个度量值（月报 9 / 日报 7 / 辅助 7）</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3>关键架构特征</h3>
+    <ul>
+      <li><b>无模型关系</b>：<code>model.tmdl</code> 仅有 <code>ref table</code>，无 <code>relationship</code>。维度属性（类别/序号/环节）在 M 查询里 join 后直接物化进事实表，两张事实表完全独立。</li>
+      <li><b>动态格式字符串</b>：依赖兼容级别 1702 的 DAX 原生函数（UDF），<code>FormatAmount</code> / <code>FormatRatio</code> 按单位（<code>%</code>/<code>t/t</code>/数量）动态返回格式。</li>
+      <li><b>独立值筛选</b>：<code>valueFilterBehavior: independent</code>，配合「无关系」设计，两事实表各自独立筛选。</li>
+      <li><b>映射表是数据源而非维度</b>：映射表仅作为 M 查询的 join 源存在，模型内不参与关系/切片。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>M 转换逻辑</h2>
+
+    <h3>Power Query 参数</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>参数</th><th>值</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>p_月报起始日期</code></td><td><code>2025-01-01</code></td><td>月报取数起点（留出 2025 全年供「去年同期」计算）</td></tr>
+        <tr><td><code>p_日报起始日期</code></td><td><code>2026-01-01</code></td><td>日报取数起点</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>KFM选冶厂月报（月报事实表）</h3>
+    <div class="flow">
+      <div class="step"><span class="arrow">①</span><span class="t">连接 SAP BW 立方体 <code>ZRPP_CP006</code>，取查询 <code>Q0002</code></span></div>
+      <div class="step"><span class="arrow">②</span><span class="t">按 <code>p_月报起始日期</code>→当年 12 月逐月循环，每轮 <code>Cube.ApplyParameter</code> 传月份 <code>ZMSDQNY</code>，展开 8 个维度列 + 15 个度量列</span></div>
+      <div class="step"><span class="arrow">③</span><span class="t">各月结果 <code>Table.Combine</code> 合并；添加固定列 <code>矿体="KFM"</code></span></div>
+      <div class="step"><span class="arrow">④</span><span class="t">左连接 <code>月报指标映射</code>（键 <code>指标项</code>），补齐 类别/序号/总类别/环节序号；剔除序号为空的未匹配行</span></div>
+      <div class="step"><span class="arrow">⑤</span><span class="t">派生 <code>类别2</code>（序号 ∈ {5,13,14,15,16} 时按 类别×产品分类 细分铜/钴）、<code>排序</code>（序号×10 + 铜钴次序）</span></div>
+      <div class="step"><span class="arrow">⑥</span><span class="t">计算 <code>最近月份</code>（实际数非空且≠0 的最大月份）、<code>日期</code>（YYYYMM→当月1日）、<code>月份-筛选器</code>（最近月份→文本「最近月份」）</span></div>
+      <div class="step"><span class="arrow">⑦</span><span class="t">保留最终 19 列 + 类型转换</span></div>
+    </div>
+
+    <h3>L1-KFM日报（日报事实表）</h3>
+    <div class="flow">
+      <div class="step"><span class="arrow">①</span><span class="t">连接同一立方体，取查询 <code>Q0001</code>；按 <code>p_日报起始日期</code>→当年 12 月逐月取数，展开 9 个维度列 + 4 个度量列</span></div>
+      <div class="step"><span class="arrow">②</span><span class="t">派生 <code>指标名</code>：约 20 条 if-else 规则，按 指标名称×产品分类×工序 映射为报表口径名（如「出矿品位TCu」「产量-阴极铜」）</span></div>
+      <div class="step"><span class="arrow">③</span><span class="t">左连接 <code>日报指标映射</code>（键 <code>指标名称</code>），补齐 类别/序号/总类别/环节序号；派生 <code>类别2</code> 与 <code>排序</code>、固定列 <code>地域="KFM"</code></span></div>
+      <div class="step"><span class="arrow">④</span><span class="t">日期派生：<code>年</code>、<code>标准日期</code>、<code>上月年月编码</code></span></div>
+      <div class="step"><span class="arrow">⑤</span><span class="t">内联两个中间表：<code>全年预算数</code>（从月报按 产品分类×年×指标项 汇总）、<code>累计预测数</code>（从月报按 月份×产品分类×指标项 汇总，经 <code>上月年月编码</code> join 回来）</span></div>
+    </div>
+
+    <h3>映射表</h3>
+    <p>两张映射表结构相同（<code>序号/指标项/类别/环节/环节序号/报表</code>），均从 Excel <code>指标映射.xlsx</code> 的「日报」「月报」两个 Sheet 读取，仅做 <code>PromoteHeaders</code> + 类型转换。</p>
+  </section>
+
+  <section class="card">
+    <h2>DAX 计算逻辑</h2>
+
+    <h3>用户自定义函数（functions.tmdl，3 个）</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>函数</th><th>参数</th><th>逻辑</th></tr></thead>
+      <tbody>
+        <tr><td><code>FormatAmount</code></td><td>—</td><td>取两表单位（<code>COALESCE</code>）；<code>%</code>/<code>t/t</code> → <code>#,0.00</code>，其余（吨等）→ <code>#,0</code></td></tr>
+        <tr><td><code>FormatRatio</code></td><td>—</td><td>取两表单位；<code>%</code>/<code>t/t</code> → <code>+,#0.00;-#,0.00</code>（带符号差额），其余 → <code>#,0.00%</code>（百分比）</td></tr>
+        <tr><td><code>SameMonthPriorYear</code></td><td><code>amount:EXPR</code></td><td>解析「月份-筛选器」（「最近月份」→真实最新月 / 月份文本→数值），<code>减 100</code> 得去年同月，<code>CALCULATE</code> 施加该月筛选后返回 <code>amount</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>月报度量值（9）</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>度量值</th><th>公式</th><th>格式</th></tr></thead>
+      <tbody>
+        <tr><td><code>月计划</code></td><td><code>SUM(预测数)</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>月完成</code></td><td><code>SUM(实际数)</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>月比计划</code></td><td><code>DIVIDE([月完成],[月计划])</code></td><td>静态 <code>0.00%;-0.00%;0.00%</code></td></tr>
+        <tr><td><code>月计划累计</code></td><td><code>SUM(累计预测数)</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>年累计完成</code></td><td><code>SUM(累计实际数)</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>年比计划</code></td><td><code>DIVIDE([年累计完成],[月计划累计])</code></td><td>静态 <code>0.00%;-0.00%;0.00%</code></td></tr>
+        <tr><td><code>同期年累计完成</code></td><td><code>SameMonthPriorYear([年累计完成])</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>年计划</code></td><td><code>SUM(全年预算数)</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>年累计完成比计划</code></td><td><code>DIVIDE([年累计完成],[年计划])</code></td><td>静态 <code>0.00%;-0.00%;0.00%</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>日报度量值（7）</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>度量值</th><th>公式</th><th>格式</th></tr></thead>
+      <tbody>
+        <tr><td><code>日完成</code></td><td><code>SUM(当日实际数)</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>月累计</code></td><td><code>SUM(当月累计实际数)</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>月计划L1</code></td><td><code>SUM(月计划)</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>月比计划L1</code></td><td><code>IF(单位="%", 月累计−月计划L1, DIVIDE(月累计,月计划L1))</code></td><td><code>FormatRatio</code></td></tr>
+        <tr><td><code>年计划L1</code></td><td><code>SUM(全年预算数)</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>年累计完成L1</code></td><td><code>SUM(累计预测数) + [月累计]</code></td><td><code>FormatAmount</code></td></tr>
+        <tr><td><code>年比计划L1</code></td><td><code>IF(单位="%", 年累计完成L1−年计划L1, DIVIDE(年累计完成L1,年计划L1))</code></td><td><code>FormatRatio</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>辅助度量值（7）</h3>
+    <p>占位符 <code>.</code>；标题系列 <code>标题-月报/月份/年累计/年全年/同期年/日报</code>，均基于筛选上下文的最大日期拼接动态表头（年/月/年时间进度等）。</p>
+  </section>
+
+  <section class="card">
+    <h2>问题清单</h2>
+    <p class="sub" style="color:var(--muted);font-size:13.5px">按影响程度分级：<span class="badge crit">严重</span> 会导致刷新失败或数据错误；<span class="badge warn">中等</span> 逻辑可疑或口径不一致；<span class="badge info">轻微</span> 可维护性问题。</p>
+
+    <div class="issue crit">
+      <h4><span class="badge crit">严重</span>映射表数据源路径硬编码为他人机器的绝对路径</h4>
+      <div class="loc">日报指标映射.tmdl / 月报指标映射.tmdl — partition source</div>
+      <p>两张映射表的 M 查询写死 <code>File.Contents("C:\Users\Xieyu\OneDrive - IPowerBI\…\指标映射.xlsx")</code>，指向开发者 <b>Xieyu</b> 的本地目录。</p>
+      <p><span class="tag">影响</span> 当前用户（朱惊宏）或其他同事刷新时该路径不存在，映射表加载失败 → 事实表的 join 步骤失败 → 整个模型刷新中断。</p>
+      <p><span class="tag">建议</span> 改为 Power Query 参数或相对路径；更稳妥的是把映射数据作为静态表内联进模型（数据量小、变更不频繁）。</p>
+    </div>
+
+    <div class="issue crit">
+      <h4><span class="badge crit">严重</span>日报表「类别2」值带前导空格（脏数据）</h4>
+      <div class="loc">L1-KFM日报.tmdl — 添加类别2 步骤</div>
+      <p>四个映射结果带 1–2 个前导空格：<code>" 铜选冶综合回收率TCu"</code>、<code>" 钴选冶综合回收率TCo"</code>、<code>"  阴极铜产量"</code>、<code>"  氢氧化钴含钴产量"</code>。</p>
+      <p><span class="tag">影响</span> 前导空格使同一逻辑值出现多个文本形态，导致筛选、分组、排序错乱（疑为用空格做视觉缩进的 hack，但污染了数据）。</p>
+      <p><span class="tag">建议</span> 去掉前导空格；视觉缩进改用已有的 <code>排序</code> 列或 <code>Text.PadStart</code> 单独生成显示列。</p>
+    </div>
+
+    <div class="issue warn">
+      <h4><span class="badge warn">中等</span>模型未定义任何关系</h4>
+      <div class="loc">model.tmdl — 仅有 ref table，无 relationship</div>
+      <p>5 张表之间零关系。这是「扁平化」设计的刻意选择（映射列已物化进事实表），本身可行，但代价是：</p>
+      <p><span class="tag">影响</span> 跨表筛选不传播；DAX 需手动合并（如 <code>FormatAmount</code> 用 <code>COALESCE</code> 取两表单位）；映射表成为「孤岛」，无法作为独立切片维度。</p>
+      <p><span class="tag">建议</span> 保留现状需团队明确约定；若未来需要映射表做切片器或统一筛选，需重构为星型关系。</p>
+    </div>
+
+    <div class="issue warn">
+      <h4><span class="badge warn">中等</span>月报与日报的「比计划」口径不一致</h4>
+      <div class="loc">度量值.tmdl — 月比计划 vs 月比计划L1</div>
+      <p>月报 <code>月比计划 = DIVIDE([月完成],[月计划])</code>，对 <code>%</code> 单位（品位/回收率等）也直接算比率；日报 <code>月比计划L1</code> 则对 <code>%</code> 单位返回<b>差额</b>（百分点差）。</p>
+      <p><span class="tag">影响</span> 同类指标在两张表口径不同，报表层若混排会出现「月报显示比率、日报显示差额」的不一致。</p>
+      <p><span class="tag">建议</span> 明确业务口径并统一；若确实月报要比率、日报要差额，需在文档中注明并避免混用。</p>
+    </div>
+
+    <div class="issue warn">
+      <h4><span class="badge warn">中等</span>「年累计完成L1」用「累计预测数」计算「完成」</h4>
+      <div class="loc">度量值.tmdl — 年累计完成L1</div>
+      <pre><code>年累计完成L1 =
+VAR A = SUM('L1-KFM日报'[累计预测数])   // 累计预测
+VAR B = [月累计]                          // 当月累计实际
+RETURN A + B</code></pre>
+      <p><span class="tag">影响</span> 度量值名为「完成」，却使用「累计预测数」字段。若该字段实为「截至上月累计实际数」（命名误导）则无碍；否则属于逻辑错误。</p>
+      <p><span class="tag">建议</span> 核实 SAP <code>累计预测数</code> 的真实口径，必要时重命名字段或改用累计实际数字段。</p>
+    </div>
+
+    <div class="issue warn">
+      <h4><span class="badge warn">中等</span>内联中间表用 List.Average 聚合</h4>
+      <div class="loc">L1-KFM日报.tmdl — 全年预算表 / 月累计预测表</div>
+      <p>两个内联中间表在 <code>Table.Group</code> 里用 <code>List.Average</code> 对数值取平均。同一分组若数据完整（12 个月各一条）平均=原值，但一旦出现缺失、重复或异常值，平均值会失真并掩盖问题。</p>
+      <p><span class="tag">建议</span> 改用 <code>List.Max</code> / <code>List.First</code>（取非空唯一值），并增加数据质量校验。</p>
+    </div>
+
+    <div class="issue warn">
+      <h4><span class="badge warn">中等</span>「最近月份」用「实际数 ≠ 0」过滤</h4>
+      <div class="loc">KFM选冶厂月报.tmdl — 最近月份 步骤</div>
+      <p><code>最近月份 = List.Max(Table.SelectRows(…, each [实际数] &lt;&gt; null and [实际数] &lt;&gt; 0)[月份])</code>。真实产量为 0 的月份会被误判为「无数据」。</p>
+      <p><span class="tag">影响</span> 「月份-筛选器」的「最近月份」语义错误，<code>SameMonthPriorYear</code> 的同期计算随之错位。</p>
+      <p><span class="tag">建议</span> 仅排除 <code>null</code>，或引入「数据截止月」参数由业务维护。</p>
+    </div>
+
+    <div class="issue warn">
+      <h4><span class="badge warn">中等</span>「标准日期」用 Text.Replace(".0","-") 的脆弱转换</h4>
+      <div class="loc">L1-KFM日报.tmdl — 添加标准日期 步骤</div>
+      <p><code>标准日期 = Date.From(Text.Replace([日期], ".0", "-"))</code>，依赖 SAP 日期字符串恰好含 <code>.0</code> 子串；而同表的 <code>年</code> 列用 <code>Date.From([日期])</code> 直接转换（未做替换），两处解析不一致。</p>
+      <p><span class="tag">建议</span> 统一日期解析，用显式格式（<code>Date.FromText</code> 带 format/culture 参数）。</p>
+    </div>
+
+    <div class="issue info">
+      <h4><span class="badge info">轻微</span>「指标名」映射为约 20 条 if-else 硬编码</h4>
+      <div class="loc">L1-KFM日报.tmdl — 添加指标名 步骤</div>
+      <p>业务映射规则硬编码在 M 里，可维护性差。建议把映射规则移入「日报指标映射」Excel（新增「指标名」列），M 只做 join。</p>
+    </div>
+
+    <div class="issue info">
+      <h4><span class="badge info">轻微</span>SAP BW 服务器 IP 硬编码</h4>
+      <div class="loc">两个事实表 — SapBusinessWarehouse.Cubes("10.43.13.31", …)</div>
+      <p>服务器地址硬编码。迁移时需改代码，建议参数化。</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>合理之处与总结建议</h2>
+    <div class="note" style="background:var(--info-soft)"><b style="color:var(--info)">已完成的改进：</b> 3 个 DAX 函数已按功能重命名（<code>FormatKFM</code>→<code>FormatAmount</code>、<code>FormatKFM2</code>→<code>FormatRatio</code>、<code>PriorYearMonthValue</code>→<code>SameMonthPriorYear</code>）；代码注释已按实际逻辑修正（含 FormatRatio 的格式注释）。</div>
+    <div class="note"><b>值得保留的设计：</b> 兼容级别 1702 + DAX UDF 统一动态格式；「月份-筛选器」用「最近月份」文本标记并由 <code>SameMonthPriorYear</code> 解析，解决了「最近月份」动态语义；排序键「序号×10 + 铜钴次序」；月报起点留出 2025 全年以支持去年同期。</div>
+    <h3>优先处理顺序</h3>
+    <div class="flow">
+      <div class="step"><span class="arrow">1</span><span class="t"><b>修复映射表路径</b>（严重）——否则换机器/换用户即无法刷新。</span></div>
+      <div class="step"><span class="arrow">2</span><span class="t"><b>清理类别2 前导空格</b>（严重）——保证筛选与分组正确。</span></div>
+      <div class="step"><span class="arrow">3</span><span class="t"><b>核实「年累计完成L1」与「比计划」口径</b>（中等）——确认业务语义，避免报表数字错位。</span></div>
+      <div class="step"><span class="arrow">4</span><span class="t"><b>统一日期解析、List.Average、最近月份过滤</b>（中等）——提升健壮性。</span></div>
+      <div class="step"><span class="arrow">5</span><span class="t"><b>指标映射规则外置、服务器参数化</b>（轻微）——改善可维护性。</span></div>
+    </div>
+  </section>
+
+</main>

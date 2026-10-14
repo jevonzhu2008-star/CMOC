@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "Report",
-    "displayName": "L3报表-KFM日月报"
+    "type": "SemanticModel",
+    "displayName": "L3报表"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "e5fbe25b-e297-47b2-9462-59a6c9346142"
+    "logicalId": "7e75fe84-9203-4709-86df-d7c8213bf188"
   }
 }

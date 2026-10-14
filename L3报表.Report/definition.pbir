@@ -3,7 +3,7 @@
   "version": "4.0",
   "datasetReference": {
     "byPath": {
-      "path": "../L3报表-KFM日月报.SemanticModel"
+      "path": "../L3报表.SemanticModel"
     }
   }
 }

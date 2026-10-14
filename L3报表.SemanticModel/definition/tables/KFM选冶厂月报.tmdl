@@ -172,6 +172,14 @@ table KFM选冶厂月报
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column 指标类别
+		dataType: string
+		lineageTag: 94f6f025-4b1d-42a5-984e-e9aca54947da
+		summarizeBy: none
+		sourceColumn: 指标类别
+
+		annotation SummarizationSetBy = Automatic
+
 	partition KFM选冶厂月报 = m
 		mode: import
 		source =
@@ -232,7 +240,7 @@ table KFM选冶厂月报
 				
 				    // 左连接月报指标映射，补充类别、序号、总类别、环节序号
 				    合并指标映射 = Table.NestedJoin(保留列, {"指标项"}, 月报指标映射, {"指标项"}, "指标映射", JoinKind.LeftOuter),
-				    展开指标映射 = Table.ExpandTableColumn(合并指标映射, "指标映射", {"类别", "序号", "环节", "环节序号"}, {"类别", "序号", "总类别", "环节序号"}),
+				    展开指标映射 = Table.ExpandTableColumn(合并指标映射, "指标映射", {"类别", "序号", "环节", "环节序号","指标类别"}, {"类别", "序号", "总类别", "环节序号","指标类别"}),
 				
 				    // 剔除未匹配到映射的行
 				    剔除未匹配行 = Table.SelectRows(展开指标映射, each [序号] <> null),
@@ -290,15 +298,12 @@ table KFM选冶厂月报
 				        else Text.From([月份])
 				    ),
 				
-				    // 收列（按最终输出顺序）
-				    保留输出列 = Table.SelectColumns(添加月份筛选器, {"环节序号", "序号", "排序", "月份", "月份-筛选器", "日期", "产品分类", "指标项", "总类别", "类别", "类别2", "单位", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "预测数", "预算数"}),
-				
+				  // 收列：直接选定最终字段清单 + 最终顺序，剔除无用【类别】
+				    保留最终列 = Table.SelectColumns(添加月份筛选器, {"产品分类", "单位", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "预测数", "预算数", "月份", "指标项", "序号", "总类别", "环节序号", "指标类别", "类别2", "排序", "日期", "月份-筛选器"}),
 				    // 类型转换
-				    设置类型 = Table.TransformColumnTypes(保留输出列, {{"类别2", type text}, {"月份-筛选器", type text}, {"日期", type date}, {"月份", Int64.Type}, {"环节序号", Int64.Type}, {"排序", Int64.Type}}),
-				    // 收列：一次性完成删列（去掉「类别」）与最终列顺序
-				    保留最终列 = Table.SelectColumns(设置类型, {"月份", "月份-筛选器", "日期", "环节序号", "序号", "排序", "总类别", "产品分类", "指标项", "单位", "类别2", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "预测数", "预算数"})
+				    设置类型 = Table.TransformColumnTypes(保留最终列, {{"类别2", type text}, {"月份-筛选器", type text}, {"日期", type date}, {"月份", Int64.Type}, {"环节序号", Int64.Type}, {"排序", Int64.Type}})
 				in
-				    保留最终列
+				    设置类型
 
 	annotation PBI_NavigationStepName = 导航
 

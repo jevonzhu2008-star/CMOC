@@ -144,6 +144,22 @@ table L1-KFM日报
 
 		annotation SummarizationSetBy = Automatic
 
+	column 指标名称
+		dataType: string
+		lineageTag: 1fdd88a1-5f5b-499c-a2bc-03c137768cb3
+		summarizeBy: none
+		sourceColumn: 指标名称
+
+		annotation SummarizationSetBy = Automatic
+
+	column 产品分类
+		dataType: string
+		lineageTag: d311f023-a6c6-42ac-81cc-ab24da97eb0e
+		summarizeBy: none
+		sourceColumn: 产品分类
+
+		annotation SummarizationSetBy = Automatic
+
 	partition L1-KFM日报 = m
 		mode: import
 		source =
@@ -208,10 +224,10 @@ table L1-KFM日报
 				    展开指标映射 = Table.ExpandTableColumn(合并指标映射, "映射数据", {"类别", "序号", "环节", "环节序号"}, {"类别", "序号", "总类别", "环节序号"}),
 				    // 按序号 + 指标名细分「类别2」
 				    添加类别2 = Table.AddColumn(展开指标映射, "类别2", each
-				        if [序号] = 2 and [指标名] = "出矿品位TCo" then "原矿钴品位TCo"
-				        else if [序号] = 2 and [指标名] = "出矿品位TCu" then "原矿铜品位TCu"
-				        else if [序号] = 3 and [指标名] = "入选品位TCo" then "入选品位TCo"
-				        else if [序号] = 3 and [指标名] = "入选品位TCu" then "入选品位TCu"
+				        if [序号] = 2 and [产品分类] = "全钴TCo" then "出矿品位TCo"
+				        else if [序号] = 2 and [产品分类] = "全钴TCo" then "出矿品位TCu"
+				        else if [序号] = 3 and [产品分类]= "全钴TCo" then "原矿钴品位TCo"
+				        else if [序号] = 3 and [产品分类] = "全铜TCu" then "原矿铜品位TCu"
 				        else if [序号] = 4 and [指标名] = "选冶(理论)回收率-铜" then "铜选冶综合回收率TCu"
 				        else if [序号] = 4 and [指标名] = "选冶(理论)回收率-钴" then "钴选冶综合回收率TCo"
 				        else if [序号] = 5 and [指标名] = "产量-阴极铜" then "阴极铜产量"
@@ -222,7 +238,7 @@ table L1-KFM日报
 				    添加排序键 = Table.AddColumn(添加类别2, "排序", each
 				        let
 				            主序 = [序号],
-				            次序 = if List.Contains({2, 4, 5}, [序号]) then
+				            次序 = if List.Contains({2,3,4,5}, [序号]) then
 				                if [产品分类] = "全铜TCu" then 0
 				                else if [产品分类] = "全钴TCo" then 1
 				                else 0
@@ -273,7 +289,7 @@ table L1-KFM日报
 				    合并月累计实际 = Table.NestedJoin(展开全年预算, {"上月年月编码", "产品分类", "指标名称"}, 月累计实际表, {"月份", "产品分类", "指标项"}, "月累计实际", JoinKind.LeftOuter),
 				    展开月累计实际 = Table.ExpandTableColumn(合并月累计实际, "月累计实际", {"累计实际数"}, {"累计实际数"}),
 				    // 收列：一次性完成删列与最终列顺序
-				    保留最终列 = Table.SelectColumns(展开月累计实际, {"标准日期", "日期筛选器", "环节序号", "序号", "排序", "单位", "总类别", "类别2", "地域", "月预算", "月计划", "当日实际数", "当月累计实际数", "全年预算数", "累计实际数"})
+				    保留最终列 = Table.SelectColumns(展开月累计实际, {"产品分类", "单位", "指标名称", "当日实际数", "当月累计实际数", "月计划", "月预算", "序号", "总类别", "环节序号", "类别2", "排序", "地域", "标准日期", "日期筛选器", "全年预算数", "累计实际数"})
 				in
 				    保留最终列
 

@@ -90,7 +90,7 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
 
 <header>
   <h1>KFM日月报语义模型分析</h1>
-  <p class="sub">梳理 <code>L3报表-KFM日月报.SemanticModel</code> 的 M（Power Query）转换逻辑与 DAX 计算逻辑，评估其正确性与合理性，并给出分级问题清单。</p>
+  <p class="sub">梳理 <code>L3报表.SemanticModel</code> 的 M（Power Query）转换逻辑与 DAX 计算逻辑，评估其正确性与合理性，并给出分级问题清单。</p>
   <div class="meta">
     <span>兼容级别 <b>1702</b></span>
     <span>文化 <b>zh-CN</b></span>
@@ -121,7 +121,7 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
     <table>
       <thead><tr><th>表</th><th>角色</th><th>列数</th><th>数据源</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td><code>KFM选冶厂月报</code></td><td>事实表（月报）</td><td>18</td><td>SAP BW <code>ZRPP_CP006_Q0002</code></td><td>月粒度生产指标，起点 2025-01</td></tr>
+        <tr><td><code>KFM选冶厂月报</code></td><td>事实表（月报）</td><td>19</td><td>SAP BW <code>ZRPP_CP006_Q0002</code></td><td>月粒度生产指标，起点 2025-01</td></tr>
         <tr><td><code>L1-KFM日报</code></td><td>事实表（日报）</td><td>15</td><td>SAP BW <code>ZRPP_CP006_Q0001</code></td><td>日粒度生产指标，起点 2026-01</td></tr>
         <tr><td><code>日报指标映射</code></td><td>映射表</td><td>6</td><td>Excel「指标映射.xlsx」日报 Sheet</td><td>指标 → 类别/序号/环节</td></tr>
         <tr><td><code>月报指标映射</code></td><td>映射表</td><td>6</td><td>Excel「指标映射.xlsx」月报 Sheet</td><td>指标 → 类别/序号/环节</td></tr>
@@ -159,10 +159,10 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
       <div class="step"><span class="arrow">①</span><span class="t">连接 SAP BW 立方体 <code>ZRPP_CP006</code>（服务器/系统编号/客户端ID 参数化），取查询 <code>Q0002</code></span></div>
       <div class="step"><span class="arrow">②</span><span class="t">按 <code>p_月报起始日期</code>→当年 12 月逐月循环，每轮 <code>Cube.ApplyParameter</code> 传月份 <code>ZMSDQNY</code>，展开 8 个维度列 + 15 个度量列</span></div>
       <div class="step"><span class="arrow">③</span><span class="t">各月结果 <code>Table.Combine</code> 合并；添加固定列 <code>矿体="KFM"</code></span></div>
-      <div class="step"><span class="arrow">④</span><span class="t">左连接 <code>月报指标映射</code>（键 <code>指标项</code>），补齐 类别/序号/总类别/环节序号；剔除序号为空的未匹配行</span></div>
+      <div class="step"><span class="arrow">④</span><span class="t">左连接 <code>月报指标映射</code>（键 <code>指标项</code>），补齐 类别/序号/总类别/环节序号/指标类别；剔除序号为空的未匹配行</span></div>
       <div class="step"><span class="arrow">⑤</span><span class="t">派生 <code>类别2</code>（序号 ∈ {5,13,14,15,16} 时按 类别×产品分类 细分铜/钴）、<code>排序</code>（序号×10 + 铜钴次序）</span></div>
       <div class="step"><span class="arrow">⑥</span><span class="t">计算 <code>最近月份</code>（实际数非空的最大月份）、<code>日期</code>（YYYYMM→当月1日）、<code>月份-筛选器</code>（最近月份→文本「最近月份」）</span></div>
-      <div class="step"><span class="arrow">⑦</span><span class="t">保留最终 18 列 + 类型转换</span></div>
+      <div class="step"><span class="arrow">⑦</span><span class="t">保留最终 19 列 + 类型转换</span></div>
     </div>
 
     <h3>L1-KFM日报（日报事实表）</h3>
@@ -176,7 +176,7 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
     </div>
 
     <h3>映射表</h3>
-    <p>两张映射表结构相同（<code>序号/指标项/类别/环节/环节序号/报表</code>），均从 SharePoint 站点读取 <code>指标映射.xlsx</code> 的「日报」「月报」两个 Sheet。</p>
+    <p>两张映射表均从 SharePoint 站点读取 <code>指标映射.xlsx</code> 的「日报」「月报」两个 Sheet，结构为 <code>序号/指标项/类别/环节/环节序号/报表</code>；月报映射另含 <code>指标类别</code> 列，供月报事实表 join 带入。</p>
   </section>
 
   <section class="card">
@@ -267,7 +267,8 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
         <li>「标准日期」改用 <code>Date.FromText</code> 按 <code>yyyy.MM.dd</code> 显式解析。</li>
         <li>SAP BW 服务器/系统编号/客户端ID 参数化。</li>
         <li>映射表改为按 Sheet 名称取数（消除行索引钻取），SharePoint 读取合并为 3 步。</li>
-        <li>输出列精简：月报 19→18 列、日报 27→15 列，日报新增「日期筛选器」列。</li>
+        <li>输出列精简：日报 27→15 列，日报新增「日期筛选器」列。</li>
+        <li>月报事实表新增「指标类别」列（18→19 列），由月报指标映射 join 带入。</li>
         <li>末尾「删列+重排」合并为单步「保留最终列」，补充步骤注释。</li>
       </ul>
     </div>

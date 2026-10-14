@@ -42,7 +42,7 @@
                 }
               },
               "queryRef": "L1-KFM日报.类别2",
-              "nativeQueryRef": "类别",
+              "nativeQueryRef": "类别2",
               "active": true,
               "displayName": "类别"
             },
@@ -162,6 +162,20 @@
                       "Entity": "度量值"
                     }
                   },
+                  "Property": "年累计完成L1_v2"
+                }
+              },
+              "queryRef": "度量值.年累计完成L1_v2",
+              "nativeQueryRef": "年累计完成L1_v2"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "度量值"
+                    }
+                  },
                   "Property": "."
                 }
               },
@@ -200,6 +214,23 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "L1-KFM日报"
+                  }
+                },
+                "Property": "类别2"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "objects": {
@@ -968,20 +999,6 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "182.9898222415315D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "L1-KFM日报.类别2"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
                   "Value": "82.12900805912157D"
                 }
               }
@@ -1338,7 +1355,7 @@
             "Property": "序号"
           }
         },
-        "type": "Advanced",
+        "type": "Categorical",
         "filter": {
           "Version": 2,
           "From": [
@@ -1353,23 +1370,28 @@
               "Condition": {
                 "Not": {
                   "Expression": {
-                    "Comparison": {
-                      "ComparisonKind": 0,
-                      "Left": {
-                        "Column": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Source": "l"
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "l"
+                              }
+                            },
+                            "Property": "序号"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "2D"
                             }
-                          },
-                          "Property": "序号"
-                        }
-                      },
-                      "Right": {
-                        "Literal": {
-                          "Value": "3L"
-                        }
-                      }
+                          }
+                        ]
+                      ]
                     }
                   }
                 }
@@ -1381,94 +1403,18 @@
         "objects": {
           "general": [
             {
-              "properties": {}
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
             }
           ]
         }
-      },
-      {
-        "name": "ae2c1c050c8d1f882ad9",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "度量值"
-              }
-            },
-            "Property": "月计划L1"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "ced5bb18ca019a5f1fdf",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "度量值"
-              }
-            },
-            "Property": "月比计划L1"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "ffe8a4681e1987f41fe3",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "度量值"
-              }
-            },
-            "Property": "."
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "2bad88c0d2c91c5cbd74",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "度量值"
-              }
-            },
-            "Property": "年累计完成L1"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "31be404bb277c69ea105",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "度量值"
-              }
-            },
-            "Property": "年计划L1"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "029da87821cbb8f6a7b5",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "度量值"
-              }
-            },
-            "Property": "年比计划L1"
-          }
-        },
-        "type": "Advanced"
       }
     ],
     "filterSortOrder": "Custom"

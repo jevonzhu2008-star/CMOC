@@ -155,23 +155,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "42024d323782c00b9cc3",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "L1-KFM日报"
-              }
-            },
-            "Property": "日期筛选器"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

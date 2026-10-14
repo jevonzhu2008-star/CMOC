@@ -110,9 +110,9 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
       <div class="kpi"><div class="n">0</div><div class="l">模型关系（扁平化设计）</div></div>
       <div class="kpi"><div class="n" style="color:var(--crit)">0</div><div class="l">严重问题</div></div>
       <div class="kpi"><div class="n" style="color:var(--warn)">2</div><div class="l">中等问题</div></div>
-      <div class="kpi"><div class="n" style="color:var(--info)">2</div><div class="l">轻微问题</div></div>
+      <div class="kpi"><div class="n" style="color:var(--info)">1</div><div class="l">轻微问题</div></div>
     </div>
-    <p style="margin-top:14px">整体架构清晰：两张事实表分别从 SAP BW 立方体 <code>ZRPP_CP006</code> 的两条查询按月循环取数，映射表的维度属性通过 M 层 <code>Join</code> 物化进事实表，DAX 侧用三个 UDF（动态格式字符串）统一格式化。本轮已修复硬编码路径、前导空格、重复计算等 7 项问题，剩余风险集中在<b>「比计划」口径不一致</b>与若干<b>可维护性</b>方面。</p>
+    <p style="margin-top:14px">整体架构清晰：两张事实表分别从 SAP BW 立方体 <code>ZRPP_CP006</code> 的两条查询按月循环取数，映射表的维度属性通过 M 层 <code>Join</code> 物化进事实表，DAX 侧用三个 UDF（动态格式字符串）统一格式化。硬编码路径、前导空格、重复计算、行索引钻取等问题已修复，剩余风险集中在<b>「比计划」口径不一致</b>与<b>「指标名」映射硬编码</b>等可维护性方面。</p>
   </section>
 
   <section class="card">
@@ -121,8 +121,8 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
     <table>
       <thead><tr><th>表</th><th>角色</th><th>列数</th><th>数据源</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td><code>KFM选冶厂月报</code></td><td>事实表（月报）</td><td>19</td><td>SAP BW <code>ZRPP_CP006_Q0002</code></td><td>月粒度生产指标，起点 2025-01</td></tr>
-        <tr><td><code>L1-KFM日报</code></td><td>事实表（日报）</td><td>27</td><td>SAP BW <code>ZRPP_CP006_Q0001</code></td><td>日粒度生产指标，起点 2026-01</td></tr>
+        <tr><td><code>KFM选冶厂月报</code></td><td>事实表（月报）</td><td>18</td><td>SAP BW <code>ZRPP_CP006_Q0002</code></td><td>月粒度生产指标，起点 2025-01</td></tr>
+        <tr><td><code>L1-KFM日报</code></td><td>事实表（日报）</td><td>15</td><td>SAP BW <code>ZRPP_CP006_Q0001</code></td><td>日粒度生产指标，起点 2026-01</td></tr>
         <tr><td><code>日报指标映射</code></td><td>映射表</td><td>6</td><td>Excel「指标映射.xlsx」日报 Sheet</td><td>指标 → 类别/序号/环节</td></tr>
         <tr><td><code>月报指标映射</code></td><td>映射表</td><td>6</td><td>Excel「指标映射.xlsx」月报 Sheet</td><td>指标 → 类别/序号/环节</td></tr>
         <tr><td><code>度量值</code></td><td>度量值表</td><td>—</td><td>—</td><td>23 个度量值（月报 9 / 日报 7 / 辅助 7）</td></tr>
@@ -156,13 +156,13 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
 
     <h3>KFM选冶厂月报（月报事实表）</h3>
     <div class="flow">
-      <div class="step"><span class="arrow">①</span><span class="t">连接 SAP BW 立方体 <code>ZRPP_CP006</code>，取查询 <code>Q0002</code></span></div>
+      <div class="step"><span class="arrow">①</span><span class="t">连接 SAP BW 立方体 <code>ZRPP_CP006</code>（服务器/系统编号/客户端ID 参数化），取查询 <code>Q0002</code></span></div>
       <div class="step"><span class="arrow">②</span><span class="t">按 <code>p_月报起始日期</code>→当年 12 月逐月循环，每轮 <code>Cube.ApplyParameter</code> 传月份 <code>ZMSDQNY</code>，展开 8 个维度列 + 15 个度量列</span></div>
       <div class="step"><span class="arrow">③</span><span class="t">各月结果 <code>Table.Combine</code> 合并；添加固定列 <code>矿体="KFM"</code></span></div>
       <div class="step"><span class="arrow">④</span><span class="t">左连接 <code>月报指标映射</code>（键 <code>指标项</code>），补齐 类别/序号/总类别/环节序号；剔除序号为空的未匹配行</span></div>
       <div class="step"><span class="arrow">⑤</span><span class="t">派生 <code>类别2</code>（序号 ∈ {5,13,14,15,16} 时按 类别×产品分类 细分铜/钴）、<code>排序</code>（序号×10 + 铜钴次序）</span></div>
       <div class="step"><span class="arrow">⑥</span><span class="t">计算 <code>最近月份</code>（实际数非空的最大月份）、<code>日期</code>（YYYYMM→当月1日）、<code>月份-筛选器</code>（最近月份→文本「最近月份」）</span></div>
-      <div class="step"><span class="arrow">⑦</span><span class="t">保留最终 19 列 + 类型转换</span></div>
+      <div class="step"><span class="arrow">⑦</span><span class="t">保留最终 18 列 + 类型转换</span></div>
     </div>
 
     <h3>L1-KFM日报（日报事实表）</h3>
@@ -170,8 +170,9 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
       <div class="step"><span class="arrow">①</span><span class="t">连接同一立方体（服务器/系统编号/客户端ID 参数化），取查询 <code>Q0001</code>；按 <code>p_日报起始日期</code>→当年 12 月逐月取数，展开 9 个维度列 + 4 个度量列</span></div>
       <div class="step"><span class="arrow">②</span><span class="t">派生 <code>指标名</code>：约 20 条 if-else 规则，按 指标名称×产品分类×工序 映射为报表口径名（如「出矿品位TCu」「产量-阴极铜」）</span></div>
       <div class="step"><span class="arrow">③</span><span class="t">左连接 <code>日报指标映射</code>（键 <code>指标名称</code>），补齐 类别/序号/总类别/环节序号；派生 <code>类别2</code> 与 <code>排序</code>、固定列 <code>地域="KFM"</code></span></div>
-      <div class="step"><span class="arrow">④</span><span class="t">日期派生：<code>年</code>、<code>标准日期</code>（<code>Date.FromText</code> 按 <code>yyyy.MM.dd</code> 解析）、<code>上月年月编码</code></span></div>
+      <div class="step"><span class="arrow">④</span><span class="t">日期派生：<code>年</code>、<code>标准日期</code>（<code>Date.FromText</code> 按 <code>yyyy.MM.dd</code> 解析）、<code>上月年月编码</code>；派生「日期筛选器」（按「原矿处理量」最大标准日期标记「最近日期」）</span></div>
       <div class="step"><span class="arrow">⑤</span><span class="t">内联两个中间表：<code>全年预算数</code>、<code>累计实际数</code>（均从月报按对应键汇总、取 <code>List.Max</code>，经 <code>上月年月编码</code> join 回来）</span></div>
+      <div class="step"><span class="arrow">⑥</span><span class="t">收列：保留最终 15 列</span></div>
     </div>
 
     <h3>映射表</h3>
@@ -245,13 +246,6 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
       <p><span class="tag">建议</span> 明确业务口径并统一；若确实月报要比率、日报要差额，需在文档中注明并避免混用。</p>
     </div>
 
-    <div class="issue info">
-      <h4><span class="badge info">轻微</span>映射表从 SharePoint 读取按行索引钻取工作表</h4>
-      <div class="loc">日报指标映射.tmdl / 月报指标映射.tmdl — partition source</div>
-      <p>两张映射表用 <code>SharePoint.Files</code> 按文件名 <code>指标映射</code> 过滤后，用 <code>删除的其他列{1}[Data]</code>（日报）/ <code>{0}[Data]</code>（月报）按<b>行索引</b>钻取工作表，未按 Sheet 名称选择，也未显式做 <code>PromoteHeaders</code> 与类型转换。</p>
-      <p><span class="tag">影响</span> 工作表顺序变化或多文件匹配时会取错表；列类型依赖自动推断。</p>
-      <p><span class="tag">建议</span> 改为按 <code>Item</code> 名称筛选（如 <code>源{[Item="日报", Kind="Sheet"]}</code>），并显式提升标题与设置列类型。</p>
-    </div>
 
     <div class="issue info">
       <h4><span class="badge info">轻微</span>「指标名」映射为约 20 条 if-else 硬编码</h4>
@@ -272,14 +266,16 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
         <li>「最近月份」过滤改为仅排除 <code>null</code>，不再误判 0 值月份。</li>
         <li>「标准日期」改用 <code>Date.FromText</code> 按 <code>yyyy.MM.dd</code> 显式解析。</li>
         <li>SAP BW 服务器/系统编号/客户端ID 参数化。</li>
+        <li>映射表改为按 Sheet 名称取数（消除行索引钻取），SharePoint 读取合并为 3 步。</li>
+        <li>输出列精简：月报 19→18 列、日报 27→15 列，日报新增「日期筛选器」列。</li>
+        <li>末尾「删列+重排」合并为单步「保留最终列」，补充步骤注释。</li>
       </ul>
     </div>
     <div class="note"><b>值得保留的设计：</b> 兼容级别 1702 + DAX UDF 统一动态格式；「月份-筛选器」用「最近月份」文本标记并由 <code>SameMonthPriorYear</code> 解析，解决了「最近月份」动态语义；排序键「序号×10 + 铜钴次序」；月报起点留出 2025 全年以支持去年同期。</div>
     <h3>优先处理顺序</h3>
     <div class="flow">
       <div class="step"><span class="arrow">1</span><span class="t"><b>核实「比计划」口径</b>（中等）——确认月报比率 vs 日报差额的业务语义，避免混排不一致。</span></div>
-      <div class="step"><span class="arrow">2</span><span class="t"><b>映射表读取健壮化</b>（轻微）——按 Sheet 名称选择并显式设置列类型。</span></div>
-      <div class="step"><span class="arrow">3</span><span class="t"><b>指标映射规则外置</b>（轻微）——把 if-else 规则移入映射表，M 只做 join。</span></div>
+      <div class="step"><span class="arrow">2</span><span class="t"><b>指标映射规则外置</b>（轻微）——把 if-else 规则移入映射表，M 只做 join。</span></div>
     </div>
   </section>
 

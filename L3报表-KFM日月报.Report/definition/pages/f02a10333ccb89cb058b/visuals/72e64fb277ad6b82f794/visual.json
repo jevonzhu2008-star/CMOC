@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "72e64fb277ad6b82f794",
   "position": {
-    "x": 10.875757148077831,
-    "y": 85.500866578304368,
+    "x": 34.99154089683244,
+    "y": 84.391363339419414,
     "z": 3000,
     "height": 71.666666666666671,
     "width": 301.66666666666669,
@@ -23,11 +23,11 @@
                       "Entity": "L1-KFM日报"
                     }
                   },
-                  "Property": "日期"
+                  "Property": "日期筛选器"
                 }
               },
-              "queryRef": "L1-KFM日报.日期",
-              "nativeQueryRef": "日期",
+              "queryRef": "L1-KFM日报.日期筛选器",
+              "nativeQueryRef": "日期筛选器",
               "active": true
             }
           ]
@@ -43,7 +43,7 @@
                     "Entity": "L1-KFM日报"
                   }
                 },
-                "Property": "日期"
+                "Property": "日期筛选器"
               }
             },
             "direction": "Descending"
@@ -90,7 +90,7 @@
                                   "Source": "l"
                                 }
                               },
-                              "Property": "日期"
+                              "Property": "日期筛选器"
                             }
                           }
                         ],
@@ -98,7 +98,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'2026.08.28'"
+                                "Value": "'最近日期'"
                               }
                             }
                           ]
@@ -159,57 +159,18 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "bbdf8986e092e31c2ead",
+        "name": "42024d323782c00b9cc3",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "KFM选冶厂月报"
+                "Entity": "L1-KFM日报"
               }
             },
-            "Property": "实际数"
+            "Property": "日期筛选器"
           }
         },
-        "type": "Advanced",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "k",
-              "Entity": "KFM选冶厂月报",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "Not": {
-                  "Expression": {
-                    "Comparison": {
-                      "ComparisonKind": 0,
-                      "Left": {
-                        "Column": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Source": "k"
-                            }
-                          },
-                          "Property": "实际数"
-                        }
-                      },
-                      "Right": {
-                        "Literal": {
-                          "Value": "0L"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
-        "howCreated": "User"
+        "type": "Categorical"
       }
     ]
   }

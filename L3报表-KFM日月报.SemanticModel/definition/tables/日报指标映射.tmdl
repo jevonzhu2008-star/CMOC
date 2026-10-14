@@ -2,7 +2,7 @@ table 日报指标映射
 	lineageTag: 06b1ef45-ee23-4924-b096-124c378aea69
 
 	column 序号
-		dataType: int64
+		dataType: double
 		formatString: 0
 		lineageTag: 81dfde1f-ad33-4fa0-adbd-e282cd665a09
 		summarizeBy: sum
@@ -38,7 +38,7 @@ table 日报指标映射
 		annotation SummarizationSetBy = Automatic
 
 	column 环节序号
-		dataType: int64
+		dataType: double
 		formatString: 0
 		lineageTag: e7e7348e-1a45-4d22-9545-19bc18045f74
 		summarizeBy: sum
@@ -58,12 +58,14 @@ table 日报指标映射
 		mode: import
 		source =
 				let
-				  源 = Excel.Workbook(File.Contents("C:\Users\Xieyu\OneDrive - IPowerBI\CMOC Group - 文档\01.KFM选冶厂月报\02.Reference\指标映射.xlsx"), null, true),
-				  映射数据 = 源{[Item = "日报", Kind = "Sheet"]}[Data],
-				  提升标题 = Table.PromoteHeaders(映射数据, [PromoteAllScalars = true]),
-				  设置类型 = Table.TransformColumnTypes(提升标题, {{"序号", Int64.Type}, {"指标项", type text}, {"类别", type text}, {"环节", type text}, {"环节序号", Int64.Type}, {"报表", type text}}, "zh-Hans")
+				  源 = SharePoint.Files(SharePoint站点, [ApiVersion = 15]),
+				  已筛选行 = Table.SelectRows(源, each Text.Contains([Name], "指标映射") and [Extension] = ".xlsx"),
+				  已添加自定义 = Table.AddColumn(已筛选行, "文件", each Excel.Workbook([Content], true)),
+				  #"已展开 文件" = Table.ExpandTableColumn(已添加自定义, "文件", {"Name", "Data", "Item", "Kind", "Hidden"}, {"Name.1", "Data", "Item", "Kind", "Hidden"}),
+				  删除的其他列 = Table.SelectColumns(#"已展开 文件", {"Name", "Date modified", "Date created", "Name.1", "Data"}),
+				  向下钻取 = 删除的其他列{1}[Data]
 				in
-				  设置类型
+				  向下钻取
 
 	annotation PBI_ResultType = Table
 

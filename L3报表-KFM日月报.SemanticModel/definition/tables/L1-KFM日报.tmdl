@@ -110,7 +110,7 @@ table L1-KFM日报
 		annotation SummarizationSetBy = Automatic
 
 	column 序号
-		dataType: int64
+		dataType: double
 		formatString: 0
 		lineageTag: 91c4ab0b-b85d-440e-9b7d-b3018262ad84
 		summarizeBy: sum
@@ -154,7 +154,7 @@ table L1-KFM日报
 		annotation SummarizationSetBy = Automatic
 
 	column 环节序号
-		dataType: int64
+		dataType: double
 		formatString: 0
 		lineageTag: 4d9a86c4-9ec4-4a62-ad10-e9c7b7ef516e
 		summarizeBy: sum
@@ -197,16 +197,6 @@ table L1-KFM日报
 
 		annotation SummarizationSetBy = Automatic
 
-	column 累计预测数
-		dataType: double
-		lineageTag: 647e3899-3477-4432-833d-c5792073e564
-		summarizeBy: sum
-		sourceColumn: 累计预测数
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column 月计划
 		dataType: double
 		lineageTag: 5756ba16-9a5a-499b-8490-e349122928be
@@ -238,11 +228,21 @@ table L1-KFM日报
 
 		annotation UnderlyingDateTimeDataType = Date
 
+	column 累计实际数
+		dataType: double
+		lineageTag: d431fdc9-d80d-434f-8724-d0777aa3bf7d
+		summarizeBy: sum
+		sourceColumn: 累计实际数
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition L1-KFM日报 = m
 		mode: import
 		source =
 				let
-				    源 = SapBusinessWarehouse.Cubes("10.43.13.31", "01", "100", [LanguageCode="ZH", Implementation="2.0", BatchSize=500000000]),
+				    源 = SapBusinessWarehouse.Cubes(服务器, 系统编号, 客户端ID, [LanguageCode="ZH", Implementation="2.0", BatchSize=500000000]),
 				    Cube_CP006 = 源{[Name="ZRPP_CP006"]}[Data],
 				    查询_CP006 = Cube_CP006{[Id="ZRPP_CP006/ZRPP_CP006_Q0001"]}[Data],
 				
@@ -310,10 +310,10 @@ table L1-KFM日报
 				        else if [序号] = 2 and [指标名] = "出矿品位TCu" then "原矿铜品位TCu"
 				        else if [序号] = 3 and [指标名] = "入选品位TCo" then "入选品位TCo"
 				        else if [序号] = 3 and [指标名] = "入选品位TCu" then "入选品位TCu"
-				        else if [序号] = 4 and [指标名] = "选冶(理论)回收率-铜" then " 铜选冶综合回收率TCu"
-				        else if [序号] = 4 and [指标名] = "选冶(理论)回收率-钴" then " 钴选冶综合回收率TCo"
-				        else if [序号] = 5 and [指标名] = "产量-阴极铜" then "  阴极铜产量"
-				        else if [序号] = 5 and [指标名] = "产量-氢氧化钴" then "  氢氧化钴含钴产量"
+				        else if [序号] = 4 and [指标名] = "选冶(理论)回收率-铜" then "铜选冶综合回收率TCu"
+				        else if [序号] = 4 and [指标名] = "选冶(理论)回收率-钴" then "钴选冶综合回收率TCo"
+				        else if [序号] = 5 and [指标名] = "产量-阴极铜" then "阴极铜产量"
+				        else if [序号] = 5 and [指标名] = "产量-氢氧化钴" then "氢氧化钴含钴产量"
 				        else [类别]
 				    ),
 				
@@ -336,7 +336,7 @@ table L1-KFM日报
 				
 				    // 日期派生字段
 				    添加年份 = Table.AddColumn(保留列, "年", each Date.Year(Date.From([日期])), Int64.Type),
-				    添加标准日期 = Table.AddColumn(添加年份, "标准日期", each Date.From(Text.Replace([日期], ".0", "-")), type date),
+				    添加标准日期 = Table.AddColumn(添加年份, "标准日期", each try Date.FromText([日期], [Format="yyyy.MM.dd"]) otherwise null, type date),
 				    添加上月编码 = Table.AddColumn(添加标准日期, "上月年月编码", each
 				        let
 				            当月首日 = #date(Date.Year(Date.From([日期])), Date.Month(Date.From([日期])), 1),
@@ -352,24 +352,24 @@ table L1-KFM日报
 				            "年", each Date.Year([日期]), Int64.Type
 				        ),
 				        {"产品分类", "年", "指标项"},
-				        {{"全年预算数", each List.Average([全年预算数]), type nullable number}}
+				        {{"全年预算数", each List.Max([全年预算数]), type nullable number}}
 				    ),
 				    合并全年预算 = Table.NestedJoin(添加上月编码, {"年", "产品分类", "指标名称"}, 全年预算表, {"年", "产品分类", "指标项"}, "全年预算", JoinKind.LeftOuter),
 				    展开全年预算 = Table.ExpandTableColumn(合并全年预算, "全年预算", {"全年预算数"}, {"全年预算数"}),
 				
-				    // 内联中间表：月累计预测数（按 月份+产品分类+指标项 汇总）
-				    月累计预测表 = Table.TransformColumnTypes(
+				    // 内联中间表：月累计实际数（按 月份+产品分类+指标项 汇总）
+				    月累计实际表 = Table.TransformColumnTypes(
 				        Table.Group(
-				            Table.SelectColumns(KFM选冶厂月报, {"月份", "产品分类", "指标项", "累计预测数"}),
+				            Table.SelectColumns(KFM选冶厂月报, {"月份", "产品分类", "指标项", "累计实际数"}),
 				            {"月份", "产品分类", "指标项"},
-				            {{"累计预测数", each List.Average([累计预测数]), type nullable number}}
+				            {{"累计实际数", each List.Max([累计实际数]), type nullable number}}
 				        ),
 				        {{"月份", type text}}
 				    ),
-				    合并月累计预测 = Table.NestedJoin(展开全年预算, {"上月年月编码", "产品分类", "指标名称"}, 月累计预测表, {"月份", "产品分类", "指标项"}, "月累计预测", JoinKind.LeftOuter),
-				    展开月累计预测 = Table.ExpandTableColumn(合并月累计预测, "月累计预测", {"累计预测数"}, {"累计预测数"})
+				    合并月累计实际 = Table.NestedJoin(展开全年预算, {"上月年月编码", "产品分类", "指标名称"}, 月累计实际表, {"月份", "产品分类", "指标项"}, "月累计实际", JoinKind.LeftOuter),
+				    展开月累计实际 = Table.ExpandTableColumn(合并月累计实际, "月累计实际", {"累计实际数"}, {"累计实际数"})
 				in
-				    展开月累计预测
+				    展开月累计实际
 
 	annotation PBI_ResultType = Table
 

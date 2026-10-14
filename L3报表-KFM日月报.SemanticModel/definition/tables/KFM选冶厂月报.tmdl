@@ -90,7 +90,7 @@ table KFM选冶厂月报
 		annotation SummarizationSetBy = Automatic
 
 	column 序号
-		dataType: int64
+		dataType: double
 		formatString: 0
 		lineageTag: 9a610cc4-9aa8-45c9-a4ed-5150ce631789
 		summarizeBy: sum
@@ -280,7 +280,7 @@ table KFM选冶厂月报
 				    按排序键排序 = Table.Sort(添加排序键, {{"排序", Order.Ascending}}),
 				
 				    // 最近月份 = 实际数非空的月份最大值
-				    最近月份 = List.Max(Table.SelectRows(按排序键排序, each [实际数] <> null and [实际数] <> 0)[月份]),
+				    最近月份 = List.Max(Table.SelectRows(按排序键排序, each [实际数] <> null)[月份]),
 				
 				    // 日期 = YYYYMM → 当月 1 日
 				    添加日期 = Table.AddColumn(按排序键排序, "日期", each

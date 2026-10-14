@@ -8,9 +8,13 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
+queryGroup 参数
+
+	annotation PBI_QueryGroupOrder = 0
+
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["p_日报起始日期","p_月报起始日期","L1-KFM日报","KFM选冶厂月报","日报指标映射","月报指标映射","度量值"]
+annotation PBI_QueryOrder = ["p_日报起始日期","p_月报起始日期","服务器","系统编号","客户端ID","SharePoint站点","L1-KFM日报","KFM选冶厂月报","日报指标映射","月报指标映射","度量值"]
 
 annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
 

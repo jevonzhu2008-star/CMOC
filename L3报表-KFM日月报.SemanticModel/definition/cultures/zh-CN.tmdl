@@ -1695,22 +1695,6 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "L1KFM日报.累计预测数": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "累计预测数"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "累计预测数": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
 			    "L1KFM日报.月计划": {
 			      "Definition": {
 			        "Binding": {

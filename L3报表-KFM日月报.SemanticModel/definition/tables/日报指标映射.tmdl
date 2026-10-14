@@ -58,14 +58,12 @@ table 日报指标映射
 		mode: import
 		source =
 				let
+				  // 从 SharePoint 站点定位「指标映射」工作簿，读取「日报」Sheet（首行提升为标题）
 				  源 = SharePoint.Files(SharePoint站点, [ApiVersion = 15]),
-				  已筛选行 = Table.SelectRows(源, each Text.Contains([Name], "指标映射") and [Extension] = ".xlsx"),
-				  已添加自定义 = Table.AddColumn(已筛选行, "文件", each Excel.Workbook([Content], true)),
-				  #"已展开 文件" = Table.ExpandTableColumn(已添加自定义, "文件", {"Name", "Data", "Item", "Kind", "Hidden"}, {"Name.1", "Data", "Item", "Kind", "Hidden"}),
-				  删除的其他列 = Table.SelectColumns(#"已展开 文件", {"Name", "Date modified", "Date created", "Name.1", "Data"}),
-				  向下钻取 = 删除的其他列{1}[Data]
+				  指标映射文件 = Table.SelectRows(源, each Text.Contains([Name], "指标映射") and [Extension] = ".xlsx"){0}[Content],
+				  日报表 = Excel.Workbook(指标映射文件, true){[Item = "日报", Kind = "Sheet"]}[Data]
 				in
-				  向下钻取
+				  日报表
 
 	annotation PBI_ResultType = Table
 

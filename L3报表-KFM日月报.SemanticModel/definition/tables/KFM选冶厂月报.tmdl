@@ -78,17 +78,6 @@ table KFM选冶厂月报
 
 		annotation SummarizationSetBy = Automatic
 
-	column 类别
-		dataType: string
-		lineageTag: 1b24adaa-9912-4490-b649-2131f96c11ad
-		summarizeBy: none
-		sourceColumn: 类别
-		sortByColumn: 序号
-
-		changedProperty = SortByColumn
-
-		annotation SummarizationSetBy = Automatic
-
 	column 序号
 		dataType: double
 		formatString: 0
@@ -187,7 +176,7 @@ table KFM选冶厂月报
 		mode: import
 		source =
 				let
-				    数据源 = SapBusinessWarehouse.Cubes("10.43.13.31", "01", "100", [LanguageCode="ZH", Implementation="2.0", BatchSize=500000000]),
+				    数据源 = SapBusinessWarehouse.Cubes(服务器, 系统编号, 客户端ID, [LanguageCode="ZH", Implementation="2.0", BatchSize=500000000]),
 				    立方体 = 数据源{[Name="ZRPP_CP006"]}[Data],
 				    基础查询 = 立方体{[Id="ZRPP_CP006/ZRPP_CP006_Q0002"]}[Data],
 				
@@ -238,7 +227,7 @@ table KFM选冶厂月报
 				    // 矿体标识
 				    添加矿体列 = Table.AddColumn(合并月度数据, "矿体", each "KFM"),
 				
-				    // 保留输出列
+				    // 保留基础列
 				    保留列 = Table.SelectColumns(添加矿体列, {"产品分类", "单位", "环节", "矿区", "工序代码", "工序", "环比变化%", "环比实际数", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "同比变化%", "同期实际数", "预测达成差%", "预测达成率%", "预测数", "预算达成差%", "预算达成率%", "预算数", "生产线", "生产线代码", "矿区代码", "月份", "矿体", "指标项"}),
 				
 				    // 左连接月报指标映射，补充类别、序号、总类别、环节序号
@@ -302,12 +291,14 @@ table KFM选冶厂月报
 				    ),
 				
 				    // 收列（按最终输出顺序）
-				    保留最终列 = Table.SelectColumns(添加月份筛选器, {"环节序号", "序号", "排序", "月份", "月份-筛选器", "日期", "产品分类", "指标项", "总类别", "类别", "类别2", "单位", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "预测数", "预算数"}),
+				    保留输出列 = Table.SelectColumns(添加月份筛选器, {"环节序号", "序号", "排序", "月份", "月份-筛选器", "日期", "产品分类", "指标项", "总类别", "类别", "类别2", "单位", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "预测数", "预算数"}),
 				
 				    // 类型转换
-				    设置类型 = Table.TransformColumnTypes(保留最终列, {{"类别2", type text}, {"月份-筛选器", type text}, {"日期", type date}, {"月份", Int64.Type}, {"环节序号", Int64.Type}, {"排序", Int64.Type}})
+				    设置类型 = Table.TransformColumnTypes(保留输出列, {{"类别2", type text}, {"月份-筛选器", type text}, {"日期", type date}, {"月份", Int64.Type}, {"环节序号", Int64.Type}, {"排序", Int64.Type}}),
+				    // 收列：一次性完成删列（去掉「类别」）与最终列顺序
+				    保留最终列 = Table.SelectColumns(设置类型, {"月份", "月份-筛选器", "日期", "环节序号", "序号", "排序", "总类别", "产品分类", "指标项", "单位", "类别2", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "预测数", "预算数"})
 				in
-				    设置类型
+				    保留最终列
 
 	annotation PBI_NavigationStepName = 导航
 

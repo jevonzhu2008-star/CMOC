@@ -1,67 +1,11 @@
 table L1-KFM日报
 	lineageTag: c13d8e49-6648-4b4d-90c0-30204dc558d3
 
-	column 产线
-		dataType: string
-		lineageTag: 01bb0741-e681-4ec0-8089-20b4f811b104
-		summarizeBy: none
-		sourceColumn: 产线
-
-		annotation SummarizationSetBy = Automatic
-
 	column 单位
 		dataType: string
 		lineageTag: 981ee64e-3884-458b-920b-d8c6e80e3c22
 		summarizeBy: none
 		sourceColumn: 单位
-
-		annotation SummarizationSetBy = Automatic
-
-	column 指标类型
-		dataType: string
-		lineageTag: 139d5786-7197-4c3e-9f78-01415c345419
-		summarizeBy: none
-		sourceColumn: 指标类型
-
-		annotation SummarizationSetBy = Automatic
-
-	column 日期
-		dataType: string
-		lineageTag: c050856c-5f9a-434e-8030-7b9a84ea1706
-		summarizeBy: none
-		sourceColumn: 日期
-
-		annotation SummarizationSetBy = Automatic
-
-	column 运营形式
-		dataType: string
-		lineageTag: 97279e06-373f-4f88-b052-125ec6594304
-		summarizeBy: none
-		sourceColumn: 运营形式
-
-		annotation SummarizationSetBy = Automatic
-
-	column 指标编码
-		dataType: string
-		lineageTag: 3ccaf306-1e30-489c-ad67-2d048b89178d
-		summarizeBy: none
-		sourceColumn: 指标编码
-
-		annotation SummarizationSetBy = Automatic
-
-	column 指标编码代码
-		dataType: string
-		lineageTag: 4afdf96f-7ce7-40e7-adbd-178034f28f79
-		summarizeBy: none
-		sourceColumn: 指标编码代码
-
-		annotation SummarizationSetBy = Automatic
-
-	column 指标名称
-		dataType: string
-		lineageTag: 2c7d1df8-22f5-4f37-917f-ca7c2cc8db19
-		summarizeBy: none
-		sourceColumn: 指标名称
 
 		annotation SummarizationSetBy = Automatic
 
@@ -85,22 +29,6 @@ table L1-KFM日报
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 日期（月份）
-		dataType: string
-		lineageTag: a797307e-a523-4caf-8a55-2e2f9145260a
-		summarizeBy: none
-		sourceColumn: 日期（月份）
-
-		annotation SummarizationSetBy = Automatic
-
-	column 指标名
-		dataType: string
-		lineageTag: 17590097-9a51-4485-93c0-daf7f1d55e22
-		summarizeBy: none
-		sourceColumn: 指标名
-
-		annotation SummarizationSetBy = Automatic
-
 	column 地域
 		dataType: string
 		lineageTag: a86fd38c-b0ce-4845-b085-9722b169a18d
@@ -115,14 +43,6 @@ table L1-KFM日报
 		lineageTag: 91c4ab0b-b85d-440e-9b7d-b3018262ad84
 		summarizeBy: sum
 		sourceColumn: 序号
-
-		annotation SummarizationSetBy = Automatic
-
-	column 类别
-		dataType: string
-		lineageTag: 2266ab86-a8db-41f1-8a22-1e0bcd287f50
-		summarizeBy: none
-		sourceColumn: 类别
 
 		annotation SummarizationSetBy = Automatic
 
@@ -162,15 +82,6 @@ table L1-KFM日报
 
 		annotation SummarizationSetBy = Automatic
 
-	column 年
-		dataType: int64
-		formatString: 0
-		lineageTag: d3007ac6-b778-4b39-abc7-c49b2e40d864
-		summarizeBy: sum
-		sourceColumn: 年
-
-		annotation SummarizationSetBy = Automatic
-
 	column 全年预算数
 		dataType: double
 		lineageTag: 95d61fb0-35a4-48ba-897d-e9f82aed9e7c
@@ -180,22 +91,6 @@ table L1-KFM日报
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 产品分类
-		dataType: string
-		lineageTag: c96edf02-0fc3-4595-b1c6-7fcfe137c390
-		summarizeBy: none
-		sourceColumn: 产品分类
-
-		annotation SummarizationSetBy = Automatic
-
-	column 上月年月编码
-		dataType: string
-		lineageTag: d1f17db7-d960-43e4-8fc3-c3cc9a14bb1c
-		summarizeBy: none
-		sourceColumn: 上月年月编码
-
-		annotation SummarizationSetBy = Automatic
 
 	column 月计划
 		dataType: double
@@ -238,6 +133,17 @@ table L1-KFM日报
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column 日期筛选器
+		dataType: string
+		lineageTag: 704c4bc7-7696-4601-a0d1-a15acc4968e4
+		summarizeBy: none
+		sourceColumn: 日期筛选器
+		sortByColumn: 标准日期
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
 	partition L1-KFM日报 = m
 		mode: import
 		source =
@@ -245,7 +151,6 @@ table L1-KFM日报
 				    源 = SapBusinessWarehouse.Cubes(服务器, 系统编号, 客户端ID, [LanguageCode="ZH", Implementation="2.0", BatchSize=500000000]),
 				    Cube_CP006 = 源{[Name="ZRPP_CP006"]}[Data],
 				    查询_CP006 = Cube_CP006{[Id="ZRPP_CP006/ZRPP_CP006_Q0001"]}[Data],
-				
 				    // 按月循环取数：从 p_日报起始日期 到当年 12 月，逐月查询 SAP BW 后合并
 				    合并月度数据 = let
 				        起始日期 = p_日报起始日期,
@@ -278,7 +183,6 @@ table L1-KFM日报
 				        合并结果 = Table.Combine(各月结果)
 				    in
 				        合并结果,
-				
 				    // 按指标名称 + 产品分类/工序 映射出报表使用的「指标名」
 				    添加指标名 = Table.AddColumn(合并月度数据, "指标名", each
 				        if [指标名称] = "采矿量" then "采矿量"
@@ -299,11 +203,9 @@ table L1-KFM日报
 				        else if [工序] = "产品" and [指标名称] = "矿产品产量(金属量)" and Text.Upper([产品分类]) = "全钴TCO" then "产量-氢氧化钴"
 				        else ""
 				    ),
-				
 				    // 左连接日报指标映射，补充类别、序号、总类别、环节序号
 				    合并指标映射 = Table.NestedJoin(添加指标名, {"指标名称"}, #"日报指标映射", {"指标项"}, "映射数据", JoinKind.LeftOuter),
 				    展开指标映射 = Table.ExpandTableColumn(合并指标映射, "映射数据", {"类别", "序号", "环节", "环节序号"}, {"类别", "序号", "总类别", "环节序号"}),
-				
 				    // 按序号 + 指标名细分「类别2」
 				    添加类别2 = Table.AddColumn(展开指标映射, "类别2", each
 				        if [序号] = 2 and [指标名] = "出矿品位TCo" then "原矿钴品位TCo"
@@ -316,7 +218,6 @@ table L1-KFM日报
 				        else if [序号] = 5 and [指标名] = "产量-氢氧化钴" then "氢氧化钴含钴产量"
 				        else [类别]
 				    ),
-				
 				    // 排序键 = 序号 × 10 + 铜钴次序（铜 0 钴 1）
 				    添加排序键 = Table.AddColumn(添加类别2, "排序", each
 				        let
@@ -330,10 +231,8 @@ table L1-KFM日报
 				            主序 * 10 + 次序
 				    ),
 				    添加地域 = Table.AddColumn(添加排序键, "地域", each "KFM"),
-				
 				    // 保留输出列
 				    保留列 = Table.SelectColumns(添加地域, {"产品分类", "产线", "单位", "指标类型", "日期", "运营形式", "指标编码", "指标编码代码", "指标名称", "当日实际数", "当月累计实际数", "月计划", "月预算", "日期（月份）", "指标名", "类别", "序号", "总类别", "环节序号", "类别2", "排序", "地域"}),
-				
 				    // 日期派生字段
 				    添加年份 = Table.AddColumn(保留列, "年", each Date.Year(Date.From([日期])), Int64.Type),
 				    添加标准日期 = Table.AddColumn(添加年份, "标准日期", each try Date.FromText([日期], [Format="yyyy.MM.dd"]) otherwise null, type date),
@@ -344,7 +243,13 @@ table L1-KFM日报
 				        in
 				            Text.From(Date.Year(上月)) & Text.PadStart(Text.From(Date.Month(上月)), 2, "0")
 				    , type text),
-				
+				    // 最近日期基准 = 「原矿处理量」指标的最大标准日期（用于标记「最近日期」）
+				    最大主指标日期 = List.Max(Table.SelectRows(添加上月编码, each [指标名称] = "原矿处理量")[标准日期]),
+				    // 日期筛选器：标准日期等于基准的行标记为「最近日期」，其余保留标准日期
+				    添加日期筛选器 = Table.AddColumn(添加上月编码, "日期筛选器", each
+				        if [标准日期] = 最大主指标日期 then "最近日期" else [标准日期]
+				    ),
+				    // ========================================================================
 				    // 内联中间表：全年预算数（按 产品分类+年+指标项 汇总）
 				    全年预算表 = Table.Group(
 				        Table.AddColumn(
@@ -354,9 +259,8 @@ table L1-KFM日报
 				        {"产品分类", "年", "指标项"},
 				        {{"全年预算数", each List.Max([全年预算数]), type nullable number}}
 				    ),
-				    合并全年预算 = Table.NestedJoin(添加上月编码, {"年", "产品分类", "指标名称"}, 全年预算表, {"年", "产品分类", "指标项"}, "全年预算", JoinKind.LeftOuter),
+				    合并全年预算 = Table.NestedJoin(添加日期筛选器, {"年", "产品分类", "指标名称"}, 全年预算表, {"年", "产品分类", "指标项"}, "全年预算", JoinKind.LeftOuter),
 				    展开全年预算 = Table.ExpandTableColumn(合并全年预算, "全年预算", {"全年预算数"}, {"全年预算数"}),
-				
 				    // 内联中间表：月累计实际数（按 月份+产品分类+指标项 汇总）
 				    月累计实际表 = Table.TransformColumnTypes(
 				        Table.Group(
@@ -367,9 +271,11 @@ table L1-KFM日报
 				        {{"月份", type text}}
 				    ),
 				    合并月累计实际 = Table.NestedJoin(展开全年预算, {"上月年月编码", "产品分类", "指标名称"}, 月累计实际表, {"月份", "产品分类", "指标项"}, "月累计实际", JoinKind.LeftOuter),
-				    展开月累计实际 = Table.ExpandTableColumn(合并月累计实际, "月累计实际", {"累计实际数"}, {"累计实际数"})
+				    展开月累计实际 = Table.ExpandTableColumn(合并月累计实际, "月累计实际", {"累计实际数"}, {"累计实际数"}),
+				    // 收列：一次性完成删列与最终列顺序
+				    保留最终列 = Table.SelectColumns(展开月累计实际, {"标准日期", "日期筛选器", "环节序号", "序号", "排序", "单位", "总类别", "类别2", "地域", "月预算", "月计划", "当日实际数", "当月累计实际数", "全年预算数", "累计实际数"})
 				in
-				    展开月累计实际
+				    保留最终列
 
 	annotation PBI_ResultType = Table
 

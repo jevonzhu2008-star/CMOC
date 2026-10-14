@@ -454,22 +454,6 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "KFM选冶厂月报.类别": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "KFM选冶厂月报",
-			          "ConceptualProperty": "类别"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "类别": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
 			    "KFM选冶厂月报.序号": {
 			      "Definition": {
 			        "Binding": {
@@ -1094,22 +1078,6 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "L1KFM日报.产线": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "产线"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "产线": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
 			    "L1KFM日报.单位": {
 			      "Definition": {
 			        "Binding": {
@@ -1121,102 +1089,6 @@ cultureInfo zh-CN
 			      "Terms": [
 			        {
 			          "单位": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.指标类型": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "指标类型"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "指标类型": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.日期": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "日期"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "日期": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.运营形式": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "运营形式"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "运营形式": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.指标编码": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "指标编码"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "指标编码": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.指标编码代码": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "指标编码代码"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "指标编码代码": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.指标名称": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "指标名称"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "指标名称": {
 			            "State": "Generated"
 			          }
 			        }
@@ -1254,44 +1126,6 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "L1KFM日报.日期月份": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "日期（月份）"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "日期（月份）": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "日期": {
-			            "State": "Generated",
-			            "Weight": 0.75
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.指标名": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "指标名"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "指标名": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
 			    "L1KFM日报.地域": {
 			      "Definition": {
 			        "Binding": {
@@ -1319,22 +1153,6 @@ cultureInfo zh-CN
 			      "Terms": [
 			        {
 			          "序号": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.类别": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "类别"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "类别": {
 			            "State": "Generated"
 			          }
 			        }
@@ -1586,22 +1404,6 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "L1KFM日报.年": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "年"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "年": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
 			    "L1KFM日报.全年预算数": {
 			      "Definition": {
 			        "Binding": {
@@ -1613,22 +1415,6 @@ cultureInfo zh-CN
 			      "Terms": [
 			        {
 			          "全年预算数": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.产品分类": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "产品分类"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "产品分类": {
 			            "State": "Generated"
 			          }
 			        }
@@ -1674,22 +1460,6 @@ cultureInfo zh-CN
 			      "Terms": [
 			        {
 			          "_年累计完成L1 FormatString": {
-			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.上月年月编码": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "上月年月编码"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "上月年月编码": {
 			            "State": "Generated"
 			          }
 			        }

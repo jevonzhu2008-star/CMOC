@@ -486,32 +486,6 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "KFM选冶厂月报.类别2": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "KFM选冶厂月报",
-			          "ConceptualProperty": "类别2"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "类别2": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "类别": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
-			    },
 			    "KFM选冶厂月报.日期": {
 			      "Definition": {
 			        "Binding": {
@@ -1154,32 +1128,6 @@ cultureInfo zh-CN
 			        {
 			          "序号": {
 			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "L1KFM日报.类别2": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "L1-KFM日报",
-			          "ConceptualProperty": "类别2"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "类别2": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "类别": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ]

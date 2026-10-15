@@ -38,13 +38,12 @@
                       "Entity": "KFM选冶厂月报"
                     }
                   },
-                  "Property": "类别2"
+                  "Property": "二级指标"
                 }
               },
-              "queryRef": "KFM选冶厂月报_Modify.类别2",
-              "nativeQueryRef": "类别",
-              "active": true,
-              "displayName": "类别"
+              "queryRef": "KFM选冶厂月报.二级指标",
+              "nativeQueryRef": "二级指标",
+              "active": true
             },
             {
               "field": {
@@ -249,39 +248,13 @@
         "sort": [
           {
             "field": {
-              "Measure": {
+              "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "度量值"
+                    "Entity": "KFM选冶厂月报"
                   }
                 },
-                "Property": "."
-              }
-            },
-            "direction": "Ascending"
-          },
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "度量值"
-                  }
-                },
-                "Property": "."
-              }
-            },
-            "direction": "Ascending"
-          },
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "度量值"
-                  }
-                },
-                "Property": "."
+                "Property": "二级指标"
               }
             },
             "direction": "Ascending"
@@ -303,7 +276,7 @@
           },
           {
             "queryRefs": [
-              "KFM选冶厂月报_Modify.类别2"
+              "KFM选冶厂月报.二级指标"
             ],
             "isPinned": true
           },
@@ -311,6 +284,7 @@
             "queryRefs": [
               "KFM选冶厂月报_Modify.单位"
             ],
+            "isCollapsed": true,
             "isPinned": true
           }
         ],
@@ -357,7 +331,7 @@
             "columnAdjustment": {
               "expr": {
                 "Literal": {
-                  "Value": "'fixedWidth'"
+                  "Value": "'growToFit'"
                 }
               }
             },
@@ -1013,20 +987,6 @@
           "selector": {
             "metadata": "_Measures.年累计完成比计划（修正）"
           }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "211D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "KFM选冶厂月报_Modify.类别2"
-          }
         }
       ],
       "blankRows": [
@@ -1427,6 +1387,36 @@
             "Property": "总类别"
           }
         },
+        "type": "Categorical"
+      },
+      {
+        "name": "1bd5b34a032ba10541db",
+        "ordinal": 10,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KFM选冶厂月报"
+              }
+            },
+            "Property": "单位"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "26b086de836ad430577e",
+        "ordinal": 11,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KFM选冶厂月报"
+              }
+            },
+            "Property": "指标类别"
+          }
+        },
         "type": "Categorical",
         "filter": {
           "Version": 2,
@@ -1449,7 +1439,7 @@
                             "Source": "k"
                           }
                         },
-                        "Property": "总类别"
+                        "Property": "指标类别"
                       }
                     }
                   ],
@@ -1457,21 +1447,7 @@
                     [
                       {
                         "Literal": {
-                          "Value": "'采矿'"
-                        }
-                      }
-                    ],
-                    [
-                      {
-                        "Literal": {
-                          "Value": "'选冶合计'"
-                        }
-                      }
-                    ],
-                    [
-                      {
-                        "Literal": {
-                          "Value": "'产品质量'"
+                          "Value": "'主要指标'"
                         }
                       }
                     ]
@@ -1480,37 +1456,8 @@
               }
             }
           ]
-        }
-      },
-      {
-        "name": "a0457b4a6fbaf2e9d9fb",
-        "ordinal": 10,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "KFM选冶厂月报"
-              }
-            },
-            "Property": "类别2"
-          }
         },
-        "type": "Categorical"
-      },
-      {
-        "name": "1bd5b34a032ba10541db",
-        "ordinal": 11,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "KFM选冶厂月报"
-              }
-            },
-            "Property": "单位"
-          }
-        },
-        "type": "Categorical"
+        "howCreated": "User"
       },
       {
         "name": "946ea29999f5bcecc271",
@@ -1526,9 +1473,23 @@
           }
         },
         "type": "Advanced"
+      },
+      {
+        "name": "aa9ce5661bafbab2470d",
+        "ordinal": 13,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KFM选冶厂月报"
+              }
+            },
+            "Property": "二级指标"
+          }
+        },
+        "type": "Categorical"
       }
     ],
     "filterSortOrder": "Custom"
-  },
-  "isHidden": true
+  }
 }

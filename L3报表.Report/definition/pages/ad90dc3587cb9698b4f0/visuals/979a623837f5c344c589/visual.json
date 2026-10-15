@@ -38,13 +38,12 @@
                       "Entity": "KFM选冶厂月报"
                     }
                   },
-                  "Property": "类别2"
+                  "Property": "二级指标"
                 }
               },
-              "queryRef": "KFM选冶厂月报_Modify.类别2",
-              "nativeQueryRef": "类别",
-              "active": true,
-              "displayName": "类别"
+              "queryRef": "KFM选冶厂月报.二级指标",
+              "nativeQueryRef": "二级指标",
+              "active": true
             },
             {
               "field": {
@@ -303,7 +302,7 @@
           },
           {
             "queryRefs": [
-              "KFM选冶厂月报_Modify.类别2"
+              "KFM选冶厂月报.二级指标"
             ],
             "isPinned": true
           },
@@ -311,6 +310,7 @@
             "queryRefs": [
               "KFM选冶厂月报_Modify.单位"
             ],
+            "isCollapsed": true,
             "isPinned": true
           }
         ],
@@ -1013,20 +1013,6 @@
           "selector": {
             "metadata": "_Measures.年累计完成比计划（修正）"
           }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "211D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "KFM选冶厂月报_Modify.类别2"
-          }
         }
       ],
       "blankRows": [
@@ -1481,7 +1467,8 @@
             "Property": "类别2"
           }
         },
-        "type": "Categorical"
+        "type": "Categorical",
+        "howCreated": "User"
       },
       {
         "name": "6780053caf1309ba39f2",
@@ -1515,5 +1502,6 @@
       }
     ],
     "filterSortOrder": "Custom"
-  }
+  },
+  "isHidden": true
 }

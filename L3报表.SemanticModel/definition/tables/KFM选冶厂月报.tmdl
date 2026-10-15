@@ -79,7 +79,7 @@ table KFM选冶厂月报
 		annotation SummarizationSetBy = Automatic
 
 	column 序号
-		dataType: double
+		dataType: int64
 		formatString: 0
 		lineageTag: 9a610cc4-9aa8-45c9-a4ed-5150ce631789
 		summarizeBy: sum
@@ -93,17 +93,6 @@ table KFM选冶厂月报
 		summarizeBy: none
 		sourceColumn: 总类别
 		sortByColumn: 环节序号
-
-		changedProperty = SortByColumn
-
-		annotation SummarizationSetBy = Automatic
-
-	column 类别2
-		dataType: string
-		lineageTag: 8c988aa2-2180-4bef-9c39-702f4c34b242
-		summarizeBy: none
-		sourceColumn: 类别2
-		sortByColumn: 排序
 
 		changedProperty = SortByColumn
 
@@ -180,6 +169,17 @@ table KFM选冶厂月报
 
 		annotation SummarizationSetBy = Automatic
 
+	column 二级指标
+		dataType: string
+		lineageTag: 423b489d-886a-4e6a-a23c-f6b94e0d4c6d
+		summarizeBy: none
+		sourceColumn: 二级指标
+		sortByColumn: 排序
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
 	partition KFM选冶厂月报 = m
 		mode: import
 		source =
@@ -245,19 +245,19 @@ table KFM选冶厂月报
 				    // 剔除未匹配到映射的行
 				    剔除未匹配行 = Table.SelectRows(展开指标映射, each [序号] <> null),
 				
-				    // 类别2：序号 ∈ {5,13,14,15,16} 按 类别+产品分类 细分，其余沿用原类别
-				    添加类别2 = Table.AddColumn(剔除未匹配行, "类别2", each
+				    // 二级指标：序号 ∈ {5,13,14,15,16} 按 类别+产品分类 细分，其余沿用原类别
+				    添加类别2 = Table.AddColumn(剔除未匹配行, "二级指标", each
 				        if List.Contains({5, 13, 14, 15, 16}, [序号]) then
-				            if [类别] = "采出品位（铜+钴）" and [产品分类] = "全铜TCu" then "采出全铜品位"
-				            else if [类别] = "采出品位（铜+钴）" and [产品分类] = "全钴TCo" then "采出全钴品位"
-				            else if [类别] = "入选品位（铜+钴）" and [产品分类] = "全铜TCu" then "入选铜品位"
-				            else if [类别] = "入选品位（铜+钴）" and [产品分类] = "全钴TCo" then "入选钴品位"
-				            else if [类别] = "浸出率（铜+钴）" and [产品分类] = "全铜TCu" then "浸出率TCu"
-				            else if [类别] = "浸出率（铜+钴）" and [产品分类] = "全钴TCo" then "浸出率TCo"
-				            else if [类别] = "回收率（铜+钴）" and [产品分类] = "全铜TCu" then "全铜回收率"
-				            else if [类别] = "回收率（铜+钴）" and [产品分类] = "全钴TCo" then "全钴回收率"
-				            else if [类别] = "阴极铜+氢氧化钴含钴" and [产品分类] = "全铜TCu" then "阴极铜"
-				            else if [类别] = "阴极铜+氢氧化钴含钴" and [产品分类] = "全钴TCo" then "氢氧化钴含钴"
+				                 if [序号] = 5  and [产品分类] = "全铜TCu" then "采出全铜品位"
+				            else if [序号] = 5  and [产品分类] = "全钴TCo" then "采出全钴品位"
+				            else if [序号] = 13 and [产品分类] = "全铜TCu" then "入选铜品位"
+				            else if [序号] = 13 and [产品分类] = "全钴TCo" then "入选钴品位"
+				            else if [序号] = 14 and [产品分类] = "全铜TCu" then "浸出率TCu"
+				            else if [序号] = 14 and [产品分类] = "全钴TCo" then "浸出率TCo"
+				            else if [序号] = 15 and [产品分类] = "全铜TCu" then "全铜回收率"
+				            else if [序号] = 15 and [产品分类] = "全钴TCo" then "全钴回收率"
+				            else if [序号] = 16 and [产品分类] = "全铜TCu" then "阴极铜"
+				            else if [序号] = 16 and [产品分类] = "全钴TCo" then "氢氧化钴含钴"
 				            else null
 				        else [类别]
 				    ),
@@ -299,9 +299,9 @@ table KFM选冶厂月报
 				    ),
 				
 				  // 收列：直接选定最终字段清单 + 最终顺序，剔除无用【类别】
-				    保留最终列 = Table.SelectColumns(添加月份筛选器, {"产品分类", "单位", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "预测数", "预算数", "月份", "指标项", "序号", "总类别", "环节序号", "指标类别", "类别2", "排序", "日期", "月份-筛选器"}),
+				    保留最终列 = Table.SelectColumns(添加月份筛选器, {"序号", "环节序号", "排序","总类别", "产品分类", "单位",  "指标类别","指标项", "二级指标", "日期", "月份", "月份-筛选器", "累计实际数", "累计预测数", "累计预算数", "全年预算数", "实际数", "预测数", "预算数"}),
 				    // 类型转换
-				    设置类型 = Table.TransformColumnTypes(保留最终列, {{"类别2", type text}, {"月份-筛选器", type text}, {"日期", type date}, {"月份", Int64.Type}, {"环节序号", Int64.Type}, {"排序", Int64.Type}})
+				    设置类型 = Table.TransformColumnTypes(保留最终列, {{"二级指标", type text}, {"月份-筛选器", type text}, {"日期", type date}, {"月份", Int64.Type}, {"环节序号", Int64.Type}, {"排序", Int64.Type}, {"序号", Int64.Type}})
 				in
 				    设置类型
 

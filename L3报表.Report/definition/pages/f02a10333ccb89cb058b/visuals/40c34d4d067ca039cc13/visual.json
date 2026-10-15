@@ -38,13 +38,12 @@
                       "Entity": "L1-KFM日报"
                     }
                   },
-                  "Property": "类别2"
+                  "Property": "二级指标"
                 }
               },
-              "queryRef": "L1-KFM日报.类别2",
-              "nativeQueryRef": "类别2",
-              "active": true,
-              "displayName": "类别"
+              "queryRef": "L1-KFM日报.二级指标",
+              "nativeQueryRef": "二级指标",
+              "active": true
             },
             {
               "field": {
@@ -214,23 +213,6 @@
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "L1-KFM日报"
-                  }
-                },
-                "Property": "类别2"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ]
       }
     },
     "objects": {
@@ -1340,7 +1322,8 @@
             "Property": "类别2"
           }
         },
-        "type": "Categorical"
+        "type": "Categorical",
+        "howCreated": "User"
       },
       {
         "name": "7835d23ed449a5d752ce",

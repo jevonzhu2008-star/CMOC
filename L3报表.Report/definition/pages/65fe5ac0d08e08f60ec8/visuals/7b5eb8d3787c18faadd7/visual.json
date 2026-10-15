@@ -42,137 +42,25 @@
                       "Entity": "度量值"
                     }
                   },
-                  "Property": "日累计全钴TCo入磨金属量"
-                }
-              },
-              "queryRef": "度量值.入磨金属量",
-              "nativeQueryRef": "日累计全钴TCo入磨金属量"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "月累计全钴TCo入磨金属量"
-                }
-              },
-              "queryRef": "度量值.月累计全钴TCo入磨金属量",
-              "nativeQueryRef": "月累计全钴TCo入磨金属量"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "日累计全铜TCu入磨金属量"
-                }
-              },
-              "queryRef": "度量值.全铜TCu入磨金属量",
-              "nativeQueryRef": "日累计全铜TCu入磨金属量"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "月累计全铜TCu入磨金属量"
-                }
-              },
-              "queryRef": "度量值.月累计全铜TCu入磨金属量",
-              "nativeQueryRef": "月累计全铜TCu入磨金属量"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "日累计原矿处理量"
-                }
-              },
-              "queryRef": "度量值.全钴TCo原矿处理量",
-              "nativeQueryRef": "日累计原矿处理量"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "月累计原矿处理量"
-                }
-              },
-              "queryRef": "度量值.月累计原矿处理量",
-              "nativeQueryRef": "月累计原矿处理量"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "年累计全钴TCo入矿品位"
-                }
-              },
-              "queryRef": "度量值.年累计全钴TCo入矿品位",
-              "nativeQueryRef": "年累计全钴TCo入矿品位"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "年累计全铜TCu入矿品位"
-                }
-              },
-              "queryRef": "度量值.年累计铜TCu入矿品位",
-              "nativeQueryRef": "年累计全铜TCu入矿品位"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "v年累计全钴TCo入矿品位"
-                }
-              },
-              "queryRef": "度量值.v年累计全钴TCo入矿品位",
-              "nativeQueryRef": "v年累计全钴TCo入矿品位"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "v年累计全铜TCu入矿品位"
+                  "Property": "v铜入矿品位_新口径"
                 }
               },
               "queryRef": "度量值.v年累计全铜TCu入矿品位",
-              "nativeQueryRef": "v年累计全铜TCu入矿品位"
+              "nativeQueryRef": "v铜入矿品位_新口径"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "度量值"
+                    }
+                  },
+                  "Property": "v铜回收率_新口径"
+                }
+              },
+              "queryRef": "度量值.v铜回收率_新口径",
+              "nativeQueryRef": "v铜回收率_新口径"
             }
           ]
         }

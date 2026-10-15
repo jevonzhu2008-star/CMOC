@@ -226,7 +226,7 @@ table L1-KFM日报
 				    // 按序号 + 指标名细分「类别2」
 				    添加二级指标 = Table.AddColumn(展开指标映射, "二级指标", each
 				             if [序号] = 2 and [产品分类] = "全钴TCo" then "出矿品位TCo"
-				        else if [序号] = 2 and [产品分类] = "全钴TCo" then "出矿品位TCu"
+				        else if [序号] = 2 and [产品分类] = "全铜TCu" then "出矿品位TCu"
 				        else if [序号] = 3 and [产品分类]= "全钴TCo" then "原矿钴品位TCo"
 				        else if [序号] = 3 and [产品分类] = "全铜TCu" then "原矿铜品位TCu"
 				        else if [序号] = 4 and [产品分类] = "全铜TCu" then "铜选冶综合回收率TCu"

@@ -23,7 +23,7 @@
                       "Entity": "度量值"
                     }
                   },
-                  "Property": "v_钴回收率_新口径"
+                  "Property": "钴回收率_新口径"
                 }
               },
               "queryRef": "度量值.v_钴回收率_新口径",
@@ -37,7 +37,7 @@
                       "Entity": "度量值"
                     }
                   },
-                  "Property": "v_铜回收率_新口径"
+                  "Property": "铜回收率_新口径"
                 }
               },
               "queryRef": "度量值.v_铜回收率_新口径",
@@ -51,7 +51,7 @@
                       "Entity": "度量值"
                     }
                   },
-                  "Property": "v钴入矿品位_新口径"
+                  "Property": "钴入矿品位_新口径"
                 }
               },
               "queryRef": "度量值.v钴入矿品位_新口径",
@@ -65,7 +65,7 @@
                       "Entity": "度量值"
                     }
                   },
-                  "Property": "v铜入矿品位_新口径"
+                  "Property": "铜入矿品位_新口径"
                 }
               },
               "queryRef": "度量值.v铜入矿品位_新口径",
@@ -732,7 +732,7 @@
                 "Entity": "度量值"
               }
             },
-            "Property": "v_铜回收率_新口径"
+            "Property": "铜回收率_新口径"
           }
         },
         "type": "Advanced"
@@ -747,7 +747,7 @@
                 "Entity": "度量值"
               }
             },
-            "Property": "v_钴回收率_新口径"
+            "Property": "钴回收率_新口径"
           }
         },
         "type": "Advanced"
@@ -761,7 +761,7 @@
                 "Entity": "度量值"
               }
             },
-            "Property": "v钴入矿品位_新口径"
+            "Property": "钴入矿品位_新口径"
           }
         },
         "type": "Advanced"
@@ -775,7 +775,7 @@
                 "Entity": "度量值"
               }
             },
-            "Property": "v铜入矿品位_新口径"
+            "Property": "铜入矿品位_新口径"
           }
         },
         "type": "Advanced"

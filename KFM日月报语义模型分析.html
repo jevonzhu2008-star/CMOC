@@ -109,11 +109,11 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
       <div class="kpi"><div class="n">5</div><div class="l">张表（2 事实 + 2 映射 + 1 度量值）</div></div>
       <div class="kpi"><div class="n">0</div><div class="l">模型关系（扁平化设计）</div></div>
       <div class="kpi"><div class="n">27</div><div class="l">度量值（月报 9 / 日报 7 / 辅助 7 / 新口径 4）</div></div>
-      <div class="kpi"><div class="n" style="color:var(--crit)">2</div><div class="l">严重问题</div></div>
-      <div class="kpi"><div class="n" style="color:var(--warn)">4</div><div class="l">中等问题</div></div>
+      <div class="kpi"><div class="n" style="color:var(--crit)">0</div><div class="l">严重问题</div></div>
+      <div class="kpi"><div class="n" style="color:var(--warn)">2</div><div class="l">中等问题</div></div>
       <div class="kpi"><div class="n" style="color:var(--info)">2</div><div class="l">轻微问题</div></div>
     </div>
-    <p style="margin-top:14px">本轮切换了 SAP BW 服务器与 SharePoint 站点参数，月报二级指标序号体系由 <code>5/13/14/15/16</code> 调整为 <code>1004/1012/1013/1014/1015</code>，并把「年累计完成L1_v2」并入「年累计完成L1」、回收率改为「矿产品产量 × 浸出率 / CCD 洗涤效率」反推的新口径（品位 ×100、<code>ALLEXCEPT</code> 保留日期筛选器）。但当前存在<b>两处严重缺陷</b>需优先修复：<code>年累计完成L1</code> 的 SWITCH 兜底分支仍有 <code>VAR</code> 内联语法错误，<code>v_钴回收率_新口径</code> 的 <code>RETURN</code> 返回了调试用中间变量。</p>
+    <p style="margin-top:14px">整体架构清晰：两张事实表从 SAP BW 立方体 <code>ZRPP_CP006</code> 按月循环取数，映射列在 M 层 join 物化，DAX 侧用三个 UDF 统一动态格式。本轮<b>已修复全部 4 处缺陷</b>（钴回收率 <code>RETURN</code>、<code>年累计完成L1</code> 的 SWITCH 语法、月报序号集合不一致、日报「二级指标」复制粘贴），度量值去掉 <code>v</code>/<code>v_</code> 草稿前缀，并为<b>全部 27 个度量值补充了 <code>///</code> 文档注释</b>。剩余问题集中在「比计划」口径一致性与映射硬编码等可维护性方面。</p>
   </section>
 
   <section class="card">
@@ -126,7 +126,7 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
         <tr><td><code>L1-KFM日报</code></td><td>事实表（日报）</td><td>17</td><td>SAP BW <code>ZRPP_CP006_Q0001</code></td><td>日粒度生产指标，起点 2026-01；含「指标名称」「产品分类」</td></tr>
         <tr><td><code>日报指标映射</code></td><td>映射表</td><td>6</td><td>Excel「指标映射.xlsx」日报 Sheet</td><td>指标 → 类别/序号/环节</td></tr>
         <tr><td><code>月报指标映射</code></td><td>映射表</td><td>7</td><td>Excel「指标映射.xlsx」月报 Sheet</td><td>指标 → 类别/序号/环节（含「指标类别」）</td></tr>
-        <tr><td><code>度量值</code></td><td>度量值表</td><td>—</td><td>—</td><td>27 个度量值（月报 9 / 日报 7 / 辅助 7 / 新口径 4）</td></tr>
+        <tr><td><code>度量值</code></td><td>度量值表</td><td>—</td><td>—</td><td>27 个度量值（月报 9 / 日报 7 / 辅助 7 / 新口径 4），全部带 <code>///</code> 注释</td></tr>
       </tbody>
     </table>
     </div>
@@ -160,8 +160,8 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
     <div class="flow">
       <div class="step"><span class="arrow">①</span><span class="t">连接 SAP BW 立方体 <code>ZRPP_CP006</code>（参数化），取查询 <code>Q0002</code>，按月循环取数，展开 8 维度 + 15 度量列</span></div>
       <div class="step"><span class="arrow">②</span><span class="t">左连接 <code>月报指标映射</code>（键 <code>指标项</code>），补齐 类别/序号/总类别/环节序号/指标类别，剔除未匹配行</span></div>
-      <div class="step"><span class="arrow">③</span><span class="t">派生 <code>二级指标</code>：序号 ∈ {1004,1012,1013,1014,1015} 按 序号×产品分类 细分；派生 <code>排序</code></span></div>
-      <div class="step"><span class="arrow">④</span><span class="t">计算 <code>最近月份</code>（实际数非 null 且非 0 的最大月份）、<code>日期</code>、<code>月份-筛选器</code></span></div>
+      <div class="step"><span class="arrow">③</span><span class="t">派生 <code>二级指标</code>：序号 ∈ {1004,1012,1013,1014,1015} 按 序号×产品分类 细分；派生 <code>排序</code>（同集合）</span></div>
+      <div class="step"><span class="arrow">④</span><span class="t">计算 <code>最近月份</code>、<code>日期</code>、<code>月份-筛选器</code></span></div>
       <div class="step"><span class="arrow">⑤</span><span class="t">保留最终 19 列 + 类型转换（序号/环节序号/排序 int64）</span></div>
     </div>
 
@@ -170,13 +170,13 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
       <div class="step"><span class="arrow">①</span><span class="t">连接同一立方体，取查询 <code>Q0001</code>，按月循环取数，展开 9 维度 + 4 度量列</span></div>
       <div class="step"><span class="arrow">②</span><span class="t">派生 <code>指标名</code>：16 条 if-else 规则映射报表口径名</span></div>
       <div class="step"><span class="arrow">③</span><span class="t">左连接 <code>日报指标映射</code>，派生 <code>二级指标</code>（序号 2/3/4/5 按 序号×产品分类 细分）与 <code>排序</code>、<code>地域</code></span></div>
-      <div class="step"><span class="arrow">④</span><span class="t">日期派生：<code>标准日期</code>、<code>上月年月编码</code>、「日期筛选器」（按原矿处理量最大标准日期标记）</span></div>
+      <div class="step"><span class="arrow">④</span><span class="t">日期派生：<code>标准日期</code>、<code>上月年月编码</code>、「日期筛选器」</span></div>
       <div class="step"><span class="arrow">⑤</span><span class="t">内联两个中间表（全年预算数、累计实际数，均 <code>List.Max</code>）join 回来</span></div>
-      <div class="step"><span class="arrow">⑥</span><span class="t">收列：保留最终 17 列（含「指标名称」「产品分类」），类型 int64</span></div>
+      <div class="step"><span class="arrow">⑥</span><span class="t">收列：保留最终 17 列，类型 int64</span></div>
     </div>
 
     <h3>映射表</h3>
-    <p>两张映射表从 SharePoint 站点读取 <code>指标映射.xlsx</code> 的「日报」「月报」Sheet。月报映射现含 <code>指标类别</code> 列（7 列），供月报事实表 join 带入。</p>
+    <p>两张映射表从 SharePoint 站点读取 <code>指标映射.xlsx</code> 的「日报」「月报」Sheet。月报映射含 <code>指标类别</code> 列（7 列）。</p>
   </section>
 
   <section class="card">
@@ -227,10 +227,10 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
     <div class="tbl-wrap"><table>
       <thead><tr><th>度量值</th><th>公式</th></tr></thead>
       <tbody>
-        <tr><td><code>v钴入矿品位_新口径</code></td><td><code>DIVIDE(累计入磨金属量[钴], 累计原矿处理量)</code>，VAR 内联 CALCULATE</td></tr>
-        <tr><td><code>v铜入矿品位_新口径</code></td><td><code>DIVIDE(累计入磨金属量[铜], 累计原矿处理量)</code>，VAR 内联 CALCULATE</td></tr>
-        <tr><td><code>v_铜回收率_新口径</code></td><td>加权浸出率 × 加权洗涤效率 × <code>0.995</code>；分子 = 矿产品产量 × 浸出率/100（MTD+YTD 合并加权）</td></tr>
-        <tr><td><code>v_钴回收率_新口径</code></td><td>同铜回收率（钴指标，CCD 洗涤效率），系数 <code>0.98</code></td></tr>
+        <tr><td><code>钴入矿品位_新口径</code></td><td><code>DIVIDE(累计入磨金属量[钴], 累计原矿处理量)</code>，VAR 内联 CALCULATE</td></tr>
+        <tr><td><code>铜入矿品位_新口径</code></td><td><code>DIVIDE(累计入磨金属量[铜], 累计原矿处理量)</code>，VAR 内联 CALCULATE</td></tr>
+        <tr><td><code>铜回收率_新口径</code></td><td>加权浸出率 × 加权洗涤效率 × <code>0.995</code>；分子 = 矿产品产量 × 浸出率/100（MTD+YTD 合并加权）</td></tr>
+        <tr><td><code>钴回收率_新口径</code></td><td>同铜回收率（钴指标，CCD 洗涤效率），系数 <code>0.98</code></td></tr>
       </tbody>
     </table></div>
 
@@ -240,64 +240,20 @@ pre code{background:none; border:none; padding:0; font-size:inherit}
 
   <section class="card">
     <h2>问题清单</h2>
-    <p class="sub" style="color:var(--muted);font-size:13.5px">按影响程度分级：<span class="badge crit">严重</span> 会导致刷新失败或数据错误；<span class="badge warn">中等</span> 逻辑可疑或口径不一致；<span class="badge info">轻微</span> 可维护性问题。</p>
-
-    <div class="issue crit">
-      <h4><span class="badge crit">严重</span><code>v_钴回收率_新口径</code> 的 RETURN 返回调试中间变量</h4>
-      <div class="loc">度量值.tmdl — v_钴回收率_新口径</div>
-      <p>度量值末尾 <code>RETURN</code> 返回的是 <code>v_WashRate_MTD</code>（当月洗涤效率），而正确的最终回收率表达式被注释掉了：</p>
-      <pre><code>RETURN
-    // IF(NOT ISBLANK(v_TotalOreCoMetal) &amp;&amp; v_TotalOreCoMetal &gt; 0, v_CoFinalRecovery, BLANK())
-v_WashRate_MTD</code></pre>
-      <p><span class="tag">影响</span> 钴回收率度量值返回的是中间量「当月洗涤效率」而非最终回收率，报表数据错误。</p>
-      <p><span class="tag">建议</span> 取消注释，改回 <code>IF(NOT ISBLANK(v_TotalOreCoMetal) &amp;&amp; v_TotalOreCoMetal &gt; 0, v_CoFinalRecovery, BLANK())</code>。</p>
-    </div>
-
-    <div class="issue crit">
-      <h4><span class="badge crit">严重</span><code>年累计完成L1</code> 的 SWITCH 兜底分支仍有 VAR 内联语法错误</h4>
-      <div class="loc">度量值.tmdl — 年累计完成L1</div>
-      <p><code>SWITCH(TRUE(), …)</code> 的最后一个参数（else）内联了 <code>VAR … RETURN …</code>，DAX 不允许 VAR 出现在函数参数位置：</p>
-      <pre><code>SWITCH(
-    TRUE(),
-    SELECTEDVALUE(…) = "原矿钴品位TCo", CALCULATE(…),
-    SELECTEDVALUE(…) = "原矿铜品位TCu", CALCULATE(…),
-    SELECTEDVALUE(…) = "铜选冶综合回收率TCu", CALCULATE(…),
-    SELECTEDVALUE(…) = "钴选冶综合回收率TCo", CALCULATE(…),
-    SELECTEDVALUE(…) = "其他指标", BLANK(),
-    VAR MonthAccActual = SUM(…)      // ← 非法
-    VAR YearToPreMonthAccActual = SUM(…)
-    RETURN MonthAccActual + YearToPreMonthAccActual
-)</code></pre>
-      <p><span class="tag">影响</span> 度量值无法通过语义校验，引用它的视觉对象报错。</p>
-      <p><span class="tag">建议</span> 把 <code>VAR MonthAccActual / YearToPreMonthAccActual</code> 提到 <code>SWITCH</code> 之前，SWITCH 内仅引用变量名。</p>
-    </div>
-
-    <div class="issue warn">
-      <h4><span class="badge warn">中等</span>月报「二级指标」与「排序」的序号集合不一致</h4>
-      <div class="loc">KFM选冶厂月报.tmdl — 添加二级指标 / 添加排序键</div>
-      <p>二级指标用 <code>{1004, 1012, 1013, 1014, 1015}</code>，但排序键用 <code>{1005, 1013, 1014, 1015, 1016}</code>（整体 +1），两个集合不匹配。</p>
-      <p><span class="tag">影响</span> 序号 = 1004 的行不进入排序键分支，铜/钴次序恒为 0，采出品位铜钴无法按序排列。</p>
-      <p><span class="tag">建议</span> 统一两处序号集合（应同为 <code>{1004, 1012, 1013, 1014, 1015}</code>），或核对映射表实际序号。</p>
-    </div>
-
-    <div class="issue warn">
-      <h4><span class="badge warn">中等</span>日报「二级指标」序号 = 2 存在复制粘贴错误</h4>
-      <div class="loc">L1-KFM日报.tmdl — 添加二级指标 步骤</div>
-      <p>序号 = 2 的两个分支条件相同：<code>[产品分类]="全钴TCo" → "出矿品位TCo"</code> 后紧接 <code>[产品分类]="全钴TCo" → "出矿品位TCu"</code>，第二条应为 <code>"全铜TCu"</code>。</p>
-      <p><span class="tag">影响</span> 序号 = 2 的全铜 TCu 行命中不到「出矿品位TCu」，落到 <code>else [类别]</code>。</p>
-      <p><span class="tag">建议</span> 第二个分支条件改为 <code>[产品分类]="全铜TCu"</code>。</p>
-    </div>
+    <p class="sub" style="color:var(--muted);font-size:13.5px">按影响程度分级：<span class="badge crit">严重</span> 会导致刷新失败或数据错误；<span class="badge warn">中等</span> 逻辑可疑或口径不一致；<span class="badge info">轻微</span> 可维护性问题。历史已修复问题见文末「已完成的改进」。</p>
 
     <div class="issue warn">
       <h4><span class="badge warn">中等</span>模型未定义任何关系</h4>
       <div class="loc">model.tmdl — 仅有 ref table，无 relationship</div>
-      <p>扁平化设计的刻意选择，但跨表筛选不传播、映射表成「孤岛」，需团队明确约定；未来若需切片器需重构星型。</p>
+      <p>5 张表之间零关系，是「扁平化」设计的刻意选择（映射列已物化进事实表），本身可行，但代价是：跨表筛选不传播、映射表成为「孤岛」、无法作为独立切片维度。</p>
+      <p><span class="tag">建议</span> 保留现状需团队明确约定；若未来需要映射表做切片器或统一筛选，需重构为星型关系。</p>
     </div>
 
     <div class="issue warn">
       <h4><span class="badge warn">中等</span>月报与日报的「比计划」口径不一致</h4>
       <div class="loc">度量值.tmdl — 月比计划 vs 月比计划L1</div>
-      <p>月报 <code>%</code> 单位算比率，日报 <code>%</code> 单位算差额（百分点差），同类指标两表口径不同。</p>
+      <p>月报 <code>月比计划 = DIVIDE([月完成],[月计划])</code>，对 <code>%</code> 单位也直接算比率；日报 <code>月比计划L1</code> 则对 <code>%</code> 单位返回<b>差额</b>（百分点差）。</p>
+      <p><span class="tag">建议</span> 明确业务口径并统一；若确实月报要比率、日报要差额，需在文档中注明并避免混用。</p>
     </div>
 
     <div class="issue info">
@@ -307,9 +263,10 @@ v_WashRate_MTD</code></pre>
     </div>
 
     <div class="issue info">
-      <h4><span class="badge info">轻微</span>新口径度量值命名带草稿标记</h4>
+      <h4><span class="badge info">轻微</span>新口径度量值仍带 <code>_新口径</code> 后缀</h4>
       <div class="loc">度量值.tmdl — 01新口径 显示文件夹</div>
-      <p><code>v</code>/<code>v_</code> 前缀与 <code>_新口径</code> 后缀并存，下划线位置不统一（<code>v钴</code> vs <code>v_铜</code>），暗示过渡状态。</p>
+      <p>度量值已去掉 <code>v</code>/<code>v_</code> 前缀，但仍保留 <code>_新口径</code> 后缀（钴/铜入矿品位、钴/铜回收率），暗示口径尚未最终定稿。</p>
+      <p><span class="tag">建议</span> 口径稳定后移除 <code>_新口径</code> 后缀，直接命名为「钴/铜入矿品位」「钴/铜回收率」。</p>
     </div>
   </section>
 
@@ -319,22 +276,22 @@ v_WashRate_MTD</code></pre>
     <div class="note" style="background:var(--info-soft)"><b style="color:var(--info)">已完成的改进：</b>
       <ul style="margin:8px 0 0">
         <li>映射表数据源改 <code>SharePoint.Files</code>，并按 Sheet 名称取数（消除行索引钻取）。</li>
-        <li>SAP BW 服务器/系统编号/客户端ID 参数化，本轮切换至新服务器 <code>10.43.11.32</code> / 系统 <code>00</code>、新 SharePoint 站点。</li>
-        <li>「类别2」统一改名「二级指标」，月报序号体系调整为 1004/1012/1013/1014/1015。</li>
+        <li>SAP BW 服务器/系统编号/客户端ID 参数化，切换至新服务器 <code>10.43.11.32</code> / 系统 <code>00</code>、新 SharePoint 站点。</li>
+        <li>「类别2」统一改名「二级指标」，月报序号体系调整为 1004/1012/1013/1014/1015，二级指标与排序键集合已统一。</li>
         <li>月报指标映射补齐「指标类别」列声明（6→7 列）。</li>
-        <li>「年累计完成L1_v2」并入「年累计完成L1」，删除旧版重复度量值。</li>
+        <li>「年累计完成L1_v2」并入「年累计完成L1」，删除旧版重复度量值；度量值去掉 <code>v</code>/<code>v_</code> 草稿前缀。</li>
         <li>回收率改为新口径：矿产品产量 × 浸出率 / CCD 洗涤效率反推，加权后乘修正系数；品位 ×100。</li>
         <li>品位/回收率筛选由 <code>ALL</code> 改为 <code>ALLEXCEPT(…[日期筛选器])</code>，保留日期切片。</li>
-        <li>序号/环节序号/排序 类型统一 int64。</li>
+        <li><b>修复 4 处缺陷</b>：钴回收率 <code>RETURN</code> 返回调试变量、<code>年累计完成L1</code> 的 SWITCH 兜底 VAR 内联语法错误、月报排序键序号集合不一致、日报「二级指标」序号=2 复制粘贴。</li>
+        <li><b>全部 27 个度量值补充 <code>///</code> 文档注释</b>（映射到 description，便于维护与 AI 理解）。</li>
       </ul>
     </div>
-    <div class="note"><b>值得保留的设计：</b> 兼容级别 1702 + DAX UDF 动态格式；「月份-筛选器」文本标记 + <code>SameMonthPriorYear</code> 解析；排序键「序号×10 + 铜钴次序」；月报起点留 2025 全年支持去年同期；回收率含修正系数。</div>
+    <div class="note"><b>值得保留的设计：</b> 兼容级别 1702 + DAX UDF 动态格式；「月份-筛选器」文本标记 + <code>SameMonthPriorYear</code> 解析；排序键「序号×10 + 铜钴次序」；月报起点留 2025 全年支持去年同期；回收率含修正系数；度量值注释完整。</div>
     <h3>优先处理顺序</h3>
     <div class="flow">
-      <div class="step"><span class="arrow">1</span><span class="t"><b>修复 <code>v_钴回收率_新口径</code> RETURN</b>（严重）——取消注释，返回最终回收率而非 <code>v_WashRate_MTD</code>。</span></div>
-      <div class="step"><span class="arrow">2</span><span class="t"><b>修复 <code>年累计完成L1</code> SWITCH else 语法错误</b>（严重）——VAR 提到 SWITCH 之前。</span></div>
-      <div class="step"><span class="arrow">3</span><span class="t"><b>统一月报序号集合</b>（中等）——二级指标与排序键集合应一致。</span></div>
-      <div class="step"><span class="arrow">4</span><span class="t"><b>修复日报「二级指标」序号=2 复制粘贴</b>（中等）——全铜分支条件改「全铜TCu」。</span></div>
+      <div class="step"><span class="arrow">1</span><span class="t"><b>核实「比计划」口径</b>（中等）——确认月报比率 vs 日报差额的业务语义，避免混排不一致。</span></div>
+      <div class="step"><span class="arrow">2</span><span class="t"><b>指标映射规则外置</b>（轻微）——把 if-else 规则移入映射表，M 只做 join。</span></div>
+      <div class="step"><span class="arrow">3</span><span class="t"><b>新口径度量值命名定稿</b>（轻微）——稳定后移除 <code>_新口径</code> 后缀。</span></div>
     </div>
   </section>
 

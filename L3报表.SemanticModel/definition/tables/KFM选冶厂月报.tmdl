@@ -266,7 +266,7 @@ table KFM选冶厂月报
 				    添加排序键 = Table.AddColumn(添加类别2, "排序", each
 				        let
 				            主序 = [序号],
-				            次序 = if List.Contains({1005, 1013, 1014, 1015, 1016}, [序号]) then
+				            次序 = if List.Contains({1004, 1012, 1013, 1014, 1015}, [序号]) then
 				                if [产品分类] = "全铜TCu" then 0
 				                else if [产品分类] = "全钴TCo" then 1
 				                else 0

@@ -1368,32 +1368,6 @@ cultureInfo zh-CN
 			        }
 			      ]
 			    },
-			    "度量值.年累计完成L1": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "度量值",
-			          "ConceptualProperty": "年累计完成L1"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "年累计完成L1": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "年累计完成": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
-			        }
-			      ]
-			    },
 			    "度量值.entity__年累计完成L1_FormatString": {
 			      "Definition": {
 			        "Binding": {

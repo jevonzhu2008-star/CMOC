@@ -58,7 +58,7 @@
               },
               "queryRef": "L1-KFM日报.单位",
               "nativeQueryRef": "单位",
-              "active": true
+              "active": false
             }
           ]
         },
@@ -149,23 +149,8 @@
                   "Property": "年累计完成L1"
                 }
               },
-              "queryRef": "度量值.年累计完成L1",
-              "nativeQueryRef": "年累计完成",
-              "displayName": "年累计完成"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "年累计完成L1_v2"
-                }
-              },
               "queryRef": "度量值.年累计完成L1_v2",
-              "nativeQueryRef": "年累计完成L1_v2"
+              "nativeQueryRef": "年累计完成L1"
             },
             {
               "field": {
@@ -215,6 +200,35 @@
         }
       }
     },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "L1-KFM日报.地域"
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "L1-KFM日报.二级指标"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "L1-KFM日报.单位"
+            ],
+            "isCollapsed": true
+          }
+        ],
+        "root": {}
+      }
+    ],
     "objects": {
       "columnHeaders": [
         {
@@ -1398,6 +1412,96 @@
             }
           ]
         }
+      },
+      {
+        "name": "9ce7beb380451e3a92a8",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "L1-KFM日报"
+              }
+            },
+            "Property": "二级指标"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "53d7eded2f29da068e80",
+        "ordinal": 7,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "度量值"
+              }
+            },
+            "Property": "月计划L1"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fac8778b2c8eaf0d8bf0",
+        "ordinal": 8,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "度量值"
+              }
+            },
+            "Property": "月比计划L1"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5f7ea1c60510b0c5d08b",
+        "ordinal": 9,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "度量值"
+              }
+            },
+            "Property": "."
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e7469819cad74ab25699",
+        "ordinal": 10,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "度量值"
+              }
+            },
+            "Property": "年计划L1"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6fd02b7a9b65b5350a5e",
+        "ordinal": 11,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "度量值"
+              }
+            },
+            "Property": "年比计划L1"
+          }
+        },
+        "type": "Advanced"
       }
     ],
     "filterSortOrder": "Custom"

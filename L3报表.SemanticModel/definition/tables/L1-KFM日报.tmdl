@@ -295,7 +295,5 @@ table L1-KFM日报
 				in
 				    已更改列类型
 
-	changedProperty = Name
-
 	annotation PBI_ResultType = Table
 

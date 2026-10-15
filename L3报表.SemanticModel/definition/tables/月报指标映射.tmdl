@@ -51,6 +51,14 @@ table 月报指标映射
 
 		annotation SummarizationSetBy = Automatic
 
+	column 指标类别
+		dataType: string
+		lineageTag: 735a904a-0632-4971-b866-1fc66523caca
+		summarizeBy: none
+		sourceColumn: 指标类别
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 月报指标映射 = m
 		mode: import
 		source =

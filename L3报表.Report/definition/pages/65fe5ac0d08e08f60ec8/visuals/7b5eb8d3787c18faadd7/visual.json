@@ -13,27 +13,50 @@
     "visualType": "pivotTable",
     "query": {
       "queryState": {
-        "Rows": {
+        "Values": {
           "projections": [
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "L1-KFM日报"
+                      "Entity": "度量值"
                     }
                   },
-                  "Property": "地域"
+                  "Property": "v_钴回收率_新口径"
                 }
               },
-              "queryRef": "L1-KFM日报.地域",
-              "nativeQueryRef": "地域",
-              "active": true
-            }
-          ]
-        },
-        "Values": {
-          "projections": [
+              "queryRef": "度量值.v_钴回收率_新口径",
+              "nativeQueryRef": "v_钴回收率_新口径"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "度量值"
+                    }
+                  },
+                  "Property": "v_铜回收率_新口径"
+                }
+              },
+              "queryRef": "度量值.v_铜回收率_新口径",
+              "nativeQueryRef": "v_铜回收率_新口径"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "度量值"
+                    }
+                  },
+                  "Property": "v钴入矿品位_新口径"
+                }
+              },
+              "queryRef": "度量值.v钴入矿品位_新口径",
+              "nativeQueryRef": "v钴入矿品位_新口径"
+            },
             {
               "field": {
                 "Measure": {
@@ -45,22 +68,8 @@
                   "Property": "v铜入矿品位_新口径"
                 }
               },
-              "queryRef": "度量值.v年累计全铜TCu入矿品位",
+              "queryRef": "度量值.v铜入矿品位_新口径",
               "nativeQueryRef": "v铜入矿品位_新口径"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "度量值"
-                    }
-                  },
-                  "Property": "v铜回收率_新口径"
-                }
-              },
-              "queryRef": "度量值.v铜回收率_新口径",
-              "nativeQueryRef": "v铜回收率_新口径"
             }
           ]
         }
@@ -501,22 +510,6 @@
             }
           }
         }
-      ],
-      "columnWidth": [
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "82.12900805912157D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "L1-KFM日报.地域"
-          }
-        }
       ]
     },
     "visualContainerObjects": {
@@ -730,7 +723,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "902083b41c18a2d2e419",
+        "name": "732cd7c0aa41f6539b7d",
         "ordinal": 0,
         "field": {
           "Measure": {
@@ -739,14 +732,13 @@
                 "Entity": "度量值"
               }
             },
-            "Property": "日完成"
+            "Property": "v_铜回收率_新口径"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
-        "name": "8e0e19e6ae4ec64e1df7",
+        "name": "61d02253519f49b5cd0b",
         "ordinal": 1,
         "field": {
           "Measure": {
@@ -755,119 +747,38 @@
                 "Entity": "度量值"
               }
             },
-            "Property": "月累计"
+            "Property": "v_钴回收率_新口径"
           }
         },
-        "type": "Advanced",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
-        "name": "f0165debddf543e47f69",
-        "ordinal": 2,
+        "name": "23cb2b500a9d3fde3bd6",
         "field": {
-          "Column": {
+          "Measure": {
             "Expression": {
               "SourceRef": {
-                "Entity": "L1-KFM日报"
+                "Entity": "度量值"
               }
             },
-            "Property": "单位"
+            "Property": "v钴入矿品位_新口径"
           }
         },
-        "type": "Categorical",
-        "howCreated": "User"
+        "type": "Advanced"
       },
       {
-        "name": "d525e613fe535dd2a1e9",
-        "ordinal": 3,
+        "name": "51c44abc44eb1352c82a",
         "field": {
-          "Column": {
+          "Measure": {
             "Expression": {
               "SourceRef": {
-                "Entity": "L1-KFM日报"
+                "Entity": "度量值"
               }
             },
-            "Property": "地域"
+            "Property": "v铜入矿品位_新口径"
           }
         },
-        "type": "Categorical"
-      },
-      {
-        "name": "5d2443d4f57f36ac38a4",
-        "ordinal": 4,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "L1-KFM日报"
-              }
-            },
-            "Property": "类别2"
-          }
-        },
-        "type": "Categorical",
-        "howCreated": "User"
-      },
-      {
-        "name": "7835d23ed449a5d752ce",
-        "ordinal": 5,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "L1-KFM日报"
-              }
-            },
-            "Property": "序号"
-          }
-        },
-        "type": "Advanced",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "l",
-              "Entity": "L1-KFM日报",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "Not": {
-                  "Expression": {
-                    "Comparison": {
-                      "ComparisonKind": 0,
-                      "Left": {
-                        "Column": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Source": "l"
-                            }
-                          },
-                          "Property": "序号"
-                        }
-                      },
-                      "Right": {
-                        "Literal": {
-                          "Value": "3L"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
-        "howCreated": "User",
-        "objects": {
-          "general": [
-            {
-              "properties": {}
-            }
-          ]
-        }
+        "type": "Advanced"
       }
     ],
     "filterSortOrder": "Custom"

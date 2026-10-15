@@ -14,7 +14,7 @@ expression p_日报起始日期 = #date(2026, 1, 1) meta [IsParameterQuery = tru
 
 expression 服务器 =
 		let
-		    源 = "10.43.13.31" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type text]
+		    源 = "10.43.11.32" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type text]
 		in
 		    源
 	lineageTag: 3d1c1810-0927-4b08-91ce-2fd791266ab7
@@ -22,7 +22,7 @@ expression 服务器 =
 
 	annotation PBI_ResultType = Text
 
-expression 系统编号 = "01" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type text]
+expression 系统编号 = "00" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type text]
 	lineageTag: ccc630c4-3332-4432-9740-ec4ea8a87f4e
 	queryGroup: 参数
 
@@ -34,7 +34,7 @@ expression 客户端ID = "100" meta [IsParameterQuery = true, IsParameterQueryRe
 
 	annotation PBI_ResultType = Text
 
-expression SharePoint站点 = "https://xsyzz.sharepoint.com/sites/CMOCGroup/" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type text]
+expression SharePoint站点 = "https://cmocco.sharepoint.com/teams/PBI/" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type text]
 	lineageTag: f1eed767-a705-433e-8198-a945562adb00
 	queryGroup: 参数
 

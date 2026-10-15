@@ -1413,6 +1413,66 @@
             "Property": "总类别"
           }
         },
+        "type": "Categorical"
+      },
+      {
+        "name": "6780053caf1309ba39f2",
+        "ordinal": 10,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KFM选冶厂月报"
+              }
+            },
+            "Property": "单位"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "67125995d7ddeaa0d7ee",
+        "ordinal": 11,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "度量值"
+              }
+            },
+            "Property": "."
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d18a85e428393f4dac33",
+        "ordinal": 12,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KFM选冶厂月报"
+              }
+            },
+            "Property": "二级指标"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "813213a76c3f0934686a",
+        "ordinal": 13,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KFM选冶厂月报"
+              }
+            },
+            "Property": "指标类别"
+          }
+        },
         "type": "Categorical",
         "filter": {
           "Version": 2,
@@ -1435,7 +1495,7 @@
                             "Source": "k"
                           }
                         },
-                        "Property": "总类别"
+                        "Property": "指标类别"
                       }
                     }
                   ],
@@ -1452,53 +1512,8 @@
               }
             }
           ]
-        }
-      },
-      {
-        "name": "05a50433da93a5896b54",
-        "ordinal": 10,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "KFM选冶厂月报"
-              }
-            },
-            "Property": "类别2"
-          }
         },
-        "type": "Categorical",
         "howCreated": "User"
-      },
-      {
-        "name": "6780053caf1309ba39f2",
-        "ordinal": 11,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "KFM选冶厂月报"
-              }
-            },
-            "Property": "单位"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "67125995d7ddeaa0d7ee",
-        "ordinal": 12,
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "度量值"
-              }
-            },
-            "Property": "."
-          }
-        },
-        "type": "Advanced"
       }
     ],
     "filterSortOrder": "Custom"

@@ -245,19 +245,19 @@ table KFM选冶厂月报
 				    // 剔除未匹配到映射的行
 				    剔除未匹配行 = Table.SelectRows(展开指标映射, each [序号] <> null),
 				
-				    // 二级指标：序号 ∈ {5,13,14,15,16} 按 类别+产品分类 细分，其余沿用原类别
+				    // 二级指标：序号 ∈ {1004, 1012, 1013, 1014, 1015} 按 类别+产品分类 细分，其余沿用原类别
 				    添加类别2 = Table.AddColumn(剔除未匹配行, "二级指标", each
-				        if List.Contains({5, 13, 14, 15, 16}, [序号]) then
-				                 if [序号] = 5  and [产品分类] = "全铜TCu" then "采出全铜品位"
-				            else if [序号] = 5  and [产品分类] = "全钴TCo" then "采出全钴品位"
-				            else if [序号] = 13 and [产品分类] = "全铜TCu" then "入选铜品位"
-				            else if [序号] = 13 and [产品分类] = "全钴TCo" then "入选钴品位"
-				            else if [序号] = 14 and [产品分类] = "全铜TCu" then "浸出率TCu"
-				            else if [序号] = 14 and [产品分类] = "全钴TCo" then "浸出率TCo"
-				            else if [序号] = 15 and [产品分类] = "全铜TCu" then "全铜回收率"
-				            else if [序号] = 15 and [产品分类] = "全钴TCo" then "全钴回收率"
-				            else if [序号] = 16 and [产品分类] = "全铜TCu" then "阴极铜"
-				            else if [序号] = 16 and [产品分类] = "全钴TCo" then "氢氧化钴含钴"
+				        if List.Contains({1004, 1012, 1013, 1014, 1015}, [序号]) then
+				                 if [序号] = 1004  and [产品分类] = "全铜TCu" then "采出全铜品位"
+				            else if [序号] = 1004  and [产品分类] = "全钴TCo" then "采出全钴品位"
+				            else if [序号] = 1012 and [产品分类] = "全铜TCu" then "入选铜品位"
+				            else if [序号] = 1012 and [产品分类] = "全钴TCo" then "入选钴品位"
+				            else if [序号] = 1013 and [产品分类] = "全铜TCu" then "浸出率TCu"
+				            else if [序号] = 1013 and [产品分类] = "全钴TCo" then "浸出率TCo"
+				            else if [序号] = 1014 and [产品分类] = "全铜TCu" then "全铜回收率"
+				            else if [序号] = 1014 and [产品分类] = "全钴TCo" then "全钴回收率"
+				            else if [序号] = 1015 and [产品分类] = "全铜TCu" then "阴极铜"
+				            else if [序号] = 1015 and [产品分类] = "全钴TCo" then "氢氧化钴含钴"
 				            else null
 				        else [类别]
 				    ),
@@ -266,7 +266,7 @@ table KFM选冶厂月报
 				    添加排序键 = Table.AddColumn(添加类别2, "排序", each
 				        let
 				            主序 = [序号],
-				            次序 = if List.Contains({5, 13, 14, 15, 16}, [序号]) then
+				            次序 = if List.Contains({1005, 1013, 1014, 1015, 1016}, [序号]) then
 				                if [产品分类] = "全铜TCu" then 0
 				                else if [产品分类] = "全钴TCo" then 1
 				                else 0

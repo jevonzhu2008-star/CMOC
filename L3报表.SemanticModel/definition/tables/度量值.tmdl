@@ -250,25 +250,6 @@ table 度量值
 
 		formatStringDefinition = FormatAmount()
 
-	measure 年累计完成L1 = ```
-			
-			// 年累计完成 = 累计实际数 + 当月累计实际数
-			VAR MonthAccActual = SUM('L1-KFM日报'[当月累计实际数])
-			VAR YearToPreMonthAccActual = SUM('L1-KFM日报'[累计实际数])
-			VAR Res = 
-			    IF(
-			        SELECTEDVALUE('L1-KFM日报'[总类别]) = "其他指标" ,
-			        BLANK(),
-			        MonthAccActual + YearToPreMonthAccActual
-			    )
-			RETURN
-			    Res
-			```
-		displayFolder: 03日报
-		lineageTag: 2a066569-aebe-402d-acd9-9c839cad1879
-
-		formatStringDefinition = FormatAmount()
-
 	measure 年比计划L1 = ```
 			
 			 // 比率单位（%）→ 差额（百分点差）；数量单位 → 比率
@@ -286,11 +267,25 @@ table 度量值
 	measure v钴入矿品位_新口径 = ```
 			
 			VAR v_CobaltMetal =
-			    CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称] = "入磨金属量", 'L1-KFM日报'[产品分类] = "全钴TCo") +
-			    CALCULATE(SUM('L1-KFM日报'[累计实际数]),       'L1-KFM日报'[指标名称] = "入磨金属量", 'L1-KFM日报'[产品分类] = "全钴TCo")
+			    CALCULATE(
+			        SUM('L1-KFM日报'[当月累计实际数]), 
+			        'L1-KFM日报'[指标名称] = "入磨金属量", 
+			        'L1-KFM日报'[产品分类] = "全钴TCo"
+			    ) +
+			    CALCULATE(
+			        SUM('L1-KFM日报'[累计实际数]),       
+			        'L1-KFM日报'[指标名称] = "入磨金属量", 
+			        'L1-KFM日报'[产品分类] = "全钴TCo"
+			    )
 			VAR v_RawOreTonnage =
-			    CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称] = "原矿处理量") +
-			    CALCULATE(SUM('L1-KFM日报'[累计实际数]),       'L1-KFM日报'[指标名称] = "原矿处理量")
+			    CALCULATE(
+			        SUM('L1-KFM日报'[当月累计实际数]), 
+			        'L1-KFM日报'[指标名称] = "原矿处理量"
+			    ) +
+			    CALCULATE(
+			        SUM('L1-KFM日报'[累计实际数]),       
+			        'L1-KFM日报'[指标名称] = "原矿处理量"
+			    )
 			RETURN
 			    DIVIDE(v_CobaltMetal, v_RawOreTonnage)
 			
@@ -303,11 +298,25 @@ table 度量值
 	measure v铜入矿品位_新口径 = ```
 			
 			VAR v_CopperMetal =
-			    CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称] = "入磨金属量", 'L1-KFM日报'[产品分类] = "全铜TCu") +
-			    CALCULATE(SUM('L1-KFM日报'[累计实际数]),       'L1-KFM日报'[指标名称] = "入磨金属量", 'L1-KFM日报'[产品分类] = "全铜TCu")
+			    CALCULATE(
+			        SUM('L1-KFM日报'[当月累计实际数]), 
+			        'L1-KFM日报'[指标名称] = "入磨金属量", 
+			        'L1-KFM日报'[产品分类] = "全铜TCu"
+			    ) +
+			    CALCULATE(
+			        SUM('L1-KFM日报'[累计实际数]),       
+			        'L1-KFM日报'[指标名称] = "入磨金属量", 
+			        'L1-KFM日报'[产品分类] = "全铜TCu"
+			    )
 			VAR v_RawOreTonnage =
-			    CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称] = "原矿处理量") +
-			    CALCULATE(SUM('L1-KFM日报'[累计实际数]),       'L1-KFM日报'[指标名称] = "原矿处理量")
+			    CALCULATE(
+			        SUM('L1-KFM日报'[当月累计实际数]), 
+			        'L1-KFM日报'[指标名称] = "原矿处理量"
+			    ) +
+			    CALCULATE(
+			        SUM('L1-KFM日报'[累计实际数]),       
+			        'L1-KFM日报'[指标名称] = "原矿处理量"
+			    )
 			RETURN
 			    DIVIDE(v_CopperMetal, v_RawOreTonnage)
 			
@@ -317,13 +326,12 @@ table 度量值
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 年累计完成L1_v2 = ```
+	measure 年累计完成L1 = ```
 			
-			// 路由逻辑：按二级指标区分指标口径
 			VAR Res =
 			    SWITCH(
 			        TRUE(),
-			        // 原矿钴品位TCo：清除L1-KFM日报表筛选，重新完整计算品位
+			        // 原矿钴品位TCo
 			        SELECTEDVALUE('L1-KFM日报'[二级指标]) = "原矿钴品位TCo",
 			        CALCULATE(
 			            VAR v_CobaltMetal =
@@ -333,11 +341,11 @@ table 度量值
 			                CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称] = "原矿处理量") +
 			                CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称] = "原矿处理量")
 			            RETURN
-			                DIVIDE(v_CobaltMetal, v_RawOreTonnage),
-			            ALL('L1-KFM日报')
+			                DIVIDE(v_CobaltMetal, v_RawOreTonnage)*100,
+			            ALLEXCEPT('L1-KFM日报','L1-KFM日报'[日期筛选器])
 			        ),
 			
-			        // 原矿铜品位TCu：清除L1-KFM日报表筛选，重新完整计算品位
+			        // 原矿铜品位TCu
 			        SELECTEDVALUE('L1-KFM日报'[二级指标]) = "原矿铜品位TCu",
 			        CALCULATE(
 			            VAR v_CopperMetal =
@@ -347,21 +355,132 @@ table 度量值
 			                CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称] = "原矿处理量") +
 			                CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称] = "原矿处理量")
 			            RETURN
-			                DIVIDE(v_CopperMetal, v_RawOreTonnage),
-			            ALL('L1-KFM日报')
+			                DIVIDE(v_CopperMetal, v_RawOreTonnage)*100,
+			            ALLEXCEPT('L1-KFM日报','L1-KFM日报'[日期筛选器])
 			        ),
 			
-			        // 【变量：当月累计实际数，取自当前筛选上下文】
-			        VAR MonthAccActual = SUM('L1-KFM日报'[当月累计实际数])
+			        // 铜选冶综合回收率TCu
+			        SELECTEDVALUE('L1-KFM日报'[二级指标]) = "铜选冶综合回收率TCu",
+			        CALCULATE(
+			            VAR v_OreCuMetal_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="矿产品产量(金属量)")
+			            VAR v_LeachRate_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数])/100, 'L1-KFM日报'[指标名称]="浸出率",'L1-KFM日报'[产品分类]="全铜TCu")
+			            VAR v_WashRate_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数])/100, 'L1-KFM日报'[指标名称]="CCD洗涤效率",'L1-KFM日报'[产品分类]="全铜TCu")
+			            VAR v_LeachRecMetal_MTD = v_OreCuMetal_MTD * v_LeachRate_MTD
+			            VAR v_WashRecMetal_MTD = v_OreCuMetal_MTD * v_WashRate_MTD
 			
-			        // 【变量：往年/前期累计实际数，取自当前筛选上下文】
+			            VAR v_OreCuMetal_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="矿产品产量(金属量)")
+			            VAR v_LeachRate_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数])/100, 'L1-KFM日报'[指标名称]="浸出率",'L1-KFM日报'[产品分类]="全铜TCu")
+			            VAR v_WashRate_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数])/100, 'L1-KFM日报'[指标名称]="CCD洗涤效率",'L1-KFM日报'[产品分类]="全铜TCu")
+			            VAR v_LeachRecMetal_YTD = v_OreCuMetal_YTD * v_LeachRate_YTD
+			            VAR v_WashRecMetal_YTD = v_OreCuMetal_YTD * v_WashRate_YTD
+			
+			            VAR v_TotalOreCuMetal = v_OreCuMetal_MTD + v_OreCuMetal_YTD
+			            VAR v_TotalLeachRecMetal = v_LeachRecMetal_MTD + v_LeachRecMetal_YTD
+			            VAR v_TotalWashRecMetal = v_WashRecMetal_MTD + v_WashRecMetal_YTD
+			
+			            VAR v_LeachRate_Weighted = DIVIDE(v_TotalLeachRecMetal, v_TotalOreCuMetal)
+			            VAR v_WashRate_Weighted = DIVIDE(v_TotalWashRecMetal, v_TotalOreCuMetal)
+			            VAR v_CuFinalRecovery = v_LeachRate_Weighted * v_WashRate_Weighted * 0.995 * 100
+			
+			            RETURN
+			                IF(NOT ISBLANK(v_TotalOreCuMetal) && v_TotalOreCuMetal > 0, v_CuFinalRecovery, BLANK()),
+			            ALLEXCEPT('L1-KFM日报','L1-KFM日报'[日期筛选器])
+			        ),
+			
+			        // 钴选冶综合回收率TCo
+			        SELECTEDVALUE('L1-KFM日报'[二级指标]) = "钴选冶综合回收率TCo",
+			        CALCULATE(
+			            VAR v_OreCoMetal_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="矿产品产量(金属量)")
+			            VAR v_LeachRate_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数])/100, 'L1-KFM日报'[指标名称]="浸出率",'L1-KFM日报'[产品分类]="全钴TCo")
+			            VAR v_WashRate_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数])/100, 'L1-KFM日报'[指标名称]="CCD洗涤效率",'L1-KFM日报'[产品分类]="全钴TCo")
+			            VAR v_LeachRecMetal_MTD = v_OreCoMetal_MTD * v_LeachRate_MTD
+			            VAR v_WashRecMetal_MTD = v_OreCoMetal_MTD * v_WashRate_MTD
+			
+			            VAR v_OreCoMetal_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="矿产品产量(金属量)")
+			            VAR v_LeachRate_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数])/100, 'L1-KFM日报'[指标名称]="浸出率",'L1-KFM日报'[产品分类]="全钴TCo")
+			            VAR v_WashRate_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数])/100, 'L1-KFM日报'[指标名称]="CCD洗涤效率",'L1-KFM日报'[产品分类]="全钴TCo")
+			            VAR v_LeachRecMetal_YTD = v_OreCoMetal_YTD * v_LeachRate_YTD
+			            VAR v_WashRecMetal_YTD = v_OreCoMetal_YTD * v_WashRate_YTD
+			
+			            VAR v_TotalOreCoMetal = v_OreCoMetal_MTD + v_OreCoMetal_YTD
+			            VAR v_TotalLeachRecMetal = v_LeachRecMetal_MTD + v_LeachRecMetal_YTD
+			            VAR v_TotalWashRecMetal = v_WashRecMetal_MTD + v_WashRecMetal_YTD
+			
+			            VAR v_LeachRate_Weighted = DIVIDE(v_TotalLeachRecMetal, v_TotalOreCoMetal)
+			            VAR v_WashRate_Weighted = DIVIDE(v_TotalWashRecMetal, v_TotalOreCoMetal)
+			            VAR v_CoFinalRecovery = v_LeachRate_Weighted * v_WashRate_Weighted * 0.98 * 100
+			
+			            RETURN
+			                IF(NOT ISBLANK(v_TotalOreCoMetal) && v_TotalOreCoMetal > 0, v_CoFinalRecovery, BLANK()),
+			            ALLEXCEPT('L1-KFM日报','L1-KFM日报'[日期筛选器])
+			        ),
+			
+			        // 兜底：其余二级指标，当月累计+前期累计
+			        SELECTEDVALUE('L1-KFM日报'[总类别]) = "其他指标" ,
+			        BLANK(),
+			        VAR MonthAccActual = SUM('L1-KFM日报'[当月累计实际数])
 			        VAR YearToPreMonthAccActual = SUM('L1-KFM日报'[累计实际数])
-			        
 			        RETURN
 			            MonthAccActual + YearToPreMonthAccActual
 			    )
 			RETURN
 			    Res
+			
+			
+			// 路由逻辑：按二级指标区分指标口径
+			// VAR Res =
+			//     SWITCH(
+			//         TRUE(),
+			//         // 原矿钴品位TCo
+			//         SELECTEDVALUE('L1-KFM日报'[二级指标]) = "原矿钴品位TCo",
+			//         CALCULATE(
+			//             VAR v_CobaltMetal =
+			//                 CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称] = "入磨金属量", 'L1-KFM日报'[产品分类] = "全钴TCo") +
+			//                 CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称] = "入磨金属量", 'L1-KFM日报'[产品分类] = "全钴TCo")
+			//             VAR v_RawOreTonnage =
+			//                 CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称] = "原矿处理量") +
+			//                 CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称] = "原矿处理量")
+			//             RETURN
+			//                 DIVIDE(v_CobaltMetal, v_RawOreTonnage),
+			//             ALLEXCEPT('L1-KFM日报','L1-KFM日报'[日期筛选器])
+			//         ),
+			
+			//         // 原矿铜品位TCu
+			//         SELECTEDVALUE('L1-KFM日报'[二级指标]) = "原矿铜品位TCu",
+			//         CALCULATE(
+			//             VAR v_CopperMetal =
+			//                 CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称] = "入磨金属量", 'L1-KFM日报'[产品分类] = "全铜TCu") +
+			//                 CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称] = "入磨金属量", 'L1-KFM日报'[产品分类] = "全铜TCu")
+			//             VAR v_RawOreTonnage =
+			//                 CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称] = "原矿处理量") +
+			//                 CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称] = "原矿处理量")
+			//             RETURN
+			//                 DIVIDE(v_CopperMetal, v_RawOreTonnage),
+			//             ALLEXCEPT('L1-KFM日报','L1-KFM日报'[日期筛选器])
+			//         ),
+			
+			//         // 铜选冶综合回收率TCu
+			//         SELECTEDVALUE('L1-KFM日报'[二级指标]) = "铜选冶综合回收率TCu",
+			//         CALCULATE(
+			//             [v_铜回收率_新口径],
+			//             ALLEXCEPT('L1-KFM日报','L1-KFM日报'[日期筛选器])
+			//         ),
+			
+			//         // 钴选冶综合回收率TCo
+			//         SELECTEDVALUE('L1-KFM日报'[二级指标]) = "钴选冶综合回收率TCo",
+			//         CALCULATE(
+			//            [v_钴回收率_新口径],
+			//             ALLEXCEPT('L1-KFM日报','L1-KFM日报'[日期筛选器])
+			//         ),
+			
+			//         // 兜底：其余二级指标，当月累计+前期累计
+			//         VAR MonthAccActual = SUM('L1-KFM日报'[当月累计实际数])
+			//         VAR YearToPreMonthAccActual = SUM('L1-KFM日报'[累计实际数])
+			//         RETURN
+			//             MonthAccActual + YearToPreMonthAccActual
+			//     )
+			// RETURN
+			//     Res
 			
 			```
 		displayFolder: 03日报
@@ -369,44 +488,33 @@ table 度量值
 
 		formatStringDefinition = FormatAmount()
 
-	measure v铜回收率_新口径 = ```
+	measure v_铜回收率_新口径 = ```
 			
-			-- 当月累计口径指标 MTD
-			VAR v_OreCuMetal_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="原矿铜金属量")
-			VAR v_LeachResidueQty_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="浸出渣量")
-			VAR v_ResidueCuGrade_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="渣铜品位")
-			VAR v_CCD7CuMetal_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="CCD7溶液铜金属量")
-			VAR v_TailingsReturnWaterCuMetal_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="尾矿回水铜金属量")
-			
-			-- 年度累计口径指标 YTD
-			VAR v_OreCuMetal_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="原矿铜金属量")
-			VAR v_LeachResidueQty_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="浸出渣量")
-			VAR v_ResidueCuGrade_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="渣铜品位")
-			VAR v_CCD7CuMetal_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="CCD7溶液铜金属量")
-			VAR v_TailingsReturnWaterCuMetal_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="尾矿回水铜金属量")
-			
-			-- ========= 核心：MTD + YTD 合并相加，代入整套回收率计算 =========
-			VAR v_OreCuMetal = v_OreCuMetal_MTD + v_OreCuMetal_YTD
-			VAR v_LeachResidueQty = v_LeachResidueQty_MTD + v_LeachResidueQty_YTD
-			VAR v_ResidueCuGrade = v_ResidueCuGrade_MTD + v_ResidueCuGrade_YTD
-			VAR v_CCD7CuMetal = v_CCD7CuMetal_MTD + v_CCD7CuMetal_YTD
-			VAR v_TailingsReturnWaterCuMetal = v_TailingsReturnWaterCuMetal_MTD + v_TailingsReturnWaterCuMetal_YTD
-			
-			-- 浸出回收率
-			VAR v_LeachRecovery =
-			    DIVIDE(
-			        v_OreCuMetal - (v_LeachResidueQty * v_ResidueCuGrade),
-			        v_OreCuMetal
-			    )
-			-- 洗涤回收率
-			VAR v_WashRecovery =
-			    DIVIDE(
-			        v_OreCuMetal - (v_CCD7CuMetal - v_TailingsReturnWaterCuMetal),
-			        v_OreCuMetal
-			    )
-			VAR v_TotalRecovery = v_LeachRecovery * v_WashRecovery * 0.995
+			-- ========== MTD 当月累计 ==========
+			VAR v_OreCuMetal_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="矿产品产量(金属量)")
+			VAR v_LeachRate_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数])/100, 'L1-KFM日报'[指标名称]="浸出率",'L1-KFM日报'[产品分类]="全铜TCu")
+			VAR v_WashRate_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数])/100, 'L1-KFM日报'[指标名称]="CCD洗涤效率",'L1-KFM日报'[产品分类]="全铜TCu")
+			-- MTD：反推回收金属分子
+			VAR v_LeachRecMetal_MTD = v_OreCuMetal_MTD * v_LeachRate_MTD
+			VAR v_WashRecMetal_MTD = v_OreCuMetal_MTD * v_WashRate_MTD
+			-- ========== YTD 年度累计 ==========
+			VAR v_OreCuMetal_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="矿产品产量(金属量)")
+			VAR v_LeachRate_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数])/100, 'L1-KFM日报'[指标名称]="浸出率",'L1-KFM日报'[产品分类]="全铜TCu")
+			VAR v_WashRate_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数])/100, 'L1-KFM日报'[指标名称]="CCD洗涤效率",'L1-KFM日报'[产品分类]="全铜TCu")
+			-- YTD：反推回收金属分子
+			VAR v_LeachRecMetal_YTD = v_OreCuMetal_YTD * v_LeachRate_YTD
+			VAR v_WashRecMetal_YTD = v_OreCuMetal_YTD * v_WashRate_YTD
+			-- ========== 合并：分子相加，分母相加 ==========
+			VAR v_TotalOreCuMetal = v_OreCuMetal_MTD + v_OreCuMetal_YTD
+			VAR v_TotalLeachRecMetal = v_LeachRecMetal_MTD + v_LeachRecMetal_YTD
+			VAR v_TotalWashRecMetal = v_WashRecMetal_MTD + v_WashRecMetal_YTD
+			-- 加权浸出率 & 加权洗涤效率
+			VAR v_LeachRate_Weighted = DIVIDE(v_TotalLeachRecMetal, v_TotalOreCuMetal)
+			VAR v_WashRate_Weighted = DIVIDE(v_TotalWashRecMetal, v_TotalOreCuMetal)
+			-- 铜最终回收率，系数0.995
+			VAR v_CuFinalRecovery = v_LeachRate_Weighted * v_WashRate_Weighted * 0.995
 			RETURN
-			    IF(NOT ISBLANK(v_OreCuMetal) && v_OreCuMetal > 0, v_TotalRecovery, BLANK())
+			    IF(NOT ISBLANK(v_TotalOreCuMetal) && v_TotalOreCuMetal > 0, v_CuFinalRecovery, BLANK())
 			
 			```
 		displayFolder: 01新口径
@@ -416,42 +524,32 @@ table 度量值
 
 	measure v_钴回收率_新口径 = ```
 			
-			-- 当月累计口径指标 MTD
-			VAR v_OreCoMetal_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="原矿钴金属量")
-			VAR v_LeachResidueQty_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="浸出渣量")
-			VAR v_ResidueCoGrade_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="渣钴品位")
-			VAR v_CCD7CoMetal_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="CCD7溶液钴金属量")
-			VAR v_TailingsReturnWaterCoMetal_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="尾矿回水钴金属量")
-			
-			-- 年度累计口径指标 YTD
-			VAR v_OreCoMetal_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="原矿钴金属量")
-			VAR v_LeachResidueQty_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="浸出渣量")
-			VAR v_ResidueCoGrade_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="渣钴品位")
-			VAR v_CCD7CoMetal_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="CCD7溶液钴金属量")
-			VAR v_TailingsReturnWaterCoMetal_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="尾矿回水钴金属量")
-			
-			-- MTD + YTD 合并相加代入公式
-			VAR v_OreCoMetal = v_OreCoMetal_MTD + v_OreCoMetal_YTD
-			VAR v_LeachResidueQty = v_LeachResidueQty_MTD + v_LeachResidueQty_YTD
-			VAR v_ResidueCoGrade = v_ResidueCoGrade_MTD + v_ResidueCoGrade_YTD
-			VAR v_CCD7CoMetal = v_CCD7CoMetal_MTD + v_CCD7CoMetal_YTD
-			VAR v_TailingsReturnWaterCoMetal = v_TailingsReturnWaterCoMetal_MTD + v_TailingsReturnWaterCoMetal_YTD
-			
-			-- 浸出回收率
-			VAR v_LeachRecovery =
-			    DIVIDE(
-			        v_OreCoMetal - (v_LeachResidueQty * v_ResidueCoGrade),
-			        v_OreCoMetal
-			    )
-			-- 洗涤回收率
-			VAR v_WashRecovery =
-			    DIVIDE(
-			        v_OreCoMetal - (v_CCD7CoMetal - v_TailingsReturnWaterCoMetal),
-			        v_OreCoMetal
-			    )
-			VAR v_TotalRecovery = v_LeachRecovery * v_WashRecovery * 0.98
+			-- ========== MTD 当月累计 ==========
+			VAR v_OreCoMetal_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数]), 'L1-KFM日报'[指标名称]="矿产品产量(金属量)")
+			VAR v_LeachRate_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数])/100, 'L1-KFM日报'[指标名称]="浸出率",'L1-KFM日报'[产品分类]="全钴TCo")
+			VAR v_WashRate_MTD = CALCULATE(SUM('L1-KFM日报'[当月累计实际数])/100, 'L1-KFM日报'[指标名称]="CCD洗涤效率",'L1-KFM日报'[产品分类]="全钴TCo")
+			-- MTD：反推回收金属分子
+			VAR v_LeachRecMetal_MTD = v_OreCoMetal_MTD * v_LeachRate_MTD
+			VAR v_WashRecMetal_MTD = v_OreCoMetal_MTD * v_WashRate_MTD
+			-- ========== YTD 年度累计 ==========
+			VAR v_OreCoMetal_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数]), 'L1-KFM日报'[指标名称]="矿产品产量(金属量)")
+			VAR v_LeachRate_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数])/100, 'L1-KFM日报'[指标名称]="浸出率",'L1-KFM日报'[产品分类]="全钴TCo")
+			VAR v_WashRate_YTD = CALCULATE(SUM('L1-KFM日报'[累计实际数])/100, 'L1-KFM日报'[指标名称]="CCD洗涤效率",'L1-KFM日报'[产品分类]="全钴TCo")
+			-- YTD：反推回收金属分子
+			VAR v_LeachRecMetal_YTD = v_OreCoMetal_YTD * v_LeachRate_YTD
+			VAR v_WashRecMetal_YTD = v_OreCoMetal_YTD * v_WashRate_YTD
+			-- ========== 合并：分子相加，分母相加 ==========
+			VAR v_TotalOreCoMetal = v_OreCoMetal_MTD + v_OreCoMetal_YTD
+			VAR v_TotalLeachRecMetal = v_LeachRecMetal_MTD + v_LeachRecMetal_YTD
+			VAR v_TotalWashRecMetal = v_WashRecMetal_MTD + v_WashRecMetal_YTD
+			-- 加权浸出率 & 加权洗涤效率
+			VAR v_LeachRate_Weighted = DIVIDE(v_TotalLeachRecMetal, v_TotalOreCoMetal)
+			VAR v_WashRate_Weighted = DIVIDE(v_TotalWashRecMetal, v_TotalOreCoMetal)
+			-- 钴最终回收率，系数0.98
+			VAR v_CoFinalRecovery = v_LeachRate_Weighted * v_WashRate_Weighted * 0.98
 			RETURN
-			    IF(NOT ISBLANK(v_OreCoMetal) && v_OreCoMetal > 0, v_TotalRecovery, BLANK())
+			    // IF(NOT ISBLANK(v_TotalOreCoMetal) && v_TotalOreCoMetal > 0, v_CoFinalRecovery, BLANK())
+			v_WashRate_MTD
 			
 			```
 		displayFolder: 01新口径
@@ -468,8 +566,6 @@ table 度量值
 				    删除占位列 = Table.RemoveColumns(转换类型,{"列 1"})
 				in
 				    删除占位列
-
-	changedProperty = Name
 
 	annotation PBI_ResultType = Table
 

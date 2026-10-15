@@ -7,58 +7,58 @@ table 度量值
 			// 说明：仅返回一个空格，用于表格/矩阵中制造间隔列，无业务含义
 			// ------------------------------------------------------------
 			" "
-		displayFolder: 辅助
+		displayFolder: 00辅助
 		lineageTag: e7a3b12a-83a8-4420-b280-443476456db1
 
 	measure 月计划 = SUM('KFM选冶厂月报'[预测数])
-		displayFolder: 月报
+		displayFolder: 02月报
 		lineageTag: 9574da2d-1ff7-44e7-a7e0-cccdc3fc916d
 
 		formatStringDefinition = FormatAmount()
 
 	measure 月完成 = SUM('KFM选冶厂月报'[实际数])
-		displayFolder: 月报
+		displayFolder: 02月报
 		lineageTag: fc665243-de9e-44cf-b181-787dafd11401
 
 		formatStringDefinition = FormatAmount()
 
 	measure 月比计划 = DIVIDE ( [月完成], [月计划] )
 		formatString: 0.00%;-0.00%;0.00%
-		displayFolder: 月报
+		displayFolder: 02月报
 		lineageTag: 4aed6c08-0b00-428f-b3cd-ba9f26db2ecd
 
 	measure 月计划累计 = SUM('KFM选冶厂月报'[累计预测数])
-		displayFolder: 月报
+		displayFolder: 02月报
 		lineageTag: 6f628e6c-6fff-4107-86a4-f4559811f6cd
 
 		formatStringDefinition = FormatAmount()
 
 	measure 年累计完成 = SUM('KFM选冶厂月报'[累计实际数])
-		displayFolder: 月报
+		displayFolder: 02月报
 		lineageTag: 9d700dd8-e4b0-4c57-ade7-61e2320d01fd
 
 		formatStringDefinition = FormatAmount()
 
 	measure 年比计划 = DIVIDE ( [年累计完成], [月计划累计] )
 		formatString: 0.00%;-0.00%;0.00%
-		displayFolder: 月报
+		displayFolder: 02月报
 		lineageTag: 3a615cd9-4013-4269-b999-3c8186c5b5fd
 
 	measure 同期年累计完成 = SameMonthPriorYear([年累计完成])
-		displayFolder: 月报
+		displayFolder: 02月报
 		lineageTag: 767269f6-7d34-4e30-988f-00f03d46e4a7
 
 		formatStringDefinition = FormatAmount()
 
 	measure 年计划 = SUM('KFM选冶厂月报'[全年预算数])
-		displayFolder: 月报
+		displayFolder: 02月报
 		lineageTag: 38cd5c00-3ece-4b80-90cc-39620cdaf36a
 
 		formatStringDefinition = FormatAmount()
 
 	measure 年累计完成比计划 = DIVIDE ( [年累计完成], [年计划] )
 		formatString: 0.00%;-0.00%;0.00%
-		displayFolder: 月报
+		displayFolder: 02月报
 		lineageTag: c405995a-f7b8-49e5-abcc-4940f06860bc
 
 	measure 标题-月报 =
@@ -95,7 +95,7 @@ table 度量值
 			        TitlePrefix & ReportYearMonthText & TitleSuffix & YearProgressText,
 			        BLANK()
 			    )
-		displayFolder: 辅助
+		displayFolder: 00辅助
 		lineageTag: 2d7d98c3-f3c4-4c3f-bf40-b5153ee09089
 
 	measure 标题-月份 =
@@ -116,7 +116,7 @@ table 度量值
 			        ReportMonth & "月",
 			        BLANK()
 			    )
-		displayFolder: 辅助
+		displayFolder: 00辅助
 		lineageTag: f9fef871-800a-41ad-81bc-1dbd349b2cd9
 
 	measure 标题-年累计 =
@@ -136,7 +136,7 @@ table 度量值
 			        ReportYear & "年累计",
 			        BLANK()
 			    )
-		displayFolder: 辅助
+		displayFolder: 00辅助
 		lineageTag: 1baff191-cc54-4823-9cb5-309556a487fe
 
 	measure 标题-年全年 =
@@ -156,7 +156,7 @@ table 度量值
 			        ReportYear & "年全年",
 			        BLANK()
 			    )
-		displayFolder: 辅助
+		displayFolder: 00辅助
 		lineageTag: 9851be14-e662-4a51-b980-90e1477f7348
 
 	measure 标题-同期年 =
@@ -177,23 +177,23 @@ table 度量值
 			        (ReportYear - 1) & "年",
 			        BLANK()
 			    )
-		displayFolder: 辅助
+		displayFolder: 00辅助
 		lineageTag: 2edb1f3d-5ab9-4b52-915b-9691edcd9664
 
 	measure 日完成 = SUM('L1-KFM日报'[当日实际数])
-		displayFolder: 日报
+		displayFolder: 03日报
 		lineageTag: 56ceea6a-68ff-47c5-b883-f01003950497
 
 		formatStringDefinition = FormatAmount()
 
 	measure 月累计 = SUM('L1-KFM日报'[当月累计实际数])
-		displayFolder: 日报
+		displayFolder: 03日报
 		lineageTag: 883aa15e-6a38-48b6-ae74-9e95cda00f40
 
 		formatStringDefinition = FormatAmount()
 
 	measure 月计划L1 = SUM('L1-KFM日报'[月计划])
-		displayFolder: 日报
+		displayFolder: 03日报
 		lineageTag: 3042fb7d-44b9-4294-a4ec-abb88a9ccae6
 
 		formatStringDefinition = FormatAmount()
@@ -207,7 +207,7 @@ table 度量值
 			    DIVIDE([月累计],[月计划L1])
 			 )
 			```
-		displayFolder: 日报
+		displayFolder: 03日报
 		lineageTag: 92bf0f52-a549-4cdb-a15a-b6b5ce619bf6
 
 		formatStringDefinition = FormatRatio()
@@ -241,11 +241,11 @@ table 度量值
 			        TitlePrefix & ReportYearMonthDayText & TitleSuffix & YearProgressText,
 			        BLANK()
 			    )
-		displayFolder: 辅助
+		displayFolder: 00辅助
 		lineageTag: dc30c013-90ab-409b-bc39-fdbc3568ba9d
 
 	measure 年计划L1 = SUM('L1-KFM日报'[全年预算数])
-		displayFolder: 日报
+		displayFolder: 03日报
 		lineageTag: e42cd4f5-5fbe-426a-85cb-178d99dd60cf
 
 		formatStringDefinition = FormatAmount()
@@ -264,7 +264,7 @@ table 度量值
 			RETURN
 			    Res
 			```
-		displayFolder: 日报
+		displayFolder: 03日报
 		lineageTag: 2a066569-aebe-402d-acd9-9c839cad1879
 
 		formatStringDefinition = FormatAmount()
@@ -278,7 +278,7 @@ table 度量值
 			    DIVIDE([年累计完成L1],[年计划L1])
 			 )
 			```
-		displayFolder: 日报
+		displayFolder: 03日报
 		lineageTag: 7c4b1d22-9343-4f52-8f26-cbb150ca8d11
 
 		formatStringDefinition = FormatRatio()
@@ -295,7 +295,7 @@ table 度量值
 			    DIVIDE(v_CobaltMetal, v_RawOreTonnage)
 			
 			```
-		displayFolder: 入选品位
+		displayFolder: 01新口径
 		lineageTag: 3bfb8e2b-807a-48d9-8d3e-fe24332e795e
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -312,7 +312,7 @@ table 度量值
 			    DIVIDE(v_CopperMetal, v_RawOreTonnage)
 			
 			```
-		displayFolder: 入选品位
+		displayFolder: 01新口径
 		lineageTag: 9c0d477a-04b5-4db2-aea1-d1d80b6ebbe0
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -364,7 +364,7 @@ table 度量值
 			    Res
 			
 			```
-		displayFolder: 日报
+		displayFolder: 03日报
 		lineageTag: 1720b4a2-48a1-4943-a9cc-a2cc31ebf037
 
 		formatStringDefinition = FormatAmount()
@@ -409,7 +409,7 @@ table 度量值
 			    IF(NOT ISBLANK(v_OreCuMetal) && v_OreCuMetal > 0, v_TotalRecovery, BLANK())
 			
 			```
-		displayFolder: 入选品位
+		displayFolder: 01新口径
 		lineageTag: e677d72d-d811-4e68-a608-e9dc4891a350
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -454,7 +454,7 @@ table 度量值
 			    IF(NOT ISBLANK(v_OreCoMetal) && v_OreCoMetal > 0, v_TotalRecovery, BLANK())
 			
 			```
-		displayFolder: 入选品位
+		displayFolder: 01新口径
 		lineageTag: 366b99f8-b369-44d7-a931-e6464758384c
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -468,6 +468,8 @@ table 度量值
 				    删除占位列 = Table.RemoveColumns(转换类型,{"列 1"})
 				in
 				    删除占位列
+
+	changedProperty = Name
 
 	annotation PBI_ResultType = Table
 

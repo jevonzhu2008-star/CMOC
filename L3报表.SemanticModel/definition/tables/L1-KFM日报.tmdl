@@ -221,7 +221,7 @@ table L1-KFM日报
 				        else ""
 				    ),
 				    // 左连接日报指标映射，补充类别、序号、总类别、环节序号
-				    合并指标映射 = Table.NestedJoin(添加指标名, {"指标名称"}, #"日报指标映射", {"指标项"}, "映射数据", JoinKind.LeftOuter),
+				    合并指标映射 = Table.NestedJoin(添加指标名, {"指标名称"}, 日报指标映射, {"指标项"}, "映射数据", JoinKind.LeftOuter),
 				    展开指标映射 = Table.ExpandTableColumn(合并指标映射, "映射数据", {"类别", "序号", "环节", "环节序号"}, {"类别", "序号", "总类别", "环节序号"}),
 				    // 按序号 + 指标名细分「类别2」
 				    添加二级指标 = Table.AddColumn(展开指标映射, "二级指标", each
@@ -294,6 +294,8 @@ table L1-KFM日报
 				  已更改列类型 = Table.TransformColumnTypes(保留最终列, {{"序号", Int64.Type}, {"环节序号", Int64.Type}, {"排序", Int64.Type}})
 				in
 				    已更改列类型
+
+	changedProperty = Name
 
 	annotation PBI_ResultType = Table
 
